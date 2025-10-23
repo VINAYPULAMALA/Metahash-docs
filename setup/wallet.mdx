@@ -1,0 +1,107 @@
+---
+title: Wallet & Hotkey Creation
+description: Create your Bittensor wallet and register on Subnet 73
+---
+
+# Wallet & Hotkey Creation
+
+Create your Bittensor wallet, hotkey, and register on Subnet 73.
+
+## Commands
+
+Run these commands to create and register your wallet:
+
+```bash
+btcli wallet new_coldkey --wallet.name mywallet
+btcli wallet new_hotkey --wallet.name mywallet --wallet.hotkey miner1
+btcli subnets register --netuid 73 --wallet.name mywallet --wallet.hotkey miner1
+```
+
+<Steps>
+  <Step title="Create Coldkey">
+    ```bash
+    btcli wallet new_coldkey --wallet.name mywallet
+    ```
+    Creates your main wallet (coldkey). **Save the seed phrase securely!**
+  </Step>
+
+  <Step title="Create Hotkey">
+    ```bash
+    btcli wallet new_hotkey --wallet.name mywallet --wallet.hotkey miner1
+    ```
+    Creates a hotkey for mining operations.
+  </Step>
+
+  <Step title="Register on Subnet 73">
+    ```bash
+    btcli subnets register --netuid 73 --wallet.name mywallet --wallet.hotkey miner1
+    ```
+    Registers your hotkey on MetaHash Subnet 73.
+  </Step>
+</Steps>
+
+## Example Output
+
+After successful registration, you'll see:
+
+```
+✅ Registered on netuid 73 with UID 111
+Coldkey: 5EA3B95aucxu7FEMfaG8gyDTz5nv24sdzbALbCcrb8WmNVv6
+Hotkey:  5H9WDbXXtJVoMRAGM3EgqZPZBk5A4d57PthhxsNrb6hBXsz7
+```
+
+<Check>
+Save your UID number and wallet addresses - you'll need them for configuration.
+</Check>
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="No such command 'register'">
+    **Cause**: Using old Bittensor CLI syntax
+
+    **Fix**: Use `btcli subnets register` (not just `btcli register`)
+  </Accordion>
+
+  <Accordion title="Insufficient balance">
+    **Cause**: Not enough TAO in coldkey
+
+    **Fix**: Transfer ≥ 0.001 TAO to your coldkey address
+  </Accordion>
+
+  <Accordion title="Missed seed words">
+    **Cause**: Forgot to save mnemonic phrase
+
+    **Fix**: Use `btcli wallet list` and back up the `~/.bittensor/wallets/` folder
+  </Accordion>
+
+  <Accordion title="task destroyed pending">
+    **Cause**: Benign async cleanup warning
+
+    **Fix**: This is normal - you can safely ignore it
+  </Accordion>
+</AccordionGroup>
+
+## Wallet Management Commands
+
+<CodeGroup>
+```bash List Wallets
+btcli wallet list
+```
+
+```bash Wallet Overview
+btcli wallet overview --wallet.name mywallet
+```
+
+```bash Check Balance
+btcli wallet balance --wallet.name mywallet
+```
+</CodeGroup>
+
+<Warning>
+**Important**: Always backup your wallet seed phrases! Store them securely offline. Loss of seed phrases means permanent loss of funds.
+</Warning>
+
+## Next Steps
+
+After creating your wallet and registering on Subnet 73, proceed to [Environment Configuration](/setup/configuration).

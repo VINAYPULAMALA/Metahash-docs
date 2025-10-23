@@ -1,0 +1,329 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for MetaHash miners
+---
+
+# Troubleshooting Guide
+
+Comprehensive solutions for common MetaHash miner issues.
+
+## Validator Connection & α Transfer Issues
+
+### No AuctionStart Events or Validator Connections
+
+<Accordion title="Symptom">
+Logs show nothing like `AuctionStart detected` or `WinSynapse`.
+</Accordion>
+
+**Cause**: Port 8091 is closed or your miner's axon is not visible externally.
+
+**Fix**:
+
+<Steps>
+  <Step title="Check Security Group">
+    Ensure inbound rule for TCP 8091 is open in your AWS Security Group
+  </Step>
+
+  <Step title="Verify Port Listening">
+    ```bash
+    ss -tulpn | grep 8091
+    ```
+    You should see Python listening on `[::]:8091`
+  </Step>
+
+  <Step title="Test External Access">
+    Use an online port checker or:
+    ```bash
+    nc -zv YOUR_INSTANCE_IP 8091
+    ```
+  </Step>
+</Steps>
+
+---
+
+### Bids Never Clear or Validator Ignores Miner
+
+**Cause**: Wrong `--payment.validators` address or that hotkey has no staked TAO.
+
+**Fix**:
+
+```bash
+# Confirm which hotkeys have stake
+btcli stake overview
+
+# Use only hotkeys with stake in your --payment.validators argument
+```
+
+<Warning>
+Your `--payment.validators` must be a hotkey that has staked TAO. Otherwise, α payments will fail.
+</Warning>
+
+---
+
+### "Invalid α Invoice" or "Win Invoice Rejected"
+
+**Cause**: Payment was sent from the wrong subnet or outside the validator's payment window.
+
+**Fix**:
+
+1. **Pay from correct subnet**: Ensure payment comes from the subnet indicated in your Win invoice
+2. **Sync clock**:
+   ```bash
+   sudo apt install chrony -y
+   sudo systemctl enable chrony --now
+   ```
+3. **Resync miner**: If lagging behind block height, restart with:
+   ```bash
+   python neurons/miner.py --fresh
+   ```
+
+---
+
+## α (Alpha) Payment Issues
+
+<Info>
+α tokens are automatically sent when your miner wins bids. Payments come from hotkeys defined under `--payment.validators`.
+</Info>
+
+**Verify α balances:**
+
+```bash
+btcli stake overview --wallet.name mywallet --wallet.hotkey miner1
+```
+
+You'll see your current α per subnet (e.g., α62, α73).
+
+<Warning>
+If your miner cannot pay (no balance or wrong subnet), your α is burned — you lose rewards for that auction.
+</Warning>
+
+---
+
+## Network & Resource Stability
+
+### "Killed" in Logs
+
+**Cause**: Out-of-memory (OOM) termination.
+
+**Fix**: Add swap space:
+
+```bash
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+**Alternative**: Upgrade to a larger instance (e.g., t3.medium instead of t3.micro)
+
+---
+
+### Clock Drift / Block Mismatch
+
+**Symptoms**: Transactions fail, "Extrinsic not included" errors
+
+**Fix**: Install and enable chrony:
+
+```bash
+sudo apt install chrony -y
+sudo systemctl enable chrony --now
+```
+
+<Note>
+Restart miner periodically (every 3-5 days) if memory grows beyond 85%.
+</Note>
+
+---
+
+## α Swap & Conversion Errors
+
+### "No such command 'swap'"
+
+**Cause**: Using old Bittensor CLI syntax
+
+**Fix**: Use new syntax:
+
+```bash
+btcli subnets alpha_to_tao --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount X
+```
+
+<CodeGroup>
+```bash Convert α to TAO
+btcli subnets alpha_to_tao --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount X
+```
+
+```bash Convert TAO to α
+btcli subnets tao_to_alpha --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount X
+```
+</CodeGroup>
+
+**Always ensure** your `.env` includes:
+```bash
+BITTENSOR_NETWORK=finney
+```
+
+---
+
+## Network Desync Recovery
+
+**Symptoms**: "Extrinsic not included" or block lag logs
+
+**Cause**: Miner is out of sync with latest block height
+
+**Fix**: Resync metagraph:
+
+```bash
+python neurons/miner.py --fresh
+```
+
+Or restart your miner service:
+
+```bash
+sudo systemctl restart metahash-miner
+```
+
+---
+
+## Installation & Setup Issues
+
+### Command 'python' Not Found
+
+**Cause**: Python not aliased to `python3`
+
+**Fix**: Use `python3` instead of `python` in all commands
+
+---
+
+### async-substrate-interface Mismatch
+
+**Cause**: MetaHash requires version 1.3.1
+
+**Fix**: Reinstall specific version:
+
+```bash
+pip install async-substrate-interface==1.3.1
+```
+
+---
+
+### Missing .env.template
+
+**Cause**: Repository structure changed
+
+**Fix**: Create `.env` manually (see [Configuration](/setup/configuration))
+
+---
+
+### ValueError: miner.bids.* Lengths Must Match
+
+**Cause**: Mismatched number of netuids, amounts, or discounts
+
+**Fix**: Ensure equal list lengths:
+
+```bash
+--miner.bids.netuids 62 63     # 2 items
+--miner.bids.amounts 0.25 0.20 # 2 items
+--miner.bids.discounts 500 450 # 2 items
+```
+
+---
+
+## Wallet Issues
+
+### Insufficient Balance
+
+**Problem**: Not enough TAO to register or stake
+
+**Fix**: Transfer ≥ 0.001 TAO to your coldkey address
+
+---
+
+### Missed Seed Words
+
+**Problem**: Forgot to save mnemonic phrase
+
+**Fix**:
+1. Use `btcli wallet list` to see existing wallets
+2. Back up the `~/.bittensor/wallets/` folder
+3. For future wallets, always save seed phrases securely
+
+---
+
+### Wallet Password Prompt Keeps Appearing
+
+**Cause**: Missing or incorrect `.env` configuration
+
+**Fix**:
+1. Ensure `.env` exists in `~/metahash/` directory
+2. Add `WALLET_PASSWORD=yourpassword` line
+3. Run miner from the directory containing `.env`
+
+---
+
+## Validator & Payment Health Checklist
+
+| Check | Command | Goal |
+|-------|---------|------|
+| Port 8091 open | `ss -tulpn \| grep 8091` | Port should be listening |
+| Validator hotkey stake | `btcli stake overview` | Must have >0 TAO |
+| Wallet password loaded | Check `.env` includes `WALLET_PASSWORD` | Avoid interactive prompt |
+| Memory | `htop` or `free -h` | Avoid OOM kills |
+| α payment subnet | Check logs show same subnet ID | Payment must match subnet |
+| Logs healthy | Look for "AuctionStart" & "WinSynapse" | Confirms bid flow active |
+
+---
+
+## Advanced Diagnostics
+
+### Check Miner UID
+
+Verify your miner is registered:
+
+```bash
+btcli subnets metagraph --netuid 73 | grep YOUR_HOTKEY
+```
+
+### View All Validators
+
+```bash
+btcli subnets metagraph --netuid 73 | grep validator
+```
+
+### Monitor Real-Time Logs
+
+```bash
+tail -f ~/.bittensor/miners/mywallet/miner1/netuid73/miner.log
+```
+
+### Check System Resources
+
+```bash
+# Memory usage
+free -h
+
+# Disk space
+df -h
+
+# CPU and process info
+htop
+```
+
+---
+
+## Getting Help
+
+If you're still experiencing issues:
+
+1. **Check logs**: `tail -f ~/.bittensor/miners/mywallet/miner1/netuid73/miner.log`
+2. **Join Discord**: [MetaHash Discord](https://discord.com/channels/799672011265015819/1351969903132938302)
+3. **Review GitHub Issues**: [MetaHash GitHub](https://github.com/fx-integral/metahash/issues)
+4. **Ask on Twitter**: [@metahashsn73](https://x.com/metahashsn73)
+
+<Tip>
+When asking for help, include:
+- Your UID
+- Relevant log snippets
+- Steps you've already tried
+- System specs (instance type, memory, etc.)
+</Tip>

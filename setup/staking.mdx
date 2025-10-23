@@ -1,0 +1,112 @@
+---
+title: Staking
+description: Stake TAO for α (alpha) source on funding subnets
+---
+
+# Staking for α Source
+
+Stake TAO in a funding subnet to generate α (alpha) tokens for your miner's bid payments.
+
+## Why Stake?
+
+Your miner needs α tokens to pay validators when winning auctions. Staking TAO on funding subnets (like Subnet 62) generates α that your miner can use.
+
+## Staking Commands
+
+<Steps>
+  <Step title="Add Stake to Funding Subnet">
+    ```bash
+    btcli stake add --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount 0.15
+    ```
+    Stakes 0.15 TAO on subnet 62 (adjust amount as needed).
+  </Step>
+
+  <Step title="Verify Stake">
+    ```bash
+    btcli stake overview --wallet.name mywallet --wallet.hotkey miner1
+    ```
+    Check your staked amounts across subnets.
+  </Step>
+</Steps>
+
+## Example Output
+
+After successful staking:
+
+```
+Netuid  Hotkey                                        Stake
+62      5H9WDbXXtJVoMRAGM3EgqZPZBk5A4d57PthhxsNrb6hBXsz7   0.1500 τ
+```
+
+<Check>
+✅ This hotkey can now fund α payments for your miner.
+</Check>
+
+## Recommended Amounts
+
+| Use Case | Recommended Stake | Notes |
+|----------|-------------------|-------|
+| Testing | 0.10 - 0.15 TAO | Minimal for initial testing |
+| Light Mining | 0.25 - 0.50 TAO | Good for consistent operations |
+| Production | 0.50+ TAO | Higher stake for continuous mining |
+
+<Info>
+You can stake on multiple funding subnets. Common options include Subnet 62.
+</Info>
+
+## Managing Your Stake
+
+<CodeGroup>
+```bash Check Stake Overview
+btcli stake overview --wallet.name mywallet --wallet.hotkey miner1
+```
+
+```bash Add More Stake
+btcli stake add --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount 0.10
+```
+
+```bash Remove Stake
+btcli stake remove --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount 0.05
+```
+
+```bash Convert α to TAO
+btcli subnets alpha_to_tao --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount X
+```
+</CodeGroup>
+
+## Understanding α Tokens
+
+- **α (Alpha)** tokens are generated from staked TAO
+- Used to pay validators when your miner wins auctions
+- Different subnets have different α tokens (α62, α73, etc.)
+- Can be converted back to TAO using `alpha_to_tao` command
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Insufficient TAO balance">
+    **Problem**: Not enough TAO to stake
+
+    **Fix**: Transfer TAO to your coldkey address first
+  </Accordion>
+
+  <Accordion title="No such command 'swap'">
+    **Problem**: Using old command syntax
+
+    **Fix**: Use `btcli subnets alpha_to_tao` instead of `swap`
+  </Accordion>
+
+  <Accordion title="Stake not showing">
+    **Problem**: Stake command succeeded but not visible
+
+    **Fix**: Wait a few minutes for blockchain confirmation, then check again
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+Always ensure your .env includes `BITTENSOR_NETWORK=finney` before running stake or swap commands.
+</Warning>
+
+## Next Steps
+
+After staking TAO for α generation, proceed to [Running the Miner](/setup/running-miner).

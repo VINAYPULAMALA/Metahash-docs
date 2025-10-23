@@ -1,0 +1,93 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "MetaHash",
+  "logo": {
+    "dark": "/icon/favicon.png",
+    "light": "/icon/favicon.png"
+  },
+  "favicon": "/icon/favicon.png",
+  "colors": {
+    "primary": "#ff8c00",
+    "light": "#ff9f2e",
+    "dark": "#e67d00",
+    "background": {
+      "dark": "#0a0a0a"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Treasury",
+      "url": "https://metahash73.com/treasury"
+    },
+    {
+      "name": "Auction",
+      "url": "https://metahash73.com/auction/current"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://github.com/fx-integral/metahash"
+  },
+  "tabs": [
+    {
+      "name": "Setup Guide",
+      "url": "setup"
+    },
+    {
+      "name": "UID111 Review",
+      "url": "review"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.com/channels/799672011265015819/1351969903132938302"
+    },
+    {
+      "name": "Twitter",
+      "icon": "twitter",
+      "url": "https://x.com/metahashsn73"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/fx-integral/metahash"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction"
+      ]
+    },
+    {
+      "group": "Setup Guide",
+      "pages": [
+        "setup/introduction",
+        "setup/environment",
+        "setup/wallet",
+        "setup/configuration",
+        "setup/staking",
+        "setup/running-miner",
+        "setup/port-setup",
+        "setup/troubleshooting",
+        "setup/keep-running",
+        "setup/commands",
+        "setup/checklist"
+      ]
+    },
+    {
+      "group": "UID111 Review",
+      "pages": [
+        "review/uid111-review"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://x.com/metahashsn73",
+    "github": "https://github.com/fx-integral/metahash",
+    "discord": "https://discord.com/channels/799672011265015819/1351969903132938302"
+  }
+}
