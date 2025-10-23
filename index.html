@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction - MetaHash</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <img src="icon/favicon.png" alt="MetaHash Logo" class="loading-logo">
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="icon/favicon.png" alt="MetaHash Logo" class="logo-img">
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="nav-link">
+                    <span class="icon"></span>
+                    <span>Home</span>
+                </a>
+                <a href="https://metahash73.com/treasury" class="nav-link">
+                    <span>Treasury</span>
+                </a>
+                <a href="https://metahash73.com/auction/current" class="nav-link">
+                    <span>Auction</span>
+                </a>
+                <a href="https://github.com/fx-integral/metahash" target="_blank" class="nav-link">
+                    <span class="icon"></span>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://discord.gg/bittensor" target="_blank" class="nav-link">
+                    <span>Bittensor Discord</span>
+                </a>
+                <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank" class="nav-link">
+                    <span>MetaHash Discord</span>
+                </a>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Get Started</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#glossary-bittensor" class="sidebar-link" data-page="glossary-bittensor">Bittensor Basics</a></li>
+                        <li><a href="#how-it-works-overview" class="sidebar-link" data-page="how-it-works-overview">How MetaHash Works</a></li>
+                        <li><a href="#glossary-metahash" class="sidebar-link" data-page="glossary-metahash">MetaHash Terms</a></li>
+                        <li><a href="#how-it-works-auction" class="sidebar-link" data-page="how-it-works-auction">Auction Cycle</a></li>
+                        <li><a href="#how-it-works-mechanisms" class="sidebar-link" data-page="how-it-works-mechanisms">Key Mechanisms</a></li>
+                        <li><a href="#which-guide" class="sidebar-link" data-page="which-guide">Which Guide For Me?</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Setup Guides</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#subnet" class="sidebar-link" data-page="subnet">MetaHash | Subnet 73</a></li>
+                        <li><a href="#miner-simple" class="sidebar-link" data-page="miner-simple">Miner Simple Guide</a></li>
+                        <li><a href="#miner-advanced" class="sidebar-link" data-page="miner-advanced">Miner Advanced Guide</a></li>
+                        <li><a href="#validator-simple" class="sidebar-link" data-page="validator-simple">Validator Simple Guide</a></li>
+                        <li><a href="#validator-advanced" class="sidebar-link" data-page="validator-advanced">Validator Advanced Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Help & Support</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#prerequisites" class="sidebar-link" data-page="prerequisites">Prerequisites</a></li>
+                        <li><a href="#error-reference" class="sidebar-link" data-page="error-reference">Error Reference</a></li>
+                        <li><a href="#treasury-whitelisting" class="sidebar-link" data-page="treasury-whitelisting">Treasury Whitelisting</a></li>
+                        <li><a href="#connect" class="sidebar-link" data-page="connect">Connect</a></li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="content-area">
+                <!-- Home Page -->
+                <div class="page active" id="page-home">
+                    <h1>Welcome to MetaHash (Subnet 73)</h1>
+                    <p class="section-description"><strong>A decentralized liquidity and incentive layer on the Bittensor network</strong></p>
+                    <p>MetaHash is a marketplace connecting those holding idle alpha (α) tokens with miners and subnet operators needing access to capital. It enables fair, deterministic auctions for weight allocation through transparent, on-chain mechanisms.</p>
+
+                    <div class="info-box warning">
+                        <h3>⚠️ CRITICAL SAFETY WARNINGS - Read Before Using MetaHash:</h3>
+                        <ul>
+                            <li><strong>NEVER send META tokens to validators!</strong> This is explicitly forbidden and will result in permanent loss of funds.</li>
+                            <li><strong>ONLY send α to whitelisted treasury addresses!</strong> Verify addresses in <code>treasuries.py</code> before every payment.</li>
+                            <li><strong>Start with small test amounts!</strong> Practice with minimal α before committing large amounts.</li>
+                            <li><strong>You need τ (TAO) for gas fees!</strong> Keep at least 0.1 τ in your wallet for transaction costs.</li>
+                        </ul>
+                        <p><strong>Failure to follow these rules can result in permanent, unrecoverable loss of funds.</strong></p>
+                    </div>
+
+                    <h2 class="section-heading">What Can You Do With MetaHash?</h2>
+
+                    <h3>For dTAO Holders</h3>
+                    <ul>
+                        <li><strong>Participate without mining</strong> - Deploy your α across multiple subnets</li>
+                        <li><strong>Avoid slippage on original pools</strong> - Access capital without destabilizing liquidity</li>
+                        <li><strong>Transparent allocation tracking</strong> - See exactly where your α goes on-chain</li>
+                        <li><strong>Earn through strategic allocation</strong> - Support subnets while generating returns</li>
+                    </ul>
+
+                    <h3>For Miners & Subnet Owners</h3>
+                    <ul>
+                        <li><strong>Access α capital</strong> - Get funding without destabilizing existing liquidity positions</li>
+                        <li><strong>Competitive bidding</strong> - Submit bids with custom discounts to win auctions</li>
+                        <li><strong>Multi-subnet support</strong> - Bid on α from any Bittensor subnet</li>
+                        <li><strong>Reputation-based limits</strong> - Build trust to increase bidding capacity</li>
+                    </ul>
+
+                    <h3>For Validators</h3>
+                    <ul>
+                        <li><strong>Run fair, deterministic auctions</strong> - No subjective weight allocation</li>
+                        <li><strong>Earn validator emissions</strong> - Get rewarded for providing infrastructure</li>
+                        <li><strong>Transparent clearing mechanism</strong> - Slippage-aware bid ranking</li>
+                        <li><strong>On-chain commitments</strong> - Publish auction results to IPFS with CID on-chain</li>
+                    </ul>
+
+                    <h2 class="section-heading">Quick Start: Choose Your Path</h2>
+
+                    <div class="card-grid">
+                        <a href="#miner-simple" class="setup-card" data-page="miner-simple">
+                            <div class="card-icon">⛏️</div>
+                            <h3>I'm a Miner</h3>
+                            <p>Trade your α for META tokens</p>
+                            <p><strong>Time to setup:</strong> 15-30 minutes<br>
+                            <strong>You'll need:</strong> Some α, registered hotkey, 0.1 τ for gas</p>
+                        </a>
+
+                        <a href="#validator-simple" class="setup-card" data-page="validator-simple">
+                            <div class="card-icon">🖥️</div>
+                            <h3>I'm a Validator</h3>
+                            <p>Run auctions and earn emissions</p>
+                            <p><strong>Time to setup:</strong> 1-2 hours<br>
+                            <strong>You'll need:</strong> VPS/server, technical skills, more τ for stake</p>
+                        </a>
+
+                        <a href="#glossary-bittensor" class="setup-card" data-page="glossary-bittensor">
+                            <div class="card-icon">📖</div>
+                            <h3>I'm New to This</h3>
+                            <p>Learn key terms and concepts</p>
+                            <p><strong>Reading time:</strong> 10 minutes<br>
+                            <strong>Start here</strong> if you're new to Bittensor or MetaHash</p>
+                        </a>
+
+                        <a href="#connect" class="setup-card" data-page="connect">
+                            <div class="card-icon">🆘</div>
+                            <h3>I Need Help</h3>
+                            <p>FAQs and troubleshooting</p>
+                            <p><strong>Common issues</strong> and their solutions, error codes, community support</p>
+                        </a>
+                    </div>
+
+                    <h2 class="section-heading">Live Network Stats</h2>
+                    <div class="info-box">
+                        <p><strong>Real-time data:</strong> Visit <a href="https://taostats.io/subnets/73" target="_blank">Taostats SN73</a> for current metrics</p>
+                        <ul>
+                            <li><strong>Subnet ID:</strong> 73</li>
+                            <li><strong>Network:</strong> Bittensor Mainnet (Finney)</li>
+                            <li><strong>Status:</strong> Active</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="section-heading">Essential Links</h2>
+                    <ul>
+                        <li><strong>GitHub:</strong> <a href="https://github.com/fx-integral/metahash" target="_blank">fx-integral/metahash</a></li>
+                        <li><strong>Twitter:</strong> <a href="https://x.com/metahashsn73" target="_blank">@metahashsn73</a></li>
+                        <li><strong>Discord:</strong> <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank">MetaHash Channel</a></li>
+                        <li><strong>Stats:</strong> <a href="https://taostats.io/subnets/73" target="_blank">Taostats SN73</a></li>
+                        <li><strong>Bittensor Docs:</strong> <a href="https://docs.bittensor.com/" target="_blank">docs.bittensor.com</a></li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <p><strong>Ready to start?</strong> Choose your path above and let's build the future of decentralized liquidity together!</p>
+                    </div>
+                </div>
+
+                <!-- Which Guide For Me Page -->
+                <div class="page" id="page-which-guide">
+                    <h1>Which Guide Is Right For You?</h1>
+                    <p class="section-description">Use this quick flow to land on the setup instructions that match your goals, experience, and hardware.</p>
+
+                    <div class="info-box warning">
+                        <p><strong>Shortcut:</strong> If this is your first time touching MetaHash, pick the simple guide. Move to advanced once you need automation, scaling, or bespoke tuning.</p>
+                    </div>
+
+                    <h2>Step 1: Identify Your Role</h2>
+                    <ul>
+                        <li><strong>Miner:</strong> You hold α and want to convert it into META via auctions.</li>
+                        <li><strong>Validator:</strong> You clear auctions, publish commitments, and manage treasuries.</li>
+                        <li><strong>Explorer:</strong> Still learning? Start with <a href="#glossary-bittensor" data-page="glossary-bittensor">Bittensor Basics</a>.</li>
+                    </ul>
+
+                    <h2>Step 2: Match Your Experience</h2>
+                    <h3>For Miners</h3>
+                    <ul>
+                        <li><strong>Choose Miner Simple</strong> if you want a 15-30 minute walkthrough, single VPS support, and copy-paste commands with expected outputs.</li>
+                        <li><strong>Choose Miner Advanced</strong> if you manage multiple hotkeys, tweak auto-bidding, or integrate monitoring dashboards.</li>
+                        <li><strong>Readiness check:</strong> Run <code>btcli wallet list</code> and confirm your hotkey appears before starting either guide.</li>
+                    </ul>
+
+                    <h3>For Validators</h3>
+                    <ul>
+                        <li><strong>Choose Validator Simple</strong> for your first deployment, minimal hardware, and a single-instance setup.</li>
+                        <li><strong>Choose Validator Advanced</strong> when you need redundancy, custom scoring logic, or Prometheus/Grafana telemetry.</li>
+                        <li><strong>Readiness check:</strong> Verify permit status with <code>btcli subnet list --netuid 73</code> so you know you can accept bids.</li>
+                    </ul>
+
+                    <h2>Step 3: Confirm Requirements</h2>
+                    <ul>
+                        <li>Hardware meets the specs listed in <a href="#prerequisites" data-page="prerequisites">Prerequisites</a>.</li>
+                        <li>You can reach Discord for live support if anything looks off.</li>
+                        <li>You know how to validate treasuries using <code>treasuries.py</code> before sending α.</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><strong>Still deciding?</strong> Share your setup plan in <a href="#connect" data-page="connect">MetaHash Discord</a>. The community will nudge you toward the best starting point and flag any risks.</p>
+                    </div>
+                </div>
+
+                <!-- Subnet Page -->
+                <div class="page" id="page-subnet">
+                    <h1>MetaHash | Subnet 73</h1>
+                    <p>MetaHash is a decentralized subnet on the Bittensor network (Subnet 73) that focuses on distributed computing and validation.</p>
+
+                    <h2>Overview</h2>
+                    <p>Subnet 73 provides a framework for miners and validators to participate in the MetaHash network. This subnet enables:</p>
+                    <ul>
+                        <li>Distributed hash computation</li>
+                        <li>Proof of work validation</li>
+                        <li>Incentivized participation through TAO rewards</li>
+                        <li>Decentralized network security</li>
+                    </ul>
+
+                    <h2>Network Information</h2>
+                    <div class="info-box">
+                        <p><strong>Subnet ID:</strong> 73</p>
+                        <p><strong>Network:</strong> Bittensor</p>
+                        <p><strong>Status:</strong> Active</p>
+                    </div>
+
+                    <h2>Getting Started</h2>
+                    <p>Choose your role in the network:</p>
+                    <ul>
+                        <li><strong>Miner:</strong> Contribute computational resources and earn rewards</li>
+                        <li><strong>Validator:</strong> Validate work and maintain network integrity</li>
+                    </ul>
+                </div>
+
+                <!-- Miner Simple Guide Page -->
+                <div class="page" id="page-miner-simple">
+                    <h1>Miner Simple Guide</h1>
+                    <p>Get started mining on MetaHash in 15-30 minutes. This guide is for beginners who want a quick, working setup.</p>
+
+                    <div class="info-box">
+                        <p><strong>Perfect for:</strong> First-time miners, testing the system</p>
+                        <p><strong>Time:</strong> 15-30 minutes</p>
+                        <p><strong>Difficulty:</strong> Beginner</p>
+                    </div>
+
+                    <div class="info-box warning">
+                        <h3>🔒 CRITICAL SECURITY WARNINGS</h3>
+                        <p><strong>Protect Your Coldkey:</strong> NEVER expose your coldkey private key on a mining rig or validator server. The coldkey controls your funds – if it's stolen, you lose your TAO. Generate your coldkey in a secure, offline environment if possible.</p>
+                        <p><strong>Use Hotkeys for Operations:</strong> Always use hotkeys (not coldkeys) on servers. Your hotkey is your operational key for day-to-day mining – it cannot move TAO from your wallet.</p>
+                        <p><strong>Backup Your Keys:</strong> Write down your mnemonic (seed phrase) on paper. Do not screenshot or copy-paste it online. Treat it like a bank vault combination.</p>
+                        <p><strong>Verify Treasury Addresses:</strong> Before sending ANY α, verify the treasury address is whitelisted in <code>treasuries.py</code>. Wrong address = permanent loss of funds.</p>
+                    </div>
+
+                    <h2>Prerequisites</h2>
+                    <p><strong>Before you start, you MUST have:</strong></p>
+                    <ul>
+                        <li>✅ <strong>Linux system</strong> (Ubuntu 20.04+ recommended) - Windows is not supported</li>
+                        <li>✅ <strong>Python 3.8+</strong> installed</li>
+                        <li>✅ <strong>Registered Bittensor hotkey</strong> on Subnet 73</li>
+                        <li>✅ <strong>Some α tokens</strong> to bid in auctions</li>
+                        <li>✅ <strong>0.1 τ (TAO)</strong> minimum for gas fees</li>
+                        <li>✅ <strong>At least 8GB RAM</strong></li>
+                        <li>✅ <strong>Stable internet</strong> (10+ Mbps recommended)</li>
+                    </ul>
+
+                    <div class="info-box warning">
+                        <p><strong>Don't have these?</strong> See <a href="#prerequisites" data-page="prerequisites">Prerequisites Guide</a> first!</p>
+                    </div>
+
+                    <h2>Step 1: Install MetaHash</h2>
+
+                    <h3>Clone the Repository</h3>
+                    <pre><code># Navigate to your home directory
+cd ~
+
+# Clone MetaHash repository
+git clone https://github.com/fx-integral/metahash.git
+
+# Enter directory
+cd metahash</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>Cloning into 'metahash'...
+remote: Enumerating objects: 1234, done.
+remote: Counting objects: 100% (1234/1234), done.
+remote: Compressing objects: 100% (890/890), done.
+Receiving objects: 100% (1234/1234), 2.34 MiB | 5.67 MiB/s, done.
+Resolving deltas: 100% (456/456), done.</code></pre>
+
+                    <div class="info-box success">
+                        <p>✅ <strong>Success looks like:</strong> You now have a <code>metahash</code> folder with code inside.</p>
+                    </div>
+
+                    <h3>Install Dependencies</h3>
+                    <pre><code># Create virtual environment (recommended)
+python3 -m venv venv
+
+# Activate it
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+
+# Install Bittensor
+pip install bittensor --upgrade</code></pre>
+
+                    <p><strong>This takes:</strong> 5-10 minutes (downloading packages)</p>
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>Successfully installed bittensor-6.9.3 ...
+Successfully installed metahash-2.0.0 ...
+Successfully installed numpy-1.24.3 ...</code></pre>
+
+                    <div class="info-box success">
+                        <p>✅ <strong>Success looks like:</strong> No red error messages, ends with "Successfully installed..."</p>
+                    </div>
+
+                    <h3>Check Wallet & Treasury Status</h3>
+                    <pre><code># Confirm wallet and hotkey exist locally
+btcli wallet list
+
+# Review balances and registrations
+btcli wallet overview --wallet.name YOUR_WALLET_NAME
+
+# Ensure the treasury from your invoice is whitelisted
+btcli treasury list --netuid 73 | grep TREASURY_FRAGMENT</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>Wallets:
+  YOUR_WALLET_NAME (coldkey)
+    YOUR_HOTKEY (hotkey)
+
+Overview:
+  Balance: 12.34 τ
+  Registered Subnets: [73]
+  Last Emission: 0.42 α
+
+Treasury:
+  5F9k...XYZ  ✅</code></pre>
+
+                    <h2>Step 2: Configure Your Miner</h2>
+
+                    <h3>Create Configuration File</h3>
+                    <pre><code># Copy example config
+cp config.example.json config.json
+
+# Edit it
+nano config.json</code></pre>
+
+                    <h3>Update These Fields</h3>
+                    <pre><code>{
+  "wallet": {
+    "name": "my_wallet",      // ← Your wallet name
+    "hotkey": "my_hotkey"     // ← Your hotkey name
+  },
+
+  "network": {
+    "netuid": 73,
+    "subtensor": {
+      "network": "finney",
+      "chain_endpoint": "wss://entrypoint-finney.opentensor.ai:443"
+    }
+  },
+
+  "miner": {
+    "auto_bid": false,              // ← Keep false for manual control
+    "default_discount_bps": 500     // ← 5% discount
+  }
+}</code></pre>
+
+                    <p><strong>Save and exit:</strong> <code>Ctrl+X</code>, then <code>Y</code>, then <code>Enter</code></p>
+
+                    <h3>4. Start Mining</h3>
+                    <pre><code>python miner.py --wallet.name YOUR_WALLET_NAME --wallet.hotkey YOUR_HOTKEY</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>[INFO] Connecting to finney | netuid=73
+[INFO] Hotkey YOUR_HOTKEY registered (permit ✓)
+[INFO] Awaiting auction_start signal from validators...
+[READY] Listening for bids and payment instructions</code></pre>
+
+                    <h2>Verification</h2>
+                    <p>Check that your miner is running correctly:</p>
+                    <pre><code>tail -f logs/miner.log</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>[INFO] Auction announced | budget=4,500 α | discount cap 10%
+[INFO] Submitted bid | amount=500 α | discount=4.5%
+[SUCCESS] Bid accepted | payment window blocks 121-220</code></pre>
+
+                    <div class="info-box success">
+                        <strong>Success!</strong> Your miner should now be connected to Subnet 73 and contributing to the network.
+                    </div>
+                </div>
+
+                <!-- Miner Advanced Guide Page -->
+                <div class="page" id="page-miner-advanced">
+                    <h1>Miner Advanced Guide</h1>
+                    <p>Advanced configuration and optimization for MetaHash miners.</p>
+
+                    <h2>Advanced Configuration</h2>
+
+                    <h3>Environment Variables</h3>
+                    <pre><code>export METAHASH_NETWORK=mainnet
+export METAHASH_PORT=9944
+export METAHASH_LOG_LEVEL=INFO</code></pre>
+
+                    <h3>Custom Configuration File</h3>
+                    <pre><code>{
+  "network": "mainnet",
+  "subnet_id": 73,
+  "miner": {
+    "threads": 4,
+    "batch_size": 128,
+    "timeout": 30
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/miner.log"
+  }
+}</code></pre>
+
+                    <h2>Performance Optimization</h2>
+
+                    <h3>CPU Optimization</h3>
+                    <p>Maximize your mining performance:</p>
+                    <ul>
+                        <li>Use all available CPU cores</li>
+                        <li>Adjust batch size based on RAM</li>
+                        <li>Enable CPU affinity for dedicated cores</li>
+                    </ul>
+
+                    <h3>Network Optimization</h3>
+                    <pre><code>python miner.py \
+  --wallet.name YOUR_WALLET \
+  --wallet.hotkey YOUR_HOTKEY \
+  --threads 8 \
+  --batch-size 256 \
+  --netuid 73</code></pre>
+
+                    <h2>Monitoring and Maintenance</h2>
+
+                    <h3>Setup Monitoring</h3>
+                    <pre><code># Install monitoring tools
+pip install prometheus-client grafana-api
+
+# Start monitoring
+python monitor.py --port 9090</code></pre>
+
+                    <h3>Auto-restart on Failure</h3>
+                    <pre><code># Create systemd service
+sudo nano /etc/systemd/system/metahash-miner.service</code></pre>
+
+                    <div class="info-box warning">
+                        <strong>Note:</strong> Advanced configurations may affect stability. Test thoroughly before deploying to production.
+                    </div>
+                </div>
+
+                <!-- Validator Simple Guide Page -->
+                <div class="page" id="page-validator-simple">
+                    <h1>Validator Simple Guide</h1>
+                    <p>Set up a MetaHash validator to help secure the network.</p>
+
+                    <h2>Prerequisites</h2>
+                    <ul>
+                        <li>Linux system (Ubuntu 20.04+ recommended)</li>
+                        <li>Python 3.8 or higher</li>
+                        <li>At least 16GB RAM</li>
+                        <li>Registered validator key on Bittensor</li>
+                        <li>Sufficient TAO for staking</li>
+                    </ul>
+
+                    <h2>Installation Steps</h2>
+
+                    <h3>1. Clone the Repository</h3>
+                    <pre><code>git clone https://github.com/metahash/subnet73.git
+cd subnet73</code></pre>
+
+                    <h3>2. Install Dependencies</h3>
+                    <pre><code>pip install -r requirements.txt
+pip install bittensor</code></pre>
+
+                    <h3>3. Register Your Validator</h3>
+                    <pre><code>btcli subnet register --netuid 73 --wallet.name YOUR_WALLET</code></pre>
+
+                    <h3>4. Start Validator</h3>
+                    <pre><code>python validator.py \
+  --wallet.name YOUR_WALLET_NAME \
+  --wallet.hotkey YOUR_HOTKEY \
+  --netuid 73</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>[INFO] Validator boot | netuid=73 | hotkey=YOUR_HOTKEY
+[INFO] Syncing auction config from chain...
+[INFO] Whitelisted treasuries loaded: 4
+[SUCCESS] Auction loop online — waiting for bids</code></pre>
+
+                    <h2>Monitoring</h2>
+                    <p>Check validator status:</p>
+                    <pre><code>btcli subnet list --netuid 73
+tail -f logs/validator.log</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>Subnet 73 Overview
+------------------
+Hotkey        Stake    Permit  Activity
+YOUR_HOTKEY   1024 τ   ✅       Active
+
+[validator.log]
+[INFO] Cleared 12 bids | committed CID QmX123...
+[INFO] Payment window closes at block 456789</code></pre>
+
+                    <div class="info-box success">
+                        <strong>Success!</strong> Your validator is now active on Subnet 73.
+                    </div>
+                </div>
+
+                <!-- Validator Advanced Guide Page -->
+                <div class="page" id="page-validator-advanced">
+                    <h1>Validator Advanced Guide</h1>
+                    <p>Advanced validator configuration, monitoring, and optimization strategies.</p>
+
+                    <h2>Advanced Configuration</h2>
+
+                    <h3>Validator Configuration File</h3>
+                    <pre><code>{
+  "network": "mainnet",
+  "subnet_id": 73,
+  "validator": {
+    "max_miners": 256,
+    "epoch_length": 100,
+    "validation_timeout": 60,
+    "scoring": {
+      "alpha": 0.9,
+      "weights_rate_limit": 100
+    }
+  },
+  "monitoring": {
+    "prometheus_port": 9091,
+    "log_level": "DEBUG"
+  }
+}</code></pre>
+
+                    <h3>Custom Scoring Logic</h3>
+                    <p>Implement custom validation logic:</p>
+                    <pre><code>def custom_scoring(responses):
+    scores = []
+    for response in responses:
+        # Validate response quality
+        quality = validate_hash_quality(response)
+        # Validate response time
+        speed = calculate_speed_score(response)
+        # Combined score
+        score = (quality * 0.7) + (speed * 0.3)
+        scores.append(score)
+    return scores</code></pre>
+
+                    <h2>High Availability Setup</h2>
+
+                    <h3>Multi-Instance Deployment</h3>
+                    <pre><code># Primary validator
+python validator.py --port 8091 --role primary
+
+# Backup validator
+python validator.py --port 8092 --role backup</code></pre>
+
+                    <h3>Load Balancing</h3>
+                    <p>Distribute validation requests across multiple instances for better performance.</p>
+
+                    <h2>Security Best Practices</h2>
+                    <ul>
+                        <li>Keep your coldkey offline and secure</li>
+                        <li>Use firewalls to restrict access</li>
+                        <li>Enable SSH key authentication only</li>
+                        <li>Regularly update dependencies</li>
+                        <li>Monitor for suspicious activity</li>
+                    </ul>
+
+                    <h2>Performance Metrics</h2>
+                    <pre><code># View validator metrics
+curl http://localhost:9091/metrics
+
+# Key metrics to monitor:
+# - validation_success_rate
+# - average_validation_time
+# - miner_response_quality
+# - network_weight_percentage</code></pre>
+
+                    <div class="info-box warning">
+                        <strong>Important:</strong> Ensure your validator maintains high uptime to avoid deregistration penalties.
+                    </div>
+                </div>
+
+                <!-- Glossary: Bittensor Basics Page -->
+                <div class="page" id="page-glossary-bittensor">
+                    <h1>Bittensor Basics</h1>
+                    <p>Essential Bittensor terminology you need to understand before using MetaHash.</p>
+
+                    <h3>α (Alpha) / Alpha Token</h3>
+                    <p><strong>What it is:</strong> Subnet-specific reward tokens that represent emissions from a particular Bittensor subnet.</p>
+                    <p><strong>Real-world analogy:</strong> Like store-specific gift cards. Each subnet gives you their own "gift card" (α), and MetaHash is the exchange where you can trade them for something more liquid (META).</p>
+                    <p><strong>Example:</strong> If you mine on Subnet 18, you earn "SN18 α". If you mine on Subnet 5, you earn "SN5 α". Each is different and has different value.</p>
+                    <p><strong>In MetaHash:</strong> You offer your α in auctions to receive META tokens.</p>
+
+                    <h3>τ (Tau) / TAO</h3>
+                    <p><strong>What it is:</strong> The native cryptocurrency of the Bittensor blockchain. Used for staking, governance, and paying transaction fees.</p>
+                    <p><strong>In MetaHash:</strong> You need small amounts (~0.1 τ) to pay for gas fees when submitting bids or making payments.</p>
+                    <p><strong>How to get:</strong> Purchase on exchanges like Binance, MEXC, or through OTC trades.</p>
+
+                    <h3>Subnet</h3>
+                    <p><strong>What it is:</strong> An independent AI network running on Bittensor. Each subnet has a specific purpose or function.</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>Subnet 39: Sacred Compute </li>
+                        <li>Subnet 75: Storage</li>
+                        <li>Subnet 62: Software Engineering Agents</li>
+                        <li>Subnet 73: MetaHash (that's us!)</li>
+                    </ul>
+                    <p><strong>In MetaHash:</strong> You can mine on any subnet and use MetaHash to convert those rewards into liquid META.</p>
+
+                    <h3>Hotkey</h3>
+                    <p><strong>What it is:</strong> Your operational wallet address used daily for mining or validating. Think of it as your "working key."</p>
+                    <p><strong>Security level:</strong> Medium - stored on your server, used frequently for operations</p>
+                    <p><strong>Usage:</strong> Signs transactions, bids in auctions, receives emissions</p>
+
+                    <h3>Coldkey</h3>
+                    <p><strong>What it is:</strong> Your high-security master wallet that controls your stake, funds, and overall account. Think of it as your "bank vault key."</p>
+                    <p><strong>Security level:</strong> Maximum - should be stored offline, preferably on hardware wallet</p>
+                    <p><strong>Best practice:</strong> Store seed phrase in multiple secure physical locations</p>
+
+                    <h3>UID (Unique Identifier)</h3>
+                    <p><strong>What it is:</strong> Your miner or validator's ID number on a specific subnet.</p>
+                    <p><strong>Example:</strong> "Your miner is UID 42 on Subnet 73"</p>
+                    <p><strong>In MetaHash:</strong> Used to track your bids, payments, and reputation</p>
+
+                    <div class="info-box">
+                        <p><strong>Next:</strong> <a href="#glossary-metahash" data-page="glossary-metahash">MetaHash-Specific Terms →</a></p>
+                    </div>
+                </div>
+
+                <!-- Glossary: MetaHash Terms Page -->
+                <div class="page" id="page-glossary-metahash">
+                    <h1>MetaHash-Specific Terms</h1>
+                    <p>Key terminology specific to MetaHash auctions, bids, and operations.</p>
+
+                    <h3>Weight Allocation</h3>
+                    <p><strong>What it is:</strong> The mechanism by which validators distribute rewards to miners in MetaHash.</p>
+                    <p><strong>How it works:</strong></p>
+                    <ul>
+                        <li>Validators run deterministic auctions to allocate weights fairly</li>
+                        <li>Miners bid for α access and pay to whitelisted treasuries</li>
+                        <li>Successful payments result in higher weight allocation</li>
+                        <li>Weights are set on-chain after settlement (or preview-only in testing mode)</li>
+                    </ul>
+                    <p><strong>Key feature:</strong> Replaces subjective weight allocation with transparent, auction-based mechanism.</p>
+
+                    <h3>Auction</h3>
+                    <p><strong>What it is:</strong> A competitive bidding process that happens every epoch (~12 minutes) where miners bid for α access.</p>
+                    <p><strong>The Process:</strong></p>
+                    <ol>
+                        <li><strong>Announcement:</strong> Validator broadcasts auction start with budget signals</li>
+                        <li><strong>Bidding:</strong> Miners submit bids (subnet, α amount, discount)</li>
+                        <li><strong>Clearing:</strong> Validator ranks bids by TAO value with slippage consideration</li>
+                        <li><strong>Payment:</strong> Winners send α to whitelisted treasury addresses</li>
+                        <li><strong>Settlement:</strong> Validator verifies payments and sets weights on-chain</li>
+                    </ol>
+
+                    <h3>Bid</h3>
+                    <p><strong>What it is:</strong> Your offer to obtain α access in an auction by specifying the subnet, amount, and discount you're willing to offer.</p>
+                    <p><strong>Example:</strong> "I want 100 SN18-α and will offer a 5% discount"</p>
+                    <p><strong>Strategy:</strong> Balance between competitive discount (higher = more likely to win) and preserving value. Higher discounts make bids more competitive.</p>
+
+                    <h3>Discount (BPS)</h3>
+                    <p><strong>What it is:</strong> The percentage discount you offer on your α to make your bid competitive.</p>
+                    <p><strong>Format:</strong> Basis points (BPS) where 100 BPS = 1%</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>500 BPS = 5% discount</li>
+                        <li>1000 BPS = 10% discount</li>
+                        <li>1500 BPS = 15% discount</li>
+                    </ul>
+
+                    <h3>Treasury</h3>
+                    <p><strong>What it is:</strong> The official wallet address where miners must send α payments after winning auctions.</p>
+                    <p><strong>Critical importance:</strong> Only whitelisted treasuries are valid. Sending to wrong address = permanent loss of funds.</p>
+                    <p><strong>How to verify:</strong> Always check <code>metahash/treasuries.py</code> in the official repository</p>
+
+                    <h3>Payment Window</h3>
+                    <p><strong>What it is:</strong> The specific time period <code>[start_block, end_block]</code> during which you must send α after winning an auction.</p>
+                    <p><strong>Example:</strong> <code>[5931900, 5932000]</code> means you have 100 blocks (~20 minutes) to pay</p>
+                    <p><strong>Important:</strong> Set alerts! Late payments mean you lose your auction win AND damage your reputation.</p>
+
+                    <h3>Reputation</h3>
+                    <p><strong>What it is:</strong> A score assigned to each coldkey based on historical auction behavior.</p>
+                    <p><strong>Affects:</strong></p>
+                    <ul>
+                        <li>Maximum bid amount you can submit</li>
+                        <li>Priority when bids have similar value</li>
+                        <li>Trust level in the system</li>
+                    </ul>
+                    <p><strong>Build it:</strong> Win auctions and pay on time consistently</p>
+
+                    <h3>Epoch</h3>
+                    <p><strong>What it is:</strong> A fixed time period in Bittensor, approximately 12 minutes or ~100 blocks.</p>
+                    <p><strong>In MetaHash:</strong></p>
+                    <ul>
+                        <li><strong>Epoch N:</strong> Auction + Clearing phase</li>
+                        <li><strong>Epoch N+1:</strong> Payment window + Commitment phase</li>
+                        <li><strong>Epoch N+2:</strong> Settlement phase</li>
+                    </ul>
+
+                    <h3>Slippage</h3>
+                    <p><strong>What it is:</strong> The price impact that occurs when trading large amounts of α relative to available liquidity.</p>
+                    <p><strong>Example:</strong></p>
+                    <ul>
+                        <li>Small bid (100 α): 0.5% slippage - minimal impact</li>
+                        <li>Large bid (10,000 α): 15% slippage - might be rejected!</li>
+                    </ul>
+                    <p><strong>How to avoid:</strong> Bid smaller amounts relative to subnet liquidity, or split into multiple bids</p>
+
+                    <div class="info-box">
+                        <p><strong>Can't find a term?</strong></p>
+                        <ul>
+                            <li>Check <a href="#glossary-bittensor" data-page="glossary-bittensor">Bittensor Basics</a></li>
+                            <li>Ask in Discord</li>
+                            <li>Check <a href="https://docs.bittensor.com/" target="_blank">Bittensor Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box success">
+                        <p><strong>Ready to learn more?</strong> <a href="#how-it-works-overview" data-page="how-it-works-overview">How MetaHash Works →</a></p>
+                    </div>
+                </div>
+
+                <!-- How MetaHash Works: Overview Page -->
+                <div class="page" id="page-how-it-works-overview">
+                    <h1>How MetaHash Works: A Complete Overview</h1>
+
+                    <div class="info-box">
+                        <p><strong>Reading Time:</strong> 10 minutes</p>
+                        <p><strong>Prerequisite:</strong> Basic understanding of Bittensor</p>
+                    </div>
+
+                    <h2>The Problem We Solve</h2>
+                    <p>In the Bittensor ecosystem, there are two key challenges:</p>
+                    <ul>
+                        <li><strong>For dTAO holders:</strong> Idle α tokens sitting unused, with limited ways to deploy them productively across subnets</li>
+                        <li><strong>For miners & subnet operators:</strong> Need access to α capital but can't acquire it without destabilizing existing liquidity pools</li>
+                        <li><strong>For everyone:</strong> Subjective weight allocation by validators lacks transparency and fairness</li>
+                    </ul>
+
+                    <h2>The MetaHash Solution</h2>
+                    <p>MetaHash creates a <strong>decentralized marketplace</strong> that connects capital holders with capital seekers through <strong>fair, deterministic auctions</strong>.</p>
+                    <p>Think of it like this:</p>
+                    <ul>
+                        <li><strong>dTAO holders</strong> can deploy their idle α across multiple subnets without mining</li>
+                        <li><strong>Miners & subnet operators</strong> can bid for α access to grow their operations</li>
+                        <li><strong>Validators</strong> run transparent auctions with on-chain commitments and slippage-aware clearing</li>
+                        <li><strong>Everyone benefits</strong> from fair price discovery and deterministic weight allocation</li>
+                    </ul>
+
+                    <figure class="diagram-card">
+                        <img src="icon/images/metahash working.png" alt="Diagram of the MetaHash auction and settlement flow">
+                        <figcaption class="diagram-caption">MetaHash connects dTAO holders, validators, and miners through a transparent auction cycle.</figcaption>
+                    </figure>
+
+                    <h3>Key Features</h3>
+                    <p><strong>For dTAO Holders:</strong></p>
+                    <ul>
+                        <li><strong>No mining required:</strong> Participate in subnets without running infrastructure</li>
+                        <li><strong>Avoid slippage:</strong> Deploy α without destabilizing your original pools</li>
+                        <li><strong>Transparent tracking:</strong> See exactly where your α is allocated on-chain</li>
+                        <li><strong>Multi-subnet deployment:</strong> Diversify across the Bittensor ecosystem</li>
+                    </ul>
+
+                    <p><strong>For Miners & Subnet Operators:</strong></p>
+                    <ul>
+                        <li><strong>Access capital:</strong> Bid for α to fund operations and growth</li>
+                        <li><strong>Fair auctions:</strong> Deterministic clearing based on TAO value</li>
+                        <li><strong>Reputation system:</strong> Build trust over time to increase bidding limits</li>
+                        <li><strong>Slippage protection:</strong> Bids valued fairly based on market liquidity</li>
+                    </ul>
+
+                    <p><strong>For Validators:</strong></p>
+                    <ul>
+                        <li><strong>Deterministic auctions:</strong> No subjective weight allocation</li>
+                        <li><strong>On-chain transparency:</strong> Publish commitments to IPFS with CID on-chain</li>
+                        <li><strong>Automated settlement:</strong> Scan on-chain transfers and calculate weights</li>
+                        <li><strong>Earn emissions:</strong> Get rewarded for providing fair infrastructure</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><strong>Next:</strong> <a href="#how-it-works-auction" data-page="how-it-works-auction">Learn about the Auction Cycle →</a></p>
+                    </div>
+                </div>
+
+                <!-- How MetaHash Works: Auction Cycle Page -->
+                <div class="page" id="page-how-it-works-auction">
+                    <h1>The Three-Epoch Auction Cycle</h1>
+                    <p>MetaHash operates on a continuous cycle. Each epoch lasts approximately 12 minutes (~100 blocks).</p>
+
+                    <h2>Epoch N: Auction & Clearing</h2>
+                    <p><strong>Phase 1: AuctionStart (blocks 0-20)</strong></p>
+                    <ul>
+                        <li>Validator broadcasts: "Auction open!"</li>
+                        <li>Announces budget, parameters, payment window</li>
+                    </ul>
+
+                    <p><strong>Phase 2: Bidding (blocks 20-60)</strong></p>
+                    <ul>
+                        <li>Miners submit: (subnet_id, α_amount, discount)</li>
+                        <li>Multiple bids allowed per miner</li>
+                        <li>Competition for best value</li>
+                    </ul>
+
+                    <p><strong>Phase 3: Clearing (blocks 60-100)</strong></p>
+                    <ul>
+                        <li>Validator ranks all bids by value</li>
+                        <li>Accounts for slippage & reputation</li>
+                        <li>Picks winners until budget filled</li>
+                        <li>Announces winners with payment details</li>
+                    </ul>
+
+                    <h3>Epoch N+1: Commitment & Payment</h3>
+                    <ul>
+                        <li>Winners notified: "You won! Pay by block X"</li>
+                        <li>Validator publishes commitment (CID → IPFS)</li>
+                        <li>Payment window opens (typically 100 blocks)</li>
+                        <li>Miners send α to whitelisted treasury</li>
+                        <li>Transactions confirmed on-chain</li>
+                    </ul>
+
+                    <h2>Epoch N+2: Settlement</h2>
+                    <ul>
+                        <li>Validator scans blockchain for α payments</li>
+                        <li>Verifies: correct amount, treasury, timing</li>
+                        <li>Calculates miner scores (paid = high, missed = 0)</li>
+                        <li>Burns underfilled budget to UID 0</li>
+                        <li>Sets weights on-chain (or preview-only in testing mode)</li>
+                        <li>Emissions distributed based on weights</li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <p><strong>Visual Summary:</strong> Auction (Epoch N) → Payment (Epoch N+1) → Settlement (Epoch N+2)</p>
+                    </div>
+
+                    <div class="info-box">
+                        <p><strong>Next:</strong> <a href="#how-it-works-mechanisms" data-page="how-it-works-mechanisms">Understand Key Mechanisms →</a></p>
+                    </div>
+                </div>
+
+                <!-- How MetaHash Works: Key Mechanisms Page -->
+                <div class="page" id="page-how-it-works-mechanisms">
+                    <h1>Key Mechanisms</h1>
+                    <p>Understanding the technical systems that make MetaHash fair, secure, and efficient.</p>
+
+                    <h3>1. Slippage-Aware Valuation</h3>
+                    <p>If you bid 10,000 α but the subnet's liquidity pool only has $5,000 worth, your α isn't actually worth face value. MetaHash calculates slippage based on bid size relative to liquidity to ensure fair valuation.</p>
+
+                    <h3>2. Reputation System</h3>
+                    <p>Prevents spam and ensures reliable participants:</p>
+                    <ul>
+                        <li>Win + pay on time → reputation increases</li>
+                        <li>Miss payment → reputation decreases significantly</li>
+                        <li>Reputation affects maximum bid capacity</li>
+                    </ul>
+
+                    <h3>3. Budget Signaling & Burns</h3>
+                    <p>Validators signal expected budget (bt_mu, bl_mu). If bids fall short, the difference is burned (sent to UID 0), creating deflationary pressure and maintaining system integrity through deterministic burns.</p>
+
+                    <h3>4. IPFS + On-Chain Commitments</h3>
+                    <p>Validators publish auction commitments with Content ID (CID) on-chain and full data to IPFS. This hybrid approach keeps on-chain storage minimal while maintaining transparency. Anyone can retrieve and verify auction results.</p>
+
+                    <h2>Security & Safety Features</h2>
+                    <ul>
+                        <li><strong>Whitelisted Treasuries:</strong> Only approved addresses can receive α payments</li>
+                        <li><strong>Strict Payment Windows:</strong> Clear block-based deadlines prevent gaming</li>
+                        <li><strong>Slippage Guards:</strong> Excessive slippage (>15% typically) results in bid rejection</li>
+                        <li><strong>Deterministic Clearing:</strong> Same inputs always produce same outputs - no favoritism</li>
+                        <li><strong>Reputation Caps:</strong> Limits exposure for new/untrusted coldkeys</li>
+                        <li><strong>On-Chain Transparency:</strong> All commitments published with verifiable CIDs</li>
+                        <li><strong>Testing Mode:</strong> Preview weights without on-chain submission for safe testing</li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <p><strong>Ready to Participate?</strong> Choose your path:</p>
+                        <ul>
+                            <li><a href="#miner-simple" data-page="miner-simple">Miner Setup (Simple)</a> - Get started in 15-30 minutes</li>
+                            <li><a href="#validator-simple" data-page="validator-simple">Validator Setup (Simple)</a> - Deploy in 1-2 hours</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Treasury Whitelisting Page -->
+                <div class="page" id="page-treasury-whitelisting">
+                    <h1>Treasury Whitelisting Explained</h1>
+                    <p class="section-description">Understanding MetaHash's security mechanism for protecting treasury funds</p>
+
+                    <h2>What is Treasury Whitelisting?</h2>
+                    <p>In MetaHash's governance model, treasury whitelisting is a security measure to protect the network's funds from malicious actors. It means that any destination account or payment address must be pre-approved (whitelisted) by trusted parties before it can receive α payments from auction winners.</p>
+
+                    <div class="info-box warning">
+                        <p><strong>Critical Safety Rule:</strong> ONLY send α to whitelisted treasury addresses! Sending to non-whitelisted addresses results in permanent loss of funds.</p>
+                    </div>
+
+                    <h2>Why is Treasury Whitelisting Needed?</h2>
+                    <p>Without whitelisting, several risks could emerge:</p>
+                    <ul>
+                        <li><strong>Malicious actors</strong> could create fake treasury addresses to steal α tokens</li>
+                        <li><strong>Typos or errors</strong> could result in funds being sent to wrong addresses</li>
+                        <li><strong>Social engineering attacks</strong> could trick users into sending to attacker-controlled addresses</li>
+                        <li><strong>Governance exploits</strong> could potentially redirect treasury funds</li>
+                    </ul>
+
+                    <p>Whitelisting mitigates these risks by adding a checkpoint: only pre-approved addresses can receive treasury payments. If someone tries to send funds to an unrecognized address, validators will reject the payment in settlement.</p>
+
+                    <h2>How Does It Work?</h2>
+
+                    <h3>The Two-Key Security Model</h3>
+                    <p>Think of treasury whitelisting like requiring two keys to open a safe:</p>
+                    <ul>
+                        <li><strong>Community's key:</strong> Validators run auctions and determine winners</li>
+                        <li><strong>Foundation's key:</strong> Only whitelisted addresses are valid payment destinations</li>
+                    </ul>
+                    <p>Both must align for a payment to be considered valid. This creates a check-and-balance system.</p>
+
+                    <h3>Who Can Whitelist Addresses?</h3>
+                    <p>The MetaHash subnet owner and core team are responsible for managing the whitelist. Addresses are added through:</p>
+                    <ul>
+                        <li><strong>Governance proposals</strong> - Community can propose new treasury addresses</li>
+                        <li><strong>Core team approval</strong> - Subnet owner verifies and adds legitimate addresses</li>
+                        <li><strong>Multi-sig verification</strong> - Multiple parties must confirm before whitelisting</li>
+                    </ul>
+
+                    <h2>How to Verify Whitelisted Addresses</h2>
+
+                    <div class="info-box">
+                        <p><strong>ALWAYS verify before sending α!</strong> Follow these steps:</p>
+                    </div>
+
+                    <h3>Step 1: Check the Official Repository</h3>
+                    <pre><code># Clone the repository
+git clone https://github.com/fx-integral/metahash.git
+cd metahash
+
+# View whitelisted treasuries
+cat metahash/treasuries.py</code></pre>
+
+                    <h3>Step 2: Programmatically Confirm the Address</h3>
+                    <pre><code>python -c "from treasuries import WHITELISTED_TREASURIES; addr='PASTE_ADDRESS_HERE'; print('✅ Safe' if addr in WHITELISTED_TREASURIES else '❌ Not Whitelisted')"</code></pre>
+
+                    <h3>Step 3: Validate with btcli</h3>
+                    <pre><code>btcli treasury list --netuid 73
+# Ensure the address in your invoice appears in this list exactly</code></pre>
+
+                    <h3>Step 4: Cross-Reference Multiple Sources</h3>
+                    <ul>
+                        <li>Check the official MetaHash documentation</li>
+                        <li>Verify in the subnet's Discord channel</li>
+                        <li>Confirm with validator announcements on-chain</li>
+                    </ul>
+
+                    <h3>Step 5: Test with Small Amount First</h3>
+                    <p>When using a treasury address for the first time:</p>
+                    <ol>
+                        <li>Send a small test amount (e.g., 1-10 α)</li>
+                        <li>Wait for settlement to confirm it was accepted</li>
+                        <li>Only then send larger amounts</li>
+                    </ol>
+
+                    <h2>What Addresses Are Typically Whitelisted?</h2>
+                    <p>The whitelist typically includes:</p>
+                    <ul>
+                        <li><strong>MetaHash Foundation addresses</strong> - For core development funding</li>
+                        <li><strong>Subnet treasury addresses</strong> - Where α is pooled for distribution</li>
+                        <li><strong>Community grant multisigs</strong> - For approved community initiatives</li>
+                        <li><strong>Validator reward pools</strong> - For emission distribution</li>
+                    </ul>
+
+                    <h2>Security Benefits</h2>
+
+                    <h3>Defense Layers</h3>
+                    <ul>
+                        <li><strong>Commitment proofs:</strong> Validators publish IPFS CIDs tied to each treasury, making settlement tampering detectable.</li>
+                        <li><strong>Multi-signature controls:</strong> Treasuries use multi-sig wallets so no single operator can drain funds.</li>
+                        <li><strong>Monitoring bots:</strong> Community scripts alert Discord if new, non-whitelisted addresses appear in settlement logs.</li>
+                    </ul>
+
+                    <h3>Protection Against Attacks</h3>
+                    <p>Even if a malicious actor somehow gained influence, they still could not:</p>
+                    <ul>
+                        <li>Redirect funds to their own address (not whitelisted)</li>
+                        <li>Create fake treasury addresses that validators would accept</li>
+                        <li>Drain the treasury through social engineering</li>
+                    </ul>
+
+                    <h3>Transparency and Trust</h3>
+                    <ul>
+                        <li><strong>On-chain verification:</strong> All treasury addresses are publicly visible</li>
+                        <li><strong>Community oversight:</strong> Anyone can audit whitelisted addresses</li>
+                        <li><strong>Deterministic validation:</strong> Validators automatically reject non-whitelisted addresses</li>
+                    </ul>
+
+                    <h2>For Miners: Payment Best Practices</h2>
+
+                    <div class="info-box warning">
+                        <h3>🔒 Before Every Payment</h3>
+                        <ol>
+                            <li><strong>Verify</strong> the treasury address in <code>treasuries.py</code></li>
+                            <li><strong>Check</strong> the subnet_id matches your bid</li>
+                            <li><strong>Confirm</strong> you're within the payment window</li>
+                            <li><strong>Send</strong> only after triple-checking the address</li>
+                            <li><strong>Save</strong> transaction hash for your records</li>
+                        </ol>
+                    </div>
+
+                    <h3>Common Mistakes to Avoid</h3>
+                    <ul>
+                        <li>❌ Copying address from unverified sources (Discord DMs, random websites)</li>
+                        <li>❌ Sending to addresses from old/outdated documentation</li>
+                        <li>❌ Trusting addresses shared by other miners without verification</li>
+                        <li>❌ Sending to validator addresses directly</li>
+                        <li>✅ ALWAYS check <code>metahash/treasuries.py</code> in official repo</li>
+                    </ul>
+
+                    <h2>Governance and Evolution</h2>
+                    <p>Treasury whitelisting is not static. The community can:</p>
+                    <ul>
+                        <li><strong>Propose new addresses</strong> through governance</li>
+                        <li><strong>Remove outdated addresses</strong> that are no longer needed</li>
+                        <li><strong>Update mechanisms</strong> as the network matures</li>
+                    </ul>
+
+                    <p>This measure is in place not to centralize control, but to responsibly decentralize. As the community gains trust and the network matures, the whitelist can be expanded through governance votes.</p>
+
+                    <div class="info-box success">
+                        <p><strong>Key Takeaway:</strong> Treasury whitelisting protects everyone. It ensures that α payments go to legitimate addresses, maintaining trust in the MetaHash auction system. Always verify addresses in the official repository before sending any α tokens.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <p><strong>Ready to participate?</strong> Make sure you understand how to verify treasury addresses, then head to:</p>
+                        <ul>
+                            <li><a href="#miner-simple" data-page="miner-simple">Miner Setup Guide</a> - Learn how to bid in auctions</li>
+                            <li><a href="#prerequisites" data-page="prerequisites">Prerequisites</a> - Check you have everything needed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Prerequisites Page -->
+                <div class="page" id="page-prerequisites">
+                    <h1>Prerequisites: What You Need Before Starting</h1>
+
+                    <div class="info-box warning">
+                        <p><strong>Don't Skip This!</strong> Setting up without prerequisites leads to frustration and failures. Verify everything first.</p>
+                    </div>
+
+                    <h2>For Everyone (Miners & Validators)</h2>
+
+                    <h3>✅ 1. Registered Hotkey</h3>
+                    <p>You MUST have a hotkey registered on Bittensor mainnet.</p>
+
+                    <p><strong>Check if you have one:</strong></p>
+                    <pre><code>btcli wallet list</code></pre>
+
+                    <p><strong>Expected output:</strong></p>
+                    <pre><code>Wallets:
+  my_wallet (coldkey)
+    my_hotkey (hotkey)</code></pre>
+
+                    <p><strong>Don't have one? Create it:</strong></p>
+                    <pre><code># 1. Install Bittensor CLI
+pip install bittensor
+
+# 2. Create coldkey (your master wallet)
+btcli wallet new_coldkey --wallet.name my_wallet
+
+# 3. Create hotkey (your operational wallet)
+btcli wallet new_hotkey --wallet.name my_wallet --wallet.hotkey my_hotkey
+
+# 4. Register to Subnet 73
+btcli subnet register --netuid 73 --wallet.name my_wallet --wallet.hotkey my_hotkey</code></pre>
+
+                    <div class="info-box warning">
+                        <p><strong>Cost:</strong> ~0.1 τ for registration fee</p>
+                    </div>
+
+                    <h3>✅ 2. Some τ (TAO) for Gas Fees</h3>
+                    <p>Every blockchain transaction costs τ.</p>
+                    <p><strong>You'll need:</strong></p>
+                    <ul>
+                        <li>Registration: ~0.1 τ (one-time)</li>
+                        <li>Ongoing ops: ~0.01-0.05 τ per day</li>
+                    </ul>
+
+                    <p><strong>How to get τ:</strong></p>
+                    <ol>
+                        <li>Buy on exchanges (Binance, MEXC, Gate.io)</li>
+                        <li>Transfer to your coldkey address</li>
+                    </ol>
+
+                    <p><strong>Check your balance:</strong></p>
+                    <pre><code>btcli wallet balance --wallet.name my_wallet</code></pre>
+
+                    <h3>✅ 3. Linux Environment</h3>
+                    <p><strong>Recommended:</strong> Ubuntu 20.04 or 22.04 LTS</p>
+                    <p><strong>Not officially supported:</strong> Windows (use WSL2), macOS (limited)</p>
+
+                    <p><strong>Check your OS:</strong></p>
+                    <pre><code>lsb_release -a</code></pre>
+
+                    <h3>✅ 4. Python 3.8+</h3>
+                    <pre><code>python3 --version
+# Should show: Python 3.8.x or higher</code></pre>
+
+                    <p><strong>Install if needed:</strong></p>
+                    <pre><code>sudo apt update
+sudo apt install python3.10 python3.10-pip python3.10-venv</code></pre>
+
+                    <h3>✅ 5. Git</h3>
+                    <pre><code>git --version</code></pre>
+
+                    <p><strong>Install if needed:</strong></p>
+                    <pre><code>sudo apt install git</code></pre>
+
+                    <h2>Additional for Miners</h2>
+
+                    <h3>✅ 6. Some α (Alpha) Tokens</h3>
+                    <p>You need α from at least one subnet to participate in auctions.</p>
+
+                    <p><strong>How to get α:</strong></p>
+                    <ul>
+                        <li>Mine on any Bittensor subnet</li>
+                        <li>Trade with other miners (OTC)</li>
+                        <li>Receive as validator emissions from other subnets</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><strong>Don't have α yet?</strong> Consider mining on beginner-friendly subnets like SN1, SN5, or SN18 first to accumulate α.</p>
+                    </div>
+
+                    <h2>Additional for Validators</h2>
+
+                    <h3>✅ 7. Dedicated Server or VPS</h3>
+                    <p><strong>Minimum specs:</strong></p>
+                    <ul>
+                        <li>CPU: 4 cores</li>
+                        <li>RAM: 8 GB</li>
+                        <li>Storage: 100 GB SSD</li>
+                        <li>Bandwidth: 100 Mbps unmetered</li>
+                    </ul>
+
+                    <p><strong>Recommended specs:</strong></p>
+                    <ul>
+                        <li>CPU: 8+ cores</li>
+                        <li>RAM: 16+ GB</li>
+                        <li>Storage: 250+ GB NVMe SSD</li>
+                        <li>Bandwidth: 1 Gbps unmetered</li>
+                    </ul>
+
+                    <h3>✅ 8. Sufficient Stake</h3>
+                    <p>You need minimum stake weight to be issued a validator permit and rank in top 64.</p>
+
+                    <div class="info-box success">
+                        <p><strong>All prerequisites met?</strong></p>
+                        <p><strong>Miners:</strong> → <a href="#miner-simple" data-page="miner-simple">Simple Miner Setup</a></p>
+                        <p><strong>Validators:</strong> → <a href="#validator-simple" data-page="validator-simple">Simple Validator Setup</a></p>
+                    </div>
+                </div>
+
+                <!-- Error Reference Page -->
+                <div class="page" id="page-error-reference">
+                    <h1>Error Reference: Common Issues & Solutions</h1>
+                    <p>Use the search to jump straight to a specific error or browse by category. Each entry includes the root cause, how to fix it, and preventative tips.</p>
+
+                    <div class="error-search">
+                        <label for="errorSearchInput">Search errors</label>
+                        <input type="text" id="errorSearchInput" placeholder="Search by message, symptom, or keyword">
+                        <p class="error-search-hint">Try keywords like <code>slippage</code>, <code>btcli</code>, <code>treasury</code>, or error codes.</p>
+                    </div>
+
+                    <h2>Installation & Setup</h2>
+
+                    <div class="error-entry" data-tags="installation python ModuleNotFoundError bittensor pip">
+                        <h3>ModuleNotFoundError: No module named 'bittensor'</h3>
+                        <p><strong>Cause:</strong> Bittensor package missing from current environment.</p>
+                        <p><strong>Fix:</strong></p>
+                        <pre><code>pip install bittensor --upgrade</code></pre>
+                        <p><strong>Prevent:</strong> Activate your virtualenv before running MetaHash scripts (<code>source venv/bin/activate</code>).</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="installation wallet permissions chmod">
+                        <h3>Permission denied when accessing wallet</h3>
+                        <p><strong>Cause:</strong> Wallet files created with restrictive or root ownership.</p>
+                        <p><strong>Fix:</strong></p>
+                        <pre><code>chmod 600 ~/.bittensor/wallets/*/coldkey
+chmod 600 ~/.bittensor/wallets/*/hotkeys/*</code></pre>
+                        <p><strong>Prevent:</strong> Avoid running wallet commands with <code>sudo</code>; keep wallets owned by the runtime user.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="installation rpc connection refused port 9944 network">
+                        <h3>Connection refused: port 9944</h3>
+                        <p><strong>Cause:</strong> Cannot reach the Finney RPC endpoint.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ol>
+                            <li>Check network/firewall allows outbound 443.</li>
+                            <li>Swap endpoint: <code>wss://entrypoint-finney.opentensor.ai:443</code>.</li>
+                            <li>Validate DNS with <code>nslookup entrypoint-finney.opentensor.ai</code>.</li>
+                        </ol>
+                        <p><strong>Prevent:</strong> Keep a fallback endpoint handy and monitor latency with <code>btcli net ping</code>.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="installation hardware runtimeerror ledger device not found">
+                        <h3>RuntimeError: Ledger device not found</h3>
+                        <p><strong>Cause:</strong> Hardware wallet not connected, locked, or missing udev rules.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Unlock Ledger and open the Bittensor app.</li>
+                            <li>On Linux, install udev rules: <code>sudo btcli ledger enable</code>.</li>
+                            <li>Reconnect USB and rerun the command.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Keep firmware/apps updated and verify Ledger is detected with <code>btcli ledger list</code>.</p>
+                    </div>
+
+                    <h2>Auction & Mining</h2>
+
+                    <div class="error-entry" data-tags="auction bid rejected excessive slippage">
+                        <h3>Bid rejected: excessive slippage</h3>
+                        <p><strong>Cause:</strong> Bid size exceeds current α liquidity buffer.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Reduce bid amount (start at 30-50% of pool depth).</li>
+                            <li>Split orders across multiple auctions or subnets.</li>
+                            <li>Inspect on-chain depth with <code>btcli swap depth --netuid 73</code>.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Track liquidity snapshots and set conservative default discounts in <code>config.json</code>.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="auction reputation cap hotkey limit">
+                        <h3>Bid rejected: hotkey exceeds reputation cap</h3>
+                        <p><strong>Cause:</strong> Hotkey reputation too low for requested allocation.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Fulfill smaller bids consistently to build reputation.</li>
+                            <li>Check cap with <code>btcli reputation show --hotkey YOUR_HOTKEY</code>.</li>
+                            <li>Split the bid into smaller chunks under the cap.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Avoid missed payments and maintain activity each epoch.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="auction insufficient alpha balance btcli">
+                        <h3>Insufficient α balance</h3>
+                        <p><strong>Cause:</strong> Wallet balance lower than bid commitment.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Confirm balance: <code>btcli wallet overview --wallet.name YOUR_WALLET</code>.</li>
+                            <li>Mine additional α or adjust bid size.</li>
+                            <li>Ensure transfer confirmations before bidding again.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Automate a pre-bid balance check in custom scripts.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="auction commitment mismatch validator log sample">
+                        <h3>AuctionCommitmentMismatch</h3>
+                        <p><strong>Cause:</strong> Validator commitment CID differs from settlement data.</p>
+                        <p><strong>Log sample:</strong></p>
+                        <pre><code>[ERROR] commitment CID mismatch | expected=QmX... | observed=QmY...</code></pre>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Re-fetch commitments: <code>btcli auction commitments --netuid 73</code>.</li>
+                            <li>Verify local cache cleared (<code>rm ~/.metahash/cache/commitments*</code>).</li>
+                            <li>Contact validator if discrepancy persists.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Keep node clocks in sync (enable <code>systemd-timesyncd</code>) and avoid editing downloaded commitment files.</p>
+                    </div>
+
+                    <h2>Payments</h2>
+
+                    <div class="error-entry" data-tags="payment treasury whitelist verification">
+                        <h3>Treasury address not whitelisted</h3>
+                        <p><strong>Cause:</strong> Payment attempted to an address outside <code>treasuries.py</code>.</p>
+                        <p><strong>Fix:</strong></p>
+                        <pre><code># Verify address appears in the whitelist
+python -c "from treasuries import WHITELISTED_TREASURIES; addr='PASTE'; print(addr in WHITELISTED_TREASURIES)"</code></pre>
+                        <p><strong>Prevent:</strong> Validate every invoice through the <a href="#treasury-whitelisting" data-page="treasury-whitelisting">Treasury Whitelisting</a> checklist.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="payment window expired deadline late">
+                        <h3>Payment window expired</h3>
+                        <p><strong>Cause:</strong> α transfer confirmed after the deadline.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Bid again in the next auction cycle.</li>
+                            <li>Notify validator to blacklist stale commitment.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Set a timer when <code>auction_start</code> fires; keep a pre-filled transfer command ready.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="payment amount mismatch settlement rejected">
+                        <h3>Payment amount mismatch</h3>
+                        <p><strong>Cause:</strong> Sent α amount differs from winning invoice.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Top up with the shortfall before the window closes.</li>
+                            <li>Provide tx hash to validator for manual reconciliation.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Copy-paste the exact amount string (including decimals) from the commitment file.</p>
+                    </div>
+
+                    <h2>Network & System</h2>
+
+                    <div class="error-entry" data-tags="network ssl certificate verify failed macos openssl">
+                        <h3>SSLCertVerificationError: certificate verify failed</h3>
+                        <p><strong>Cause:</strong> Local CA store outdated (common on macOS).</p>
+                        <p><strong>Fix:</strong></p>
+                        <pre><code># macOS Python bundle
+/Applications/Python\ 3.x/Install\ Certificates.command
+
+# Homebrew OpenSSL refresh
+brew reinstall openssl</code></pre>
+                        <p><strong>Prevent:</strong> Keep system packages updated and avoid MITM proxies.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="network timeout btcli rpc TimeoutError">
+                        <h3>TimeoutError: btcli rpc timed out</h3>
+                        <p><strong>Cause:</strong> RPC endpoint not responding within default timeout.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Retry with increased timeout: <code>btcli --network finney --timeout 60 ...</code></li>
+                            <li>Switch to a closer RPC endpoint.</li>
+                            <li>Check local firewall or VPN latency.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Monitor latency with <code>btcli net latency</code> and choose a stable endpoint.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="network connection reset errno 104 WSAECONNRESET">
+                        <h3>ConnectionResetError / WSAECONNRESET</h3>
+                        <p><strong>Cause:</strong> Remote peer closed the socket (network blip or validator restart).</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Allow the client to reconnect automatically.</li>
+                            <li>Verify no local firewall is terminating idle connections.</li>
+                            <li>Check validator status in <code>btcli subnet list --netuid 73</code>.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Keep miners on reliable networks and enable automatic retries in supervisor scripts.</p>
+                    </div>
+
+                    <h2>Validator Operations</h2>
+
+                    <div class="error-entry" data-tags="validator permit missing stake insufficient">
+                        <h3>No validator permit</h3>
+                        <p><strong>Cause:</strong> Hotkey not in top stake or permit expired.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Increase stake to re-enter top 64.</li>
+                            <li>Wait for next immunities cycle if newly registered.</li>
+                            <li>Confirm permit status: <code>btcli subnet list --netuid 73</code>.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Maintain competitive stake and uptime; avoid extended downtime penalties.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="validator weights rejected InvalidSignature">
+                        <h3>Weights rejected: InvalidSignature</h3>
+                        <p><strong>Cause:</strong> Validator weights signed with mismatched hotkey (usually wrong wallet path).</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Confirm <code>--wallet.name</code> and <code>--wallet.hotkey</code> match the registered permit.</li>
+                            <li>Regenerate hotkey permissions if necessary: <code>btcli wallet new_hotkey</code>.</li>
+                            <li>Restart validator with the correct config.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Use explicit wallet paths in systemd unit files and avoid copying configs between environments without editing.</p>
+                    </div>
+
+                    <div class="error-entry" data-tags="validator payment verification settlement missing tx">
+                        <h3>Payment verification failed: transaction not found</h3>
+                        <p><strong>Cause:</strong> Validator cannot find α transfer on-chain within the settlement window.</p>
+                        <p><strong>Fix:</strong></p>
+                        <ul>
+                            <li>Double-check tx hash via <code>btcli chain get_transaction --hash HASH</code>.</li>
+                            <li>Confirm the transfer reached the correct treasury and amount.</li>
+                            <li>Update auction records to mark commitment as unpaid.</li>
+                        </ul>
+                        <p><strong>Prevent:</strong> Monitor treasury incoming transfers with a watcher script and enforce payment confirmations before closing windows.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <p><strong>Still stuck?</strong></p>
+                        <ul>
+                            <li>Ask in <a href="#connect" data-page="connect">MetaHash Discord</a> with logs and tx hashes.</li>
+                            <li>Open <a href="https://github.com/fx-integral/metahash/issues" target="_blank">GitHub Issue</a> for reproducible bugs.</li>
+                            <li>Review <a href="https://docs.bittensor.com/" target="_blank">Bittensor Docs</a> for network-level troubleshooting.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Connect Page -->
+                <div class="page" id="page-connect">
+                    <h1>Connect</h1>
+                    <p>Get in touch with the MetaHash community and team.</p>
+
+                    <h2>Community</h2>
+                    <div class="connect-links">
+                        <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank" class="connect-card">
+                            <div class="card-icon">💬</div>
+                            <h3>MetaHash Discord</h3>
+                            <p>Join our Discord channel for real-time support and community discussions.</p>
+                        </a>
+
+                        <a href="https://discord.gg/bittensor" target="_blank" class="connect-card">
+                            <div class="card-icon">🌐</div>
+                            <h3>Bittensor Discord</h3>
+                            <p>Connect with the broader Bittensor ecosystem.</p>
+                        </a>
+
+                        <a href="https://x.com/metahashsn73" target="_blank" class="connect-card">
+                            <div class="card-icon">🐦</div>
+                            <h3>Twitter/X</h3>
+                            <p>Follow us for the latest updates and announcements.</p>
+                        </a>
+
+                        <a href="https://github.com/fx-integral/metahash" target="_blank" class="connect-card">
+                            <div class="card-icon">💻</div>
+                            <h3>GitHub</h3>
+                            <p>Contribute to the project and view the source code.</p>
+                        </a>
+                    </div>
+
+                    <h2>Support</h2>
+                    <p>Need help? Reach out through any of these channels:</p>
+                    <ul>
+                        <li><strong>Discord:</strong> Best for quick questions and community support</li>
+                        <li><strong>GitHub Issues:</strong> For bug reports and feature requests</li>
+                        <li><strong>Email:</strong> For private inquiries and partnerships</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 MetaHash. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://x.com/metahashsn73" target="_blank">Twitter</a>
+                <a href="https://github.com/fx-integral/metahash" target="_blank">GitHub</a>
+                <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank">Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
