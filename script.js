@@ -24,6 +24,10 @@ function closeMobileSidebar() {
 
 // Function to show a specific page
 function showPage(pageId) {
+    if (!pages.length) {
+        return;
+    }
+
     // Hide all pages
     pages.forEach(page => {
         page.classList.remove('active');
@@ -35,7 +39,10 @@ function showPage(pageId) {
         targetPage.classList.add('active');
     } else {
         // Default to home page
-        document.getElementById('page-home').classList.add('active');
+        const defaultPage = document.getElementById('page-home');
+        if (defaultPage) {
+            defaultPage.classList.add('active');
+        }
     }
 
     // Update active state in sidebar
@@ -87,6 +94,10 @@ setupCards.forEach(card => {
 
 // Handle browser back/forward buttons
 window.addEventListener('popstate', () => {
+    if (!pages.length) {
+        return;
+    }
+
     const hash = window.location.hash.substring(1); // Remove the '#'
     if (hash) {
         showPage(hash);
@@ -97,11 +108,13 @@ window.addEventListener('popstate', () => {
 
 // Handle initial page load with hash
 window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.substring(1);
-    if (hash) {
-        showPage(hash);
-    } else {
-        showPage('home');
+    if (pages.length) {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            showPage(hash);
+        } else {
+            showPage('home');
+        }
     }
 
     initializeErrorSearch();
