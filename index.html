@@ -135,7 +135,7 @@
                             <ul>
                                 <li><span>Subnet:</span> 73 (MetaHash)</li>
                                 <li><span>Network:</span> Bittensor Mainnet</li>
-                                <li><span>Auction Frequency:</span> Every epoch (~12 minutes)</li>
+                                <li><span>Auction Tempo:</span> Every tempo (360 blocks, ~72 minutes)</li>
                                 <li><span>Clearing Type:</span> Deterministic, slippage-aware</li>
                                 <li><span>Settlement:</span> On-chain transfers + IPFS commitments</li>
                             </ul>
@@ -146,7 +146,7 @@
                         <p><strong>Stay in the loop:</strong> Follow <a href="https://x.com/metahashsn73" target="_blank" rel="noopener noreferrer">@metahashsn73</a> and drop into the <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank" rel="noopener noreferrer">MetaHash Discord</a> for real-time updates and support.</p>
                     </div>
 
-                    <p class="welcome-summary">MetaHash connects idle α with miners and validators that need it, clearing auctions every 12 minutes with verifiable, on-chain settlements.</p>
+                    <p class="welcome-summary">MetaHash connects idle α with miners and validators that need it, clearing auctions every tempo (~72 minutes) with verifiable, on-chain settlements.</p>
 
                     <div class="info-box warning">
                         <h3>⚠️ CRITICAL SAFETY WARNINGS - Read Before Using MetaHash:</h3>
@@ -485,7 +485,7 @@ nano config.json</code></pre>
                                 <pre><code>[INFO] Auction announced | budget=4,500 α | discount cap 10%
 [INFO] Submitted bid | amount=500 α | discount=4.5%
 [SUCCESS] Bid accepted | payment window blocks 121-220</code></pre>
-                                <p>Seeing bids stream in? You’re live. No auctions yet? Keep it running—validators publish roughly every 12 minutes.</p>
+                                <p>Seeing bids stream in? You’re live. No auctions yet? Keep it running—validators publish roughly every tempo (~72 minutes).</p>
                             </div>
                         </div>
                     </div>
@@ -946,14 +946,15 @@ curl http://localhost:9091/metrics
                     <div class="term-card" id="auction-term">
                         <h3 class="term-title">Auction</h3>
                         <div class="term-content">
-                            <p><strong>What it is:</strong> A competitive bidding process that happens every epoch (~12 minutes) where miners bid for α access.</p>
+                            <p><strong>What it is:</strong> A competitive bidding process that happens every tempo (360 blocks, ~72 minutes) where miners bid for α access.</p>
                             <p><strong>The process:</strong></p>
                             <ol>
-                                <li><strong>Announcement:</strong> Validator broadcasts auction start with budget signals.</li>
-                                <li><strong>Bidding:</strong> Miners submit bids (subnet, α amount, discount).</li>
-                                <li><strong>Clearing:</strong> Validator ranks bids by TAO value with slippage consideration.</li>
-                                <li><strong>Payment:</strong> Winners send α to whitelisted treasury addresses.</li>
-                                <li><strong>Settlement:</strong> Validator verifies payments and sets weights on-chain.</li>
+                                <li><strong>Preparation:</strong> First 50 blocks of the tempo finalize prior rewards through Yuma Consensus and stage the new auction budget.</li>
+                                <li><strong>Announcement:</strong> Validator broadcasts <em>AuctionStart</em> with discount caps and payment windows.</li>
+                                <li><strong>Bidding:</strong> Miners submit bids (subnet, α amount, discount) for the remainder of the tempo.</li>
+                                <li><strong>Clearing:</strong> Final 20 blocks close bidding while validators rank bids deterministically.</li>
+                                <li><strong>Payment:</strong> Winners send α to whitelisted treasury addresses during the next tempo.</li>
+                                <li><strong>Settlement:</strong> Validator verifies payments and sets weights on-chain two tempos later.</li>
                             </ol>
                         </div>
                     </div>
@@ -1014,14 +1015,14 @@ curl http://localhost:9091/metrics
                     </div>
 
                     <div class="term-card" id="epoch">
-                        <h3 class="term-title">Epoch</h3>
+                        <h3 class="term-title">Tempo (Epoch)</h3>
                         <div class="term-content">
-                            <p><strong>What it is:</strong> A fixed time period in Bittensor, approximately 12 minutes or ~100 blocks.</p>
+                            <p><strong>What it is:</strong> Bittensor’s scheduling unit. One tempo spans 360 blocks (~72 minutes) and is sometimes called an epoch in tooling.</p>
                             <p><strong>In MetaHash:</strong></p>
                             <ul>
-                                <li><strong>Epoch N:</strong> Auction + Clearing phase</li>
-                                <li><strong>Epoch N+1:</strong> Payment window + Commitment phase</li>
-                                <li><strong>Epoch N+2:</strong> Settlement phase</li>
+                                <li><strong>Tempo T:</strong> Auction + Clearing phase</li>
+                                <li><strong>Tempo T+1:</strong> Payment window + Commitment phase</li>
+                                <li><strong>Tempo T+2:</strong> Settlement phase</li>
                             </ul>
                         </div>
                     </div>
@@ -1132,38 +1133,39 @@ curl http://localhost:9091/metrics
                 <!-- How MetaHash Works: Auction Cycle Page -->
                 <div class="page" id="page-how-it-works-auction">
                     <div class="page-banner">
-                        <h1>The Three-Epoch Auction Cycle</h1>
-                        <p class="banner-description">MetaHash operates on a continuous cycle. Each epoch lasts approximately 12 minutes (~100 blocks).</p>
+                        <h1>The Tempo-Based Auction Cycle</h1>
+                        <p class="banner-description">MetaHash operates on a continuous tempo. Each tempo spans 360 blocks (~72 minutes), with Yuma Consensus finalizing who earned the rewards every round.</p>
                     </div>
 
                     <div class="term-card" id="epoch-n">
-                        <h3 class="term-title">Epoch N: Auction & Clearing</h3>
+                        <h3 class="term-title">Tempo T: Auction & Clearing</h3>
                         <div class="term-content">
-                            <p><strong>Phase 1: AuctionStart (blocks 0-20)</strong></p>
+                            <p><strong>Phase 1: Preparation (blocks 0-50)</strong></p>
                             <ul>
-                                <li>Validator broadcasts: "Auction open!"</li>
-                                <li>Announces budget, parameters, payment window</li>
+                                <li>Validators finalize the prior tempo’s rewards through Yuma Consensus.</li>
+                                <li>Budget, discount caps, and payment windows for the new tempo are staged.</li>
+                                <li>State resets ensure everyone starts the auction from a clean slate.</li>
                             </ul>
 
-                            <p><strong>Phase 2: Bidding (blocks 20-60)</strong></p>
+                            <p><strong>Phase 2: Live bidding (blocks 50-340)</strong></p>
                             <ul>
-                                <li>Miners submit: (subnet_id, α_amount, discount)</li>
-                                <li>Multiple bids allowed per miner</li>
-                                <li>Competition for best value</li>
+                                <li>Validators broadcast <em>AuctionStart</em> once preparation completes.</li>
+                                <li>Active miners submit bids each tempo: (subnet_id, α_amount, discount).</li>
+                                <li>Multiple bids per miner are allowed while the window is open.</li>
+                                <li>Competition centers on best discounted value after slippage adjustments.</li>
                             </ul>
 
-                            <p><strong>Phase 3: Clearing (blocks 60-100)</strong></p>
+                            <p><strong>Phase 3: Close-out (blocks 340-360)</strong></p>
                             <ul>
-                                <li>Validator ranks all bids by value</li>
-                                <li>Accounts for slippage & reputation</li>
-                                <li>Picks winners until budget filled</li>
-                                <li>Announces winners with payment details</li>
+                                <li>Bidding window closes; validators rank all bids by deterministic value.</li>
+                                <li>Reputation limits and budget constraints determine the final winners.</li>
+                                <li>Winning bids are paired with payment instructions for the next tempo.</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="term-card" id="epoch-n-plus-1">
-                        <h3 class="term-title">Epoch N+1: Commitment & Payment</h3>
+                        <h3 class="term-title">Tempo T+1: Commitment & Payment</h3>
                         <div class="term-content">
                             <ul>
                                 <li>Winners notified: "You won! Pay by block X."</li>
@@ -1176,7 +1178,7 @@ curl http://localhost:9091/metrics
                     </div>
 
                     <div class="term-card" id="epoch-n-plus-2">
-                        <h3 class="term-title">Epoch N+2: Settlement</h3>
+                        <h3 class="term-title">Tempo T+2: Settlement</h3>
                         <div class="term-content">
                             <ul>
                                 <li>Validator scans blockchain for α payments.</li>
@@ -1190,7 +1192,12 @@ curl http://localhost:9091/metrics
                     </div>
 
                     <div class="info-box success">
-                        <p><strong>Visual Summary:</strong> Auction (Epoch N) → Payment (Epoch N+1) → Settlement (Epoch N+2)</p>
+                        <p><strong>Visual Summary:</strong> Auction (Tempo T) → Payment (Tempo T+1) → Settlement (Tempo T+2)</p>
+                        <p><strong>Example cadence:</strong> Blocks 0-50 preparation, 50-340 live bids, 340-360 close-out and winner selection.</p>
+                    </div>
+
+                    <div class="callout info">
+                        <p><strong>Terminology bridge:</strong> Live dashboards label these phases as <em>Accepting Bids</em> (Tempo T), <em>Payment</em> (Tempo T+1), and <em>Rewards / Finalization</em> (Tempo T+2). Same workflow, different naming.</p>
                     </div>
 
                     <div class="info-box">
@@ -1296,7 +1303,7 @@ curl http://localhost:9091/metrics
                         <div class="guide-block">
                             <h3>Throughput checkpoints</h3>
                             <ul>
-                                <li><strong>Daily auctions:</strong> ~120 (12-minute cadence).</li>
+                                <li><strong>Daily auctions:</strong> ~20 (72-minute cadence).</li>
                                 <li><strong>Average validators clearing:</strong> 1 primary + 1 standby.</li>
                                 <li><strong>Typical settlement burn:</strong> &lt;5% of posted budget when payments complete.</li>
                             </ul>
