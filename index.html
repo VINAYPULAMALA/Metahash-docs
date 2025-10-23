@@ -6,7 +6,7 @@
     <title>Introduction - MetaHash</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="dark-theme">
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-content">
             <img src="icon/favicon.png" alt="MetaHash Logo" class="loading-logo">
@@ -41,19 +41,17 @@
                     <span>MetaHash Discord</span>
                 </a>
             </nav>
-            <button class="theme-toggle" id="themeToggle">
-                <span class="theme-icon">🌙</span>
-            </button>
         </div>
     </header>
 
     <div class="container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="primarySidebar">
             <div class="sidebar-content">
                 <div class="sidebar-section">
                     <h3 class="sidebar-title">Get Started</h3>
                     <ul class="sidebar-menu">
+                        <li><a href="#welcome" class="sidebar-link" data-page="welcome">Welcome</a></li>
                         <li><a href="#glossary-bittensor" class="sidebar-link" data-page="glossary-bittensor">Bittensor Basics</a></li>
                         <li><a href="#how-it-works-overview" class="sidebar-link" data-page="how-it-works-overview">How MetaHash Works</a></li>
                         <li><a href="#glossary-metahash" class="sidebar-link" data-page="glossary-metahash">MetaHash Terms</a></li>
@@ -83,6 +81,18 @@
                         <li><a href="#connect" class="sidebar-link" data-page="connect">Connect</a></li>
                     </ul>
                 </div>
+
+                <div class="sidebar-section sidebar-links-section">
+                    <h3 class="sidebar-title">Links</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="sidebar-link" data-page="home">Home</a></li>
+                        <li><a href="https://metahash73.com/treasury" class="sidebar-link" target="_blank" rel="noopener noreferrer">Treasury</a></li>
+                        <li><a href="https://metahash73.com/auction/current" class="sidebar-link" target="_blank" rel="noopener noreferrer">Auction</a></li>
+                        <li><a href="https://github.com/fx-integral/metahash" class="sidebar-link" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="https://discord.gg/bittensor" class="sidebar-link" target="_blank" rel="noopener noreferrer">Bittensor Discord</a></li>
+                        <li><a href="https://discord.com/channels/799672011265015819/1351969903132938302" class="sidebar-link" target="_blank" rel="noopener noreferrer">MetaHash Discord</a></li>
+                    </ul>
+                </div>
             </div>
         </aside>
 
@@ -94,6 +104,35 @@
                     <h1>Welcome to MetaHash (Subnet 73)</h1>
                     <p class="section-description"><strong>A decentralized liquidity and incentive layer on the Bittensor network</strong></p>
                     <p>MetaHash is a marketplace connecting those holding idle alpha (α) tokens with miners and subnet operators needing access to capital. It enables fair, deterministic auctions for weight allocation through transparent, on-chain mechanisms.</p>
+
+                    <section class="get-started">
+                        <div class="get-started-content">
+                            <h2>Get Started with MetaHash</h2>
+                            <p>MetaHash activates idle TAO by routing it into subnet builders that can put it to work immediately. Join daily auctions, deploy liquidity in minutes, and track every commitment on-chain.</p>
+                            <ul>
+                                <li><strong>Permissionless participation:</strong> Validators, miners, and dTAO holders can onboard without gatekeepers.</li>
+                                <li><strong>Deterministic outcomes:</strong> Clearing logic and treasury settlements are auditable from the first block.</li>
+                                <li><strong>Real-time transparency:</strong> Every auction, bid, and payment has an IPFS-backed record with on-chain proofs.</li>
+                            </ul>
+                        </div>
+                        <div class="get-started-steps">
+                            <article class="get-started-card">
+                                <span class="step-icon">1</span>
+                                <h3>Tour the Protocol</h3>
+                                <p>Skim the <a href="#how-it-works-overview" data-page="how-it-works-overview">How MetaHash Works</a> primer to see the full lifecycle from auction to settlement.</p>
+                            </article>
+                            <article class="get-started-card">
+                                <span class="step-icon">2</span>
+                                <h3>Pick Your Role</h3>
+                                <p>Choose the <a href="#which-guide" data-page="which-guide">guide tailored to your goals</a>—miner, validator, or curious newcomer.</p>
+                            </article>
+                            <article class="get-started-card">
+                                <span class="step-icon">3</span>
+                                <h3>Join the Next Auction</h3>
+                                <p>Visit the <a href="https://metahash73.com/auction/current" target="_blank" rel="noopener noreferrer">live auction dashboard</a> to watch bids clear and plan your first allocation.</p>
+                            </article>
+                        </div>
+                    </section>
 
                     <div class="info-box warning">
                         <h3>⚠️ CRITICAL SAFETY WARNINGS - Read Before Using MetaHash:</h3>
@@ -188,6 +227,57 @@
 
                     <div class="info-box success">
                         <p><strong>Ready to start?</strong> Choose your path above and let's build the future of decentralized liquidity together!</p>
+                    </div>
+                </div>
+
+                <!-- Welcome Page -->
+                <div class="page" id="page-welcome">
+                    <h1>MetaHash Welcome Center</h1>
+                    <p class="section-description">Subnet 73’s native liquidity engine for builders, validators, and TAO holders.</p>
+
+                    <section class="welcome-hero">
+                        <div class="welcome-copy">
+                            <h2>Activate Your TAO with Daily Auctions</h2>
+                            <p>MetaHash routes idle TAO into the builders who can deploy it immediately. Validators coordinate deterministic auctions every epoch, clear bids transparently, and settle payments through whitelisted treasuries—all with IPFS commitments you can verify.</p>
+                            <p class="welcome-highlight">Join live auctions, deploy across the Bittensor network, and stay synced with real-time telemetry straight from <a href="https://metahash73.com/" target="_blank" rel="noopener noreferrer">metahash73.com</a>.</p>
+                            <div class="welcome-actions">
+                                <a class="primary-button" href="https://metahash73.com/auction/current" target="_blank" rel="noopener noreferrer">View Live Auction</a>
+                                <a class="secondary-button" href="#how-it-works-overview" data-page="how-it-works-overview">How MetaHash Works</a>
+                            </div>
+                        </div>
+                        <aside class="welcome-stats">
+                            <h3>Network Snapshot</h3>
+                            <ul>
+                                <li><span>Subnet:</span> 73 (MetaHash)</li>
+                                <li><span>Network:</span> Bittensor Mainnet</li>
+                                <li><span>Auction Frequency:</span> Every epoch (~12 minutes)</li>
+                                <li><span>Clearing Type:</span> Deterministic, slippage-aware</li>
+                                <li><span>Settlement:</span> On-chain transfers + IPFS commitments</li>
+                            </ul>
+                        </aside>
+                    </section>
+
+                    <section class="welcome-grid">
+                        <article class="welcome-card">
+                            <h3>Why MetaHash?</h3>
+                            <p>Subnet 73 exists to make liquidity routing fair. Validators compete by offering deterministic clearing, real-time transparency, and verifiable treasury settlements.</p>
+                        </article>
+                        <article class="welcome-card">
+                            <h3>What You’ll Need</h3>
+                            <ul>
+                                <li>Registered hotkey with τ for gas</li>
+                                <li>Access to the whitelisted treasuries</li>
+                                <li>Understanding of auction blocks & payment windows</li>
+                            </ul>
+                        </article>
+                        <article class="welcome-card">
+                            <h3>Next Steps</h3>
+                            <p>Choose your path: follow the <a href="#miner-simple" data-page="miner-simple">Miner Quickstart</a>, run the <a href="#validator-simple" data-page="validator-simple">Validator Simple setup</a>, or explore the <a href="#which-guide" data-page="which-guide">guide selector</a>.</p>
+                        </article>
+                    </section>
+
+                    <div class="info-box success">
+                        <p><strong>Stay in the loop:</strong> Follow <a href="https://x.com/metahashsn73" target="_blank" rel="noopener noreferrer">@metahashsn73</a> and jump into the <a href="https://discord.com/channels/799672011265015819/1351969903132938302" target="_blank" rel="noopener noreferrer">MetaHash Discord</a> for real-time updates.</p>
                     </div>
                 </div>
 
