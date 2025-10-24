@@ -14,7 +14,20 @@
       "dark": "#0a0a0a"
     }
   },
-  "topbarLinks": [],
+  "topbarLinks": [
+    {
+      "name": "Website",
+      "url": "https://metahash73.com"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://x.com/metahashsn73"
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.com/channels/799672011265015819/1351969903132938302"
+    }
+  ],
   "topbarCtaButton": {
     "name": "GitHub",
     "url": "https://github.com/fx-integral/metahash"
@@ -22,15 +35,15 @@
   "tabs": [
     {
       "name": "Introduction",
-      "url": "/"
+      "url": "/introduction/introduction"
     },
     {
       "name": "Understand MetaHash",
-      "url": "/understand"
+      "url": "/understand/introduction"
     },
     {
       "name": "Miner's & Validator's Setup",
-      "url": "/setup"
+      "url": "/setup/introduction"
     },
     {
       "name": "Troubleshoot",
@@ -38,46 +51,25 @@
     },
     {
       "name": "Announcements",
-      "url": "/announcements"
+      "url": "/announcements/announcements"
     },
     {
       "name": "Team",
-      "url": "/team"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Website",
-      "icon": "globe",
-      "url": "https://metahash73.com"
-    },
-    {
-      "name": "Twitter",
-      "icon": "twitter",
-      "url": "https://x.com/metahashsn73"
-    },
-    {
-      "name": "Discord",
-      "icon": "discord",
-      "url": "https://discord.com/channels/799672011265015819/1351969903132938302"
-    },
-    {
-      "name": "GitHub",
-      "icon": "github",
-      "url": "https://github.com/fx-integral/metahash"
+      "url": "/team/team"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
       "pages": [
-        "introduction"
+        "introduction/introduction"
       ]
     },
     {
       "group": "Understand MetaHash",
       "pages": [
-        "understand",
+        "understand/introduction",
+        "understand/auction-mechanics",
         "review/uid111-review"
       ]
     },
@@ -109,13 +101,13 @@
     {
       "group": "Announcements",
       "pages": [
-        "announcements"
+        "announcements/announcements"
       ]
     },
     {
       "group": "Team",
       "pages": [
-        "team"
+        "team/team"
       ]
     }
   ],

@@ -1,11 +1,18 @@
 ---
-title: Understand MetaHash
+title: How MetaHash Works
 description: Learn how MetaHash Subnet 73 fits into the Bittensor network and what makes it unique.
 ---
 
-# How MetaHash Works
+![MetaHash Working](/icon/images/metahash-working.png)
 
-MetaHash is Subnet 73 on the Bittensor Finney testnet. It combines competitive α (alpha) bidding with a curated validator set to reward miners that supply high-quality signals and remain online.
+**MetaHash connects dTAO holders, validators, and miners through a transparent auction cycle, creating a decentralized marketplace that connects capital holders with capital seekers through fair, deterministic auctions.**
+
+Think of it like this:
+
+- **dTAO holders** can deploy their idle α across multiple subnets without mining.
+- **Miners & subnet operators** can bid for α access to grow their operations.
+- **Validators** run transparent auctions with on-chain commitments and slippage-aware clearing.
+- **Everyone** benefits from fair price discovery and deterministic weight allocation.
 
 ## Network Roles
 
@@ -19,6 +26,12 @@ MetaHash is Subnet 73 on the Bittensor Finney testnet. It combines competitive �
 <Info>
 MetaHash uses continuous sealed auctions. Bidders specify the funding subnet, α amount, and discount in basis points (bps).
 </Info>
+
+### Overview
+
+Each auction cycle matches dTAO liquidity from subnet 62 with miner demand on subnet 73. Validators run the clearing logic every block, so winning bids begin earning emissions almost immediately once the auction settles.
+
+### Lifecycle
 
 1. **Bidding** – Miners place bids with `--miner.bids.netuids`, `--miner.bids.amounts`, and `--miner.bids.discounts`.
 2. **Validation** – Validators score miners and record winning bids.
@@ -42,4 +55,3 @@ MetaHash uses continuous sealed auctions. Bidders specify the funding subnet, α
     Follow the UID111 journey from first bid to stable operations.
   </Card>
 </CardGroup>
-
