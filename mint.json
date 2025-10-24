@@ -14,40 +14,52 @@
       "dark": "#0a0a0a"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "Treasury",
-      "url": "https://metahash73.com/treasury"
-    },
-    {
-      "name": "Auction",
-      "url": "https://metahash73.com/auction/current"
-    }
-  ],
+  "topbarLinks": [],
   "topbarCtaButton": {
     "name": "GitHub",
     "url": "https://github.com/fx-integral/metahash"
   },
   "tabs": [
     {
-      "name": "Setup Guide",
-      "url": "setup"
+      "name": "Introduction",
+      "url": "/"
     },
     {
-      "name": "UID111 Review",
-      "url": "review"
+      "name": "Understand MetaHash",
+      "url": "/understand"
+    },
+    {
+      "name": "Miner's & Validator's Setup",
+      "url": "/setup"
+    },
+    {
+      "name": "Troubleshoot",
+      "url": "/setup/troubleshooting"
+    },
+    {
+      "name": "Announcements",
+      "url": "/announcements"
+    },
+    {
+      "name": "Team",
+      "url": "/team"
     }
   ],
   "anchors": [
     {
-      "name": "Discord",
-      "icon": "discord",
-      "url": "https://discord.com/channels/799672011265015819/1351969903132938302"
+      "name": "Website",
+      "icon": "globe",
+      "url": "https://metahash73.com"
     },
     {
       "name": "Twitter",
       "icon": "twitter",
       "url": "https://x.com/metahashsn73"
+    },
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.com/channels/799672011265015819/1351969903132938302"
     },
     {
       "name": "GitHub",
@@ -57,21 +69,37 @@
   ],
   "navigation": [
     {
-      "group": "Getting Started",
+      "group": "Introduction",
       "pages": [
         "introduction"
       ]
     },
     {
-      "group": "Setup Guide",
+      "group": "Understand MetaHash",
+      "pages": [
+        "understand",
+        "review/uid111-review"
+      ]
+    },
+    {
+      "group": "Miner's & Validator's Setup",
       "pages": [
         "setup/introduction",
+        "setup/miner-simple-guide",
+        "setup/miner-advanced-guide",
+        "setup/validator-simple-guide",
+        "setup/validator-advanced-guide",
         "setup/environment",
         "setup/wallet",
         "setup/configuration",
         "setup/staking",
         "setup/running-miner",
-        "setup/port-setup",
+        "setup/port-setup"
+      ]
+    },
+    {
+      "group": "Troubleshoot",
+      "pages": [
         "setup/troubleshooting",
         "setup/keep-running",
         "setup/commands",
@@ -79,9 +107,15 @@
       ]
     },
     {
-      "group": "UID111 Review",
+      "group": "Announcements",
       "pages": [
-        "review/uid111-review"
+        "announcements"
+      ]
+    },
+    {
+      "group": "Team",
+      "pages": [
+        "team"
       ]
     }
   ],

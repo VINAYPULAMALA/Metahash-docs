@@ -48,8 +48,13 @@ mintlify deploy
 .
 ├── mint.json              # Mintlify configuration
 ├── introduction.mdx       # Homepage
+├── understand.mdx         # Subnet deep dive
+├── announcements.mdx      # Announcements hub
+├── team.mdx               # Contributor roster
 ├── setup/                 # Setup guide pages
 │   ├── introduction.mdx
+│   ├── miner-simple-guide.mdx
+│   ├── miner-advanced-guide.mdx
 │   ├── environment.mdx
 │   ├── wallet.mdx
 │   ├── configuration.mdx
@@ -58,6 +63,8 @@ mintlify deploy
 │   ├── port-setup.mdx
 │   ├── troubleshooting.mdx
 │   ├── keep-running.mdx
+│   ├── validator-simple-guide.mdx
+│   ├── validator-advanced-guide.mdx
 │   ├── commands.mdx
 │   └── checklist.mdx
 ├── review/                # Review pages

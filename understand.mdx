@@ -1,0 +1,45 @@
+---
+title: Understand MetaHash
+description: Learn how MetaHash Subnet 73 fits into the Bittensor network and what makes it unique.
+---
+
+# How MetaHash Works
+
+MetaHash is Subnet 73 on the Bittensor Finney testnet. It combines competitive α (alpha) bidding with a curated validator set to reward miners that supply high-quality signals and remain online.
+
+## Network Roles
+
+- **Miners** submit signals to validators and bid α to earn inclusion in the active set.
+- **Validators** score miner outputs, settle auctions, and distribute rewards.
+- **Funding Subnet 62** acts as the α source. Stake TAO on subnet 62 to mint α that can be spent on MetaHash auctions.
+- **Treasury** receives a portion of on-chain fees to fund future grants and incentives.
+
+## Auction Mechanics
+
+<Info>
+MetaHash uses continuous sealed auctions. Bidders specify the funding subnet, α amount, and discount in basis points (bps).
+</Info>
+
+1. **Bidding** – Miners place bids with `--miner.bids.netuids`, `--miner.bids.amounts`, and `--miner.bids.discounts`.
+2. **Validation** – Validators score miners and record winning bids.
+3. **Settlement** – Winning bids trigger α transfers to validators and open room for the next block of bidders.
+4. **Rewards** – Active miners receive emissions proportional to performance and stake.
+
+## Operational Checklist
+
+- Keep port `8091/tcp` open to the internet so validators can reach your axon.
+- Export wallet credentials through a `.env` file and make sure it is in `.gitignore`.
+- Monitor bids and auction logs; missing `AuctionStart` events usually points to networking issues.
+- Use `screen`, `tmux`, or `systemd` to ensure the miner restarts automatically.
+
+## Learn More
+
+<CardGroup cols={2}>
+  <Card title="Setup Guide" icon="rocket" href="/setup/introduction">
+    Configure, launch, and monitor your miner end-to-end.
+  </Card>
+  <Card title="Real-World Review" icon="book-open" href="/review/uid111-review">
+    Follow the UID111 journey from first bid to stable operations.
+  </Card>
+</CardGroup>
+
