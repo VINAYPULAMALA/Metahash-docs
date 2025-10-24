@@ -11,53 +11,42 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Welcome",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": ["index"]
+          }
+        ]
+      },
+      {
         "tab": "Introduction",
-        "label": "Introduction",
-        "href": "/",
         "groups": [
           {
             "group": "Introduction",
-            "pages": [
-              "index"
-            ]
+            "pages": ["introduction"]
           }
         ]
       },
       {
         "tab": "Understand MetaHash",
-        "label": "Understand MetaHash",
-        "href": "/understand/introduction",
         "groups": [
           {
             "group": "How MetaHash Works",
-            "pages": [
-              "understand/introduction"
-            ]
+            "pages": ["understand/introduction"]
           },
           {
             "group": "Auction Mechanics",
-            "pages": [
-              "understand/auction-mechanics"
-            ]
-          },
-          {
-            "group": "Case Studies",
-            "pages": [
-              "review/uid111-review"
-            ]
+            "pages": ["understand/auction-mechanics"]
           }
         ]
       },
       {
         "tab": "Miner's & Validator's Setup",
-        "label": "Miner's & Validator's Setup",
-        "href": "/setup/introduction",
         "groups": [
           {
             "group": "Start Here",
-            "pages": [
-              "setup/introduction"
-            ]
+            "pages": ["setup/introduction"]
           },
           {
             "group": "Miner Guides",
@@ -93,14 +82,10 @@
       },
       {
         "tab": "Troubleshoot",
-        "label": "Troubleshoot",
-        "href": "/troubleshoot/troubleshooting",
         "groups": [
           {
             "group": "Troubleshooting Guides",
-            "pages": [
-              "troubleshoot/troubleshooting"
-            ]
+            "pages": ["troubleshoot/troubleshooting"]
           },
           {
             "group": "Keep Your Miner Running",
@@ -111,35 +96,25 @@
           },
           {
             "group": "Checklists",
-            "pages": [
-              "troubleshoot/checklist"
-            ]
+            "pages": ["troubleshoot/checklist"]
           }
         ]
       },
       {
         "tab": "Announcements",
-        "label": "Announcements",
-        "href": "/announcements/announcements",
         "groups": [
           {
             "group": "Announcements",
-            "pages": [
-              "announcements/announcements"
-            ]
+            "pages": ["announcements/announcements"]
           }
         ]
       },
       {
         "tab": "Team",
-        "label": "Team",
-        "href": "/team/team",
         "groups": [
           {
             "group": "Team",
-            "pages": [
-              "team/team"
-            ]
+            "pages": ["team/team"]
           }
         ]
       }
@@ -151,6 +126,7 @@
   },
   "background": {
     "color": {
+      "light": "#ffffff",
       "dark": "#0a0a0a"
     }
   },
