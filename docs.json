@@ -1,0 +1,185 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "MetaHash",
+  "colors": {
+    "primary": "#ff8c00",
+    "light": "#ff9f2e",
+    "dark": "#e67d00"
+  },
+  "favicon": "/icon/favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Introduction",
+        "label": "Introduction",
+        "href": "/",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Understand MetaHash",
+        "label": "Understand MetaHash",
+        "href": "/understand/introduction",
+        "groups": [
+          {
+            "group": "How MetaHash Works",
+            "pages": [
+              "understand/introduction"
+            ]
+          },
+          {
+            "group": "Auction Mechanics",
+            "pages": [
+              "understand/auction-mechanics"
+            ]
+          },
+          {
+            "group": "Case Studies",
+            "pages": [
+              "review/uid111-review"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Miner's & Validator's Setup",
+        "label": "Miner's & Validator's Setup",
+        "href": "/setup/introduction",
+        "groups": [
+          {
+            "group": "Start Here",
+            "pages": [
+              "setup/introduction"
+            ]
+          },
+          {
+            "group": "Miner Guides",
+            "pages": [
+              "setup/miner-simple-guide",
+              "setup/miner-advanced-guide"
+            ]
+          },
+          {
+            "group": "Validator Guides",
+            "pages": [
+              "setup/validator-simple-guide",
+              "setup/validator-advanced-guide"
+            ]
+          },
+          {
+            "group": "Environment & Wallet",
+            "pages": [
+              "setup/environment",
+              "setup/wallet",
+              "setup/configuration"
+            ]
+          },
+          {
+            "group": "Operations",
+            "pages": [
+              "setup/staking",
+              "setup/running-miner",
+              "setup/port-setup"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Troubleshoot",
+        "label": "Troubleshoot",
+        "href": "/troubleshoot/troubleshooting",
+        "groups": [
+          {
+            "group": "Troubleshooting Guides",
+            "pages": [
+              "troubleshoot/troubleshooting"
+            ]
+          },
+          {
+            "group": "Keep Your Miner Running",
+            "pages": [
+              "troubleshoot/keep-running",
+              "troubleshoot/commands"
+            ]
+          },
+          {
+            "group": "Checklists",
+            "pages": [
+              "troubleshoot/checklist"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Announcements",
+        "label": "Announcements",
+        "href": "/announcements/announcements",
+        "groups": [
+          {
+            "group": "Announcements",
+            "pages": [
+              "announcements/announcements"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Team",
+        "label": "Team",
+        "href": "/team/team",
+        "groups": [
+          {
+            "group": "Team",
+            "pages": [
+              "team/team"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/icon/favicon.png",
+    "dark": "/icon/favicon.png"
+  },
+  "background": {
+    "color": {
+      "dark": "#0a0a0a"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://metahash73.com"
+      },
+      {
+        "label": "Twitter",
+        "href": "https://x.com/metahashsn73"
+      },
+      {
+        "label": "Discord",
+        "href": "https://discord.com/channels/799672011265015819/1351969903132938302"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "GitHub",
+      "href": "https://github.com/fx-integral/metahash"
+    }
+  },
+  "footer": {
+    "socials": {
+      "twitter": "https://x.com/metahashsn73",
+      "github": "https://github.com/fx-integral/metahash",
+      "discord": "https://discord.com/channels/799672011265015819/1351969903132938302"
+    }
+  }
+}
