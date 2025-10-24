@@ -18,18 +18,12 @@ Think of it like this:
 
 - **Miners** submit signals to validators and bid α to earn inclusion in the active set.
 - **Validators** score miner outputs, settle auctions, and distribute rewards.
-- **Funding Subnet 62** acts as the α source. Stake TAO on subnet 62 to mint α that can be spent on MetaHash auctions.
+- **APY** Stake α on Treasury will earn APY on the Treasury which is used for buybacks.
 - **Treasury** receives a portion of on-chain fees to fund future grants and incentives.
-
-## Auction Mechanics
-
-<Info>
-MetaHash uses continuous sealed auctions. Bidders specify the funding subnet, α amount, and discount in basis points (bps).
-</Info>
 
 ### Overview
 
-Each auction cycle matches dTAO liquidity from subnet 62 with miner demand on subnet 73. Validators run the clearing logic every block, so winning bids begin earning emissions almost immediately once the auction settles.
+Each auction cycle matches dTAO liquidity from Emission with miner demand on subnet 73. Validators run the clearing logic every block, so winning bids begin earning emissions almost immediately once the auction settles.
 
 ### Lifecycle
 
@@ -37,13 +31,6 @@ Each auction cycle matches dTAO liquidity from subnet 62 with miner demand on su
 2. **Validation** – Validators score miners and record winning bids.
 3. **Settlement** – Winning bids trigger α transfers to validators and open room for the next block of bidders.
 4. **Rewards** – Active miners receive emissions proportional to performance and stake.
-
-## Operational Checklist
-
-- Keep port `8091/tcp` open to the internet so validators can reach your axon.
-- Export wallet credentials through a `.env` file and make sure it is in `.gitignore`.
-- Monitor bids and auction logs; missing `AuctionStart` events usually points to networking issues.
-- Use `screen`, `tmux`, or `systemd` to ensure the miner restarts automatically.
 
 ## Learn More
 

@@ -1,9 +1,159 @@
 ---
 title: Auction Mechanics
-description: Learn how MetaHash auctions work and how participants interact in the marketplace.
+description: Understand MetaHash's tempo-based auction cycle and how bids move from submission to rewards.
 ---
 
 ## Overview
 
-Content coming soon...
+MetaHash operates a **continuous, tempo-based auction system** that keeps α liquidity flowing into Subnet 73. Each tempo spans **360 blocks (~72 minutes)** and follows a deterministic three-phase cycle:
 
+<CardGroup cols={3}>
+  <Card title="Auction" icon="gavel" color="#ff8c00">
+    Miners submit competitive bids with α amounts and discounts
+  </Card>
+  <Card title="Payment" icon="credit-card" color="#ff9f2e">
+    Winners transfer α to validators within the payment window
+  </Card>
+  <Card title="Settlement" icon="check-circle" color="#e67d00">
+    Validators verify payments and distribute rewards
+  </Card>
+</CardGroup>
+
+---
+
+## How It Works
+
+![Auction Cycle Diagram](/icon/images/cycle.png)
+
+*The continuous tempo cycle showing the three-phase auction process*
+
+<Info>
+**Key Insight:** Validators anchor each tempo using Yuma Consensus. Winners are deterministic, and payments have dedicated windows to guarantee fairness and finality.
+</Info>
+
+## Tempo T — Auction & Clearing
+
+<Steps>
+  <Step title="Preparation (blocks 0–50)">
+    <Check>Finalize prior-tempo rewards via Yuma Consensus</Check>
+    <Check>Stage budget, discount caps, and payment windows for the new tempo</Check>
+    <Check>Reset auction state so every miner begins from a clean slate</Check>
+  </Step>
+  <Step title="Live bidding (blocks 50–340)">
+    <Check>Validators broadcast `AuctionStart` once preparation completes</Check>
+    <Check>Miners submit bids `(subnet_id, α_amount, discount)`; multiple bids allowed</Check>
+    <Check>Competition focuses on discounted value after slippage adjustments</Check>
+  </Step>
+  <Step title="Close-out (blocks 340–360)">
+    <Check>Validators rank bids by deterministic value and reputation limits</Check>
+    <Check>Winning bids are paired with payment instructions for the next tempo</Check>
+  </Step>
+</Steps>
+
+## Tempo T+1 — Commitment & Payment
+
+<AccordionGroup>
+  <Accordion title="📋 Payment Instructions" icon="clipboard-list">
+    Winners receive **"pay by block X"** instructions once validators publish commitments (CID → IPFS). Each commitment includes:
+    - Winning bid amount
+    - Payment deadline (block number)
+    - Treasury wallet address
+    - Verification CID for transparency
+  </Accordion>
+
+  <Accordion title="⏱️ Payment Window" icon="clock">
+    Payment windows typically span **~100 blocks** (~20 minutes) to give miners sufficient time to:
+    - Verify their winning status
+    - Confirm α balance in payment hotkey
+    - Submit on-chain transfer to treasury
+    - Monitor transaction confirmation
+  </Accordion>
+
+  <Accordion title="✅ Payment Verification" icon="badge-check">
+    All α transfers to the whitelisted treasury account are:
+    - **On-chain verifiable** via Bittensor blockchain explorer
+    - **Immutable** once confirmed
+    - **Tracked** by validators for settlement scoring
+    - **Transparent** through IPFS commitments
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+**Critical:** Late or missing payments roll into the next tempo as unpaid bids. Set up monitoring alerts on your payment hotkey to avoid missing deadlines!
+</Warning>
+
+## Tempo T+2 — Settlement & Rewards
+
+<Steps>
+  <Step title="Payment Verification">
+    Validators scan the Bittensor chain for matching α transfers from winning miners. Each transaction is verified against the commitment CID published in the previous tempo.
+  </Step>
+
+  <Step title="Weight Calculation">
+    **Scoring Logic:**
+    - ✅ **Paid bids:** Receive full weight based on bid amount and discount
+    - ❌ **Missed payments:** Drop to zero weight, losing their slot
+    - 🔥 **Unspent budget:** Automatically burned to UID 0 to maintain tokenomics
+  </Step>
+
+  <Step title="Rewards Distribution">
+    Final weights are applied on-chain (or previewed in testing mode), and TAO emissions are distributed proportionally to winning miners based on their performance and stake.
+  </Step>
+</Steps>
+
+## Quick Reference
+
+<Note>
+**Tempo Duration:** Each complete cycle takes approximately **360 blocks (~72 minutes)**
+</Note>
+
+| Phase | Blocks | Duration | Key Actions |
+|-------|--------|----------|-------------|
+| **Auction (Tempo T)** | 0–360 | ~72 min | Prep → Live bids → Close-out |
+| **Payment (Tempo T+1)** | 360–470 | ~20 min | Commit winners → Accept α payments |
+| **Settlement (Tempo T+2)** | 470–540 | ~14 min | Verify payments → Apply weights |
+
+<Tip>
+Visual dashboards may label these phases as **Accepting Bids**, **Payment Window**, and **Rewards / Finalization**—same workflow, just different terminology!
+</Tip>
+
+---
+
+## Key Terminology
+
+<AccordionGroup>
+  <Accordion title="α (Alpha)" icon="coins">
+    The native token used for bidding in MetaHash auctions. Generated by staking TAO on funding subnets (e.g., Subnet 62).
+  </Accordion>
+
+  <Accordion title="Tempo" icon="clock-rotate-left">
+    A 360-block cycle (~72 minutes) that represents one complete auction round from bidding through settlement.
+  </Accordion>
+
+  <Accordion title="CID (Content Identifier)" icon="fingerprint">
+    An IPFS hash used to verify validator commitments and ensure transparency in the auction process.
+  </Accordion>
+
+  <Accordion title="Yuma Consensus" icon="handshake">
+    Bittensor's consensus mechanism that validators use to finalize rewards and maintain network agreement.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Learn the Basics" icon="book-open" href="/understand/introduction">
+    Jump back to understand the big-picture architecture and how all components work together
+  </Card>
+  <Card title="Start Mining" icon="pickaxe" href="/setup/miner-simple-guide">
+    Ready to place bids? Follow our miner setup guides to configure your strategy
+  </Card>
+  <Card title="Run a Validator" icon="server" href="/setup/validator-simple-guide">
+    Help secure the network and earn rewards by running a validator node
+  </Card>
+  <Card title="Real-World Experience" icon="graduation-cap" href="/review/uid111-review">
+    Read a detailed case study from an actual miner's setup journey
+  </Card>
+</CardGroup>
