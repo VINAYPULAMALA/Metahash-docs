@@ -15,7 +15,9 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["index"]
+            "pages": [
+              "index"
+            ]
           }
         ]
       },
@@ -24,7 +26,9 @@
         "groups": [
           {
             "group": "Introduction",
-            "pages": ["introduction"]
+            "pages": [
+              "introduction"
+            ]
           }
         ]
       },
@@ -32,12 +36,17 @@
         "tab": "Understand MetaHash",
         "groups": [
           {
-            "group": "How MetaHash Works",
-            "pages": ["understand/introduction"]
-          },
-          {
-            "group": "Auction Mechanics",
-            "pages": ["understand/auction-mechanics"]
+            "group": "Understand MetaHash",
+            "pages": [
+              "understand/introduction",
+              "understand/auction-mechanics",
+              "understand/alpha-exchange",
+              "understand/treasury-structure",
+              "understand/validator-role",
+              "understand/miner-lifecycle",
+              "understand/interoperability",
+              "understand/glossary"
+            ]
           }
         ]
       },
@@ -46,7 +55,11 @@
         "groups": [
           {
             "group": "Start Here",
-            "pages": ["setup/introduction"]
+            "pages": [
+              "setup/which-guide-for-me",
+              "setup/safety-warnings",
+              "setup/introduction"
+            ]
           },
           {
             "group": "Miner Guides",
@@ -85,7 +98,9 @@
         "groups": [
           {
             "group": "Troubleshooting Guides",
-            "pages": ["troubleshoot/troubleshooting"]
+            "pages": [
+              "troubleshoot/troubleshooting"
+            ]
           },
           {
             "group": "Keep Your Miner Running",
@@ -96,7 +111,9 @@
           },
           {
             "group": "Checklists",
-            "pages": ["troubleshoot/checklist"]
+            "pages": [
+              "troubleshoot/checklist"
+            ]
           }
         ]
       },
@@ -105,7 +122,9 @@
         "groups": [
           {
             "group": "Announcements",
-            "pages": ["announcements/announcements"]
+            "pages": [
+              "announcements/announcements"
+            ]
           }
         ]
       },
@@ -114,7 +133,9 @@
         "groups": [
           {
             "group": "Team",
-            "pages": ["team/team"]
+            "pages": [
+              "team/team"
+            ]
           }
         ]
       }

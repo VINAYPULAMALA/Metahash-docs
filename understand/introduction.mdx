@@ -1,44 +1,49 @@
 ---
-title: How MetaHash Works
-description: Learn how MetaHash Subnet 73 fits into the Bittensor network and what makes it unique.
+title: Introduction to MetaHash SN73
+description: Vision and architecture overview for MetaHash Subnet 73 — why it exists, the problems it solves, and how it fits inside Bittensor.
 ---
+
+# What Is MetaHash SN73?
 
 ![MetaHash Working](/icon/images/metahash-working.png)
 
-**MetaHash connects dTAO holders, validators, and miners through a transparent auction cycle, creating a decentralized marketplace that connects capital holders with capital seekers through fair, deterministic auctions.**
+MetaHash is Subnet 73 on Bittensor — a liquidity-first marketplace that routes α (alpha) from holders to miners who can put it to work. Think of it as the connective tissue between capital, compute, and coordination:
 
-Think of it like this:
+- **dTAO holders** unlock idle liquidity by contributing α without spinning up hardware.
+- **Miners & subnet operators** gain predictable access to emissions when they win deterministic auctions.
+- **Validators & treasuries** enforce fairness, publish commitments, and recycle rewards back into the ecosystem.
 
-- **dTAO holders** can deploy their idle α across multiple subnets without mining.
-- **Miners & subnet operators** can bid for α access to grow their operations.
-- **Validators** run transparent auctions with on-chain commitments and slippage-aware clearing.
-- **Everyone** benefits from fair price discovery and deterministic weight allocation.
+The result is a meta-layer that keeps incentives aligned: capital is put to productive use, operators scale responsibly, and Bittensor gains a transparent market signal for demand.
 
-## Network Roles
+## Why Liquidity-Based Mining Matters
 
-- **Miners** submit signals to validators and bid α to earn inclusion in the active set.
-- **Validators** score miner outputs, settle auctions, and distribute rewards.
-- **APY** Stake α on Treasury will earn APY on the Treasury which is used for buybacks.
-- **Treasury** receives a portion of on-chain fees to fund future grants and incentives.
+SN73 treats α as a scarce resource that deserves price discovery. Rather than letting large positions slam public order books, MetaHash orchestrates scheduled drops that:
 
-### Overview
+- **Bridge liquidity to compute** — idle α is streamed to miners ready to deliver useful work.
+- **Maintain market stability** — deterministic auctions avoid sudden dumps and offer slippage-aware clearing.
+- **Enable institutional operations** — treasuries can plan tranche releases, automate rollovers, and prove every move on-chain.
 
-Each auction cycle matches dTAO liquidity from Emission with miner demand on subnet 73. Validators run the clearing logic every block, so winning bids begin earning emissions almost immediately once the auction settles.
+This liquidity-aware design makes SN73 a proving ground for professional operators who want predictability without compromising decentralization.
 
-### Lifecycle
+## Role in the Bittensor Ecosystem
 
-1. **Bidding** – Miners place bids with `--miner.bids.netuids`, `--miner.bids.amounts`, and `--miner.bids.discounts`.
-2. **Validation** – Validators score miners and record winning bids.
-3. **Settlement** – Winning bids trigger α transfers to validators and open room for the next block of bidders.
-4. **Rewards** – Active miners receive emissions proportional to performance and stake.
+MetaHash connects multiple layers of the network:
 
-## Learn More
+1. **Liquidity router** – α sourced from emission programs, treasuries, or dTAO holders flows through SN73 before reaching miners.
+2. **Validator innovation hub** – Validators experiment with fairness models, transparency tooling, and commitment pipelines that other subnets can adopt.
+3. **Institutional on‑ramp** – SN73 shows how to offer auditable, programmatic liquidity to miners and validators without creating a custodial choke point.
 
-<CardGroup cols={2}>
-  <Card title="Setup Guide" icon="rocket" href="/setup/introduction">
-    Configure, launch, and monitor your miner end-to-end.
-  </Card>
-  <Card title="Real-World Review" icon="book-open" href="/review/uid111-review">
-    Follow the UID111 journey from first bid to stable operations.
-  </Card>
-</CardGroup>
+## Architecture at a Glance
+
+- **Inputs**: α inflows from treasuries, emissions, and dTAO holders plus validator scoring signals.
+- **Control plane**: Validators coordinate deterministic auctions, publish commitments to IPFS, and finalize weights via Yuma Consensus.
+- **Execution layer**: Miners bid for inclusion, run workloads, and receive emissions proportional to stake + performance.
+- **Feedback loops**: Treasuries monitor auction health, schedule future drops, and re-inject rewards into subsequent epochs.
+
+This top-level mental model should be enough context before you dig into the mechanics of auctions, α exchange, or treasury flow on the next pages.
+
+## Next Pages
+
+- [Auction Mechanics](/understand/auction-mechanics) — how epochs, commitments, and payments operate.
+- [Alpha Exchange](/understand/alpha-exchange) — liquidity and bidding behaviors.
+- [Treasury Structure](/understand/treasury-structure) — reward routing and distribution logic.
