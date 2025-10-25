@@ -1,0 +1,23 @@
+# Reference files
+chatgpt.md
+
+# Windows metadata files
+*.Zone.Identifier
+
+# Node modules
+node_modules/
+
+# Build output
+.mintlify/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
