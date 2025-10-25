@@ -1,8 +1,92 @@
 ---
-title: Miner Lifecycle
-description: Practical miner experience
+title: Miner Lifecycle & Performance
+description: From registration to rewards—how miners participate across every MetaHash epoch.
 ---
 
-# Miner Lifecycle
+# Miner Lifecycle Overview
 
-Work in progress.
+Miners are the execution layer of MetaHash. They supply the compute, uptime, and α liquidity that keep subnets running. Validators guard fairness, treasuries clear rewards, but miners fuel the auction loop: **Join → Bid → Win → Commit → Earn → Reset**. Each full loop aligns with the ~72-minute epoch cadence.
+
+## Stage 1 — Join & Initialize
+
+1. **Create wallet + hotkey** to establish on-chain identity.
+2. **Configure environment** with SN73 parameters, ports, and dependencies.
+3. **Register on SN73** once so the node can auto-enroll in every subsequent epoch.
+
+## Stage 2 — Bid with α
+
+During the live auction window, miners submit bids such as:
+
+```
+(subnet_id=73, α=120, discount=10%)
+```
+
+- Multiple bids per epoch are allowed.
+- Discounts express willingness to trade margin for priority.
+- Bids remain editable until the window closes.
+- Validators see each signed bid instantly.
+
+## Stage 3 — Win the Auction
+
+When bidding ends:
+
+- Validators rank miners via `effective_value = α × (1 – discount)`.
+- Top effective values clear; others have their α immediately freed for the next round.
+- Winners join the active mining set for the upcoming epoch.
+
+## Stage 4 — Commit & Contribute
+
+Winning miners must deliver:
+
+- **Compute commitment** – run workloads, submit signals, maintain uptime.
+- **Liquidity commitment** – the winning α stays locked until settlement.
+- **Performance telemetry** – latency, health, and validation data stream to the network.
+
+Missing performance targets can reduce rewards or trigger partial slashing.
+
+## Stage 5 — Earn & Settle
+
+After validators finalize the epoch:
+
+- The treasury converts committed α into TAO emissions based on effective share.
+- Each miner receives rewards proportional to α contribution plus reliability.
+- The locked α returns to the miner’s wallet, ready for new bids.
+
+All payouts are transparent and traceable on-chain.
+
+## Stage 6 — Reset & Re-enter
+
+- Nodes automatically roll into the next auction unless paused.
+- Reputation and performance history carry forward.
+- Consistent miners often win at lower α cost because validators trust their reliability.
+
+## Performance Metrics
+
+| Metric | Definition | Impact |
+| --- | --- | --- |
+| **Emission share** | Portion of α converted into TAO | Determines payout weight |
+| **Uptime** | Active participation percentage per epoch | Affects eligibility next epoch |
+| **Reputation** | Multi-epoch reliability score | Influences future bid efficiency |
+
+Secondary metrics include latency, error rate, and bid consistency.
+
+## Behavior Across Epochs
+
+- **High-efficiency miners** reinvest rewards to scale α.
+- **Casual miners** drop in with smaller lots when conditions suit them.
+- **Strategic operators** track emission trends and bid during quieter windows.
+
+Over time the network self-organizes: competitive enough to maintain fairness, stable enough to retain sustainability.
+
+## Mental Model
+
+Picture a looping timeline:
+
+1. Orange α packets leave the miner toward validators.
+2. Validators confirm “WIN” and route commitments to the treasury.
+3. Blue TAO rewards flow back to the miner.
+4. The cycle repeats with the caption “Epoch → Epoch → Epoch.”
+
+## Next Step
+
+Explore [Interoperability](/understand/interoperability) to see how MetaHash shares α and liquidity cues with other subnets.

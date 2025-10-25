@@ -1,8 +1,79 @@
 ---
-title: Glossary
-description: Quick reference
+title: MetaHash Glossary
+description: Quick reference for α liquidity, auctions, consensus, and interoperability terminology.
 ---
 
-# Glossary
+# MetaHash Glossary
 
-Work in progress.
+Use this glossary to align terminology across miners, validators, and researchers. It ties auction mechanics, liquidity concepts, and consensus tooling into one reference.
+
+## Core Economic Terms
+
+| Term | Definition |
+| --- | --- |
+| **α (Alpha)** | Internal liquidity unit for bidding and auctions. Miners deploy α (not raw TAO) to signal commitment. |
+| **TAO** | Base Bittensor token used for staking, emissions, and settlement; the asset α eventually converts into. |
+| **Epoch** | A ~72-minute cycle covering bidding, clearing, consensus, and payout. |
+| **Auction** | Live marketplace inside each epoch where miners bid α to earn TAO rewards. |
+| **Discount rate** | Percentage modifier miners apply to α bids to trade margin for priority. |
+| **Effective value** | Final ranking score `α × (1 – discount)` used by validators to determine winners. |
+| **Emission rate** | TAO distributed per epoch, tuned by treasury balancing as α inflows change. |
+
+## Treasury & Reward Terms
+
+| Term | Definition |
+| --- | --- |
+| **Treasury** | MetaHash’s settlement hub; collects α, converts it to TAO, and redistributes payouts. |
+| **Reward distribution** | Process of turning committed α into TAO and splitting it by emission share + reliability. |
+| **Reserve balance** | Treasury funds held back to smooth future epochs. |
+| **Emission coefficient (k)** | Balancing constant that scales TAO output relative to α inflows. |
+| **α burn** | Mechanism that retires a slice of α when liquidity exceeds subnet capacity. |
+
+## Validator & Consensus Terms
+
+| Term | Definition |
+| --- | --- |
+| **Validator** | Node that verifies bids, ranks auctions, reaches consensus, and signs treasury payouts. |
+| **Reputation score** | Live trust metric for validators covering uptime, accuracy, and responsiveness. |
+| **Yuma Consensus** | Finalization protocol MetaHash uses to lock auction results and authorize emissions. |
+| **Clearing phase** | Step where validators finalize bid rankings based on effective value. |
+| **Consensus weight** | Influence of a validator’s vote inside Yuma, derived from reputation history. |
+
+## Miner Terms
+
+| Term | Definition |
+| --- | --- |
+| **Miner** | Participant providing α liquidity and compute to earn TAO. |
+| **Hotkey** | Miner wallet identity for signing bids and receiving rewards. |
+| **Commit phase** | Period after winning when α locks and the miner must deliver workload/uptime. |
+| **Uptime** | Percentage of time a miner stays active during an epoch; critical for eligibility. |
+| **Emission share** | Portion of rewards assigned to a miner based on effective value and reliability. |
+
+## Interoperability & Network
+
+| Term | Definition |
+| --- | --- |
+| **Subnet** | Specialized Bittensor network (e.g., SN73 for MetaHash). |
+| **Liquidity hub** | Subnet that redistributes α to stabilize emissions (MetaHash’s role). |
+| **Cross-subnet α flow** | Movement of α between subnets, logged by treasuries and validators. |
+| **Global α market** | Vision of shared α pools and auctions spanning multiple subnets. |
+
+## MetaHash-Specific
+
+| Term | Definition |
+| --- | --- |
+| **Meta-mining** | Mining liquidity itself by optimizing α bids, not just hardware. |
+| **Epoch finalization** | Moment consensus locks results and kicks off treasury distribution. |
+| **α velocity** | Speed at which α recycles between auctions—indicator of liquidity health. |
+| **Emission equilibrium** | State where α inflows, rewards, and performance stay balanced over many epochs. |
+| **SN73** | Network identifier for MetaHash within Bittensor. |
+
+## Notes
+
+- Economic parameters (percentages, coefficients, epoch length) evolve through governance.
+- α is an internal accounting unit, not a transferable token.
+- Epochs run continuously — new bids begin immediately after settlement.
+
+## End of Series
+
+This glossary caps the “Understand MetaHash” series, stitching together α, epochs, treasury flows, and interoperability into a shared language.

@@ -1,8 +1,82 @@
 ---
-title: Alpha Exchange
-description: Liquidity & bidding economy
+title: The α Exchange Economy
+description: How MetaHash routes α through bidding, clearing, and reward recycling to price subnet access every epoch.
 ---
 
-# Alpha Exchange
+# The α Exchange Explained
 
-Work in progress.
+MetaHash’s liquidity engine runs on α (alpha), a unit of commitment rather than a tradable token. α expresses how much value a miner is ready to deploy for access to emissions inside a given epoch. Instead of passive staking, miners constantly bid, clear, and recycle α, creating a live marketplace every 72 minutes.
+
+## Why α Instead of Raw TAO?
+
+| Design Goal | How α Achieves It |
+| --- | --- |
+| **Fairness** | Miners compete on α efficiency, not wallet size. |
+| **Recycling** | α returns to circulation every epoch — no permanent lock-ups. |
+| **Dynamic Pricing** | The cost of subnet access reprices as α demand shifts. |
+| **Stability** | α absorbs short-term TAO volatility, keeping auctions predictable. |
+
+## How α Flows
+
+### 1. Bidding (Epoch T)
+
+During the live bidding window, miners submit `(subnet_id, α_amount, discount_rate)` pairs. Validators compute an **effective value** for each bid:
+
+```
+effective_value = α_amount × (1 – discount_rate)
+```
+
+Higher effective values float to the top of the book.
+
+### 2. Clearing & Commitment (Epoch T Close-out → T+1)
+
+Validators deterministically select the top bids, move the committed α into the treasury, and publish payment instructions. This marks the miner’s obligation for the next epoch.
+
+### 3. Reward Recycling (Epoch T+2)
+
+Once Yuma Consensus finalizes the epoch, the treasury converts the committed α into proportional TAO rewards. Those rewards flow back to the winning miners, and the α they deployed becomes available for the next bidding round.
+
+```
+Miner → α Bid → Validator → Treasury
+Treasury → TAO Rewards → Miner
+```
+
+## Market Participants
+
+| Participant | Role | Incentive |
+| --- | --- | --- |
+| **Miner** | Provides α liquidity and submits competitive bids | Earns TAO in proportion to auction success |
+| **Validator** | Verifies bids, ranks them, and triggers clearing | Gains clearing reputation + operational incentives |
+| **Treasury** | Holds α inflows, automates reward distribution | Maintains economic stability for SN73 |
+
+Each epoch forms a self-contained auction loop: bid → clear → settle — all within ~72 minutes.
+
+## Example Auction Snapshot
+
+| Miner | α Bid | Discount | Effective Value | Notes |
+| --- | --- | --- | --- | --- |
+| A | 100 α | 5% | 95 α | Wins if threshold is below 95 |
+| B | 150 α | 15% | 127.5 α | Wins if booked capacity allows higher value |
+
+If the validator clears Miner B, 127.5 α is logged as the commitment. When Epoch T+1 closes, Miner B receives TAO rewards scaled to that effective value.
+
+## Economic Implications
+
+- **Price discovery** – α bidding surfaces real demand for subnet access.
+- **Liquidity velocity** – α constantly recycles, deepening available liquidity.
+- **Emission feedback** – reward rates self-adjust as α inflows wax or wane.
+- **Equilibrium behavior** – over time, α’s “price” reflects subnet utility rather than speculation.
+
+## Mental Model
+
+Picture a circuit:
+
+1. **Miner node** emits orange α packets toward the **Validator hub**.
+2. Validator routes winning flows into the **Treasury vault**.
+3. Treasury returns cool-blue TAO rewards back to the miner.
+
+That loop repeats every epoch — the economic heartbeat of MetaHash.
+
+## Next Step
+
+Head to [Treasury Structure](/understand/treasury-structure) to see how collected α transforms into TAO payouts for miners and validators each epoch.
