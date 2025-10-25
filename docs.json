@@ -7,7 +7,7 @@
     "light": "#ff9f2e",
     "dark": "#e67d00"
   },
-  "favicon": "/icon/favicon.png",
+  "favicon": "/assets/icons/favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -25,94 +25,106 @@
         "tab": "Introduction",
         "groups": [
           {
-            "group": "Introduction",
+            "group": "Overview",
             "pages": [
-              "introduction"
+              "introduction/overview"
             ]
           }
         ]
       },
       {
         "tab": "Understand MetaHash",
+        "label": "Understand MetaHash",
+        "href": "/understand/fundamentals/introduction",
         "groups": [
           {
-            "group": "Understand MetaHash",
+            "group": "MetaHash Fundamentals",
             "pages": [
-              "understand/introduction",
-              "understand/auction-mechanics",
-              "understand/alpha-exchange",
-              "understand/treasury-structure",
-              "understand/validator-role",
-              "understand/miner-lifecycle",
-              "understand/interoperability",
-              "understand/glossary"
+              "understand/fundamentals/introduction",
+              "understand/fundamentals/auction-mechanics"
+            ]
+          },
+          {
+            "group": "Economic Mechanics",
+            "pages": [
+              "understand/economics/alpha-exchange",
+              "understand/economics/treasury-structure",
+              "understand/economics/validator-role",
+              "understand/economics/miner-lifecycle"
+            ]
+          },
+          {
+            "group": "Network Synergy",
+            "pages": [
+              "understand/network/interoperability",
+              "understand/network/glossary"
             ]
           }
         ]
       },
       {
-        "tab": "Miner's & Validator's Setup",
+        "tab": "Operator Guides",
         "groups": [
           {
             "group": "Start Here",
             "pages": [
-              "setup/which-guide-for-me",
-              "setup/safety-warnings",
-              "setup/introduction"
+              "guides/getting-started/which-guide-for-me",
+              "guides/getting-started/safety-warnings",
+              "guides/getting-started/introduction"
             ]
           },
           {
             "group": "Miner Guides",
             "pages": [
-              "setup/miner-simple-guide",
-              "setup/miner-advanced-guide"
+              "guides/miners/miner-simple-guide",
+              "guides/miners/miner-advanced-guide"
             ]
           },
           {
             "group": "Validator Guides",
             "pages": [
-              "setup/validator-simple-guide",
-              "setup/validator-advanced-guide"
+              "guides/validators/validator-simple-guide",
+              "guides/validators/validator-advanced-guide"
             ]
           },
           {
             "group": "Environment & Wallet",
             "pages": [
-              "setup/environment",
-              "setup/wallet",
-              "setup/configuration"
+              "guides/environment/environment",
+              "guides/environment/wallet",
+              "guides/environment/configuration"
             ]
           },
           {
             "group": "Operations",
             "pages": [
-              "setup/staking",
-              "setup/running-miner",
-              "setup/port-setup"
+              "guides/operations/staking",
+              "guides/operations/running-miner",
+              "guides/operations/port-setup"
             ]
           }
         ]
       },
       {
-        "tab": "Troubleshoot",
+        "tab": "Support",
         "groups": [
           {
             "group": "Troubleshooting Guides",
             "pages": [
-              "troubleshoot/troubleshooting"
+              "support/troubleshooting/troubleshooting"
             ]
           },
           {
             "group": "Keep Your Miner Running",
             "pages": [
-              "troubleshoot/keep-running",
-              "troubleshoot/commands"
+              "support/operations/keep-running",
+              "support/operations/commands"
             ]
           },
           {
             "group": "Checklists",
             "pages": [
-              "troubleshoot/checklist"
+              "support/checklists/checklist"
             ]
           }
         ]
@@ -142,8 +154,8 @@
     ]
   },
   "logo": {
-    "light": "/icon/favicon.png",
-    "dark": "/icon/favicon.png"
+    "light": "/assets/icons/favicon.png",
+    "dark": "/assets/icons/favicon.png"
   },
   "background": {
     "color": {

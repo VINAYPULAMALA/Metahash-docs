@@ -1,0 +1,100 @@
+---
+title: Miner Advanced Guide
+description: This advanced flow builds on the [Miner Simple Guide](/guides/miners/miner-simple-guide) and covers multi-bid strategies, payment routing, and automation flags that experienced operators typically rely on.
+---
+
+## Advanced Miner
+
+<Steps>
+  <Step title="Clone and prepare the repository">
+    ```bash
+    git clone https://github.com/fx-integral/metahash.git
+    cd metahash
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -U pip wheel uv
+    uv pip install -e .
+    ```
+  </Step>
+  <Step title="Configure environment secrets">
+    ```bash
+    cp .env.template .env  # if available
+    ```
+    Update `.env` with `WALLET_PASSWORD`, `BITTENSOR_NETWORK=finney`, and any additional overrides you maintain for automation scripts.
+  </Step>
+</Steps>
+
+## Wallet Registration
+
+```bash
+# coldkey for custody
+btcli wallet new_coldkey --wallet.name metahash
+
+# hotkey for mining
+btcli wallet new_hotkey --wallet.name metahash --wallet.hotkey minerx
+
+# register on subnet 73
+btcli register --netuid 73 --wallet.name metahash --wallet.hotkey minerx
+```
+
+## Run Miner With Multiple Bids
+
+```bash
+python neurons/miner.py \
+  --netuid 73 \
+  --wallet.name metahash \
+  --wallet.hotkey minerx \
+  --subtensor.network finney \
+  --miner.bids.netuids 62 41 \
+  --miner.bids.amounts 10 25 \
+  --miner.bids.discounts 500 700 \
+  --axon.port 8091 \
+  --axon.external_port 8091 \
+  --logging.debug \
+  --payment.validators SOURCE_STAKE_HOTKEY_A SOURCE_STAKE_HOTKEY_B
+```
+
+<Warning>
+`--payment.validators` accepts a round-robin list of hotkeys that already hold α. Make sure each listed hotkey has sufficient stake to fund winning bids.
+</Warning>
+
+<Warning>
+Discounts (`--miner.bids.discounts`) remain basis points. `500` = 5%, `700` = 7%, `900` = 9%.
+</Warning>
+
+## Advanced Miner Options
+
+### Bid Controls
+
+- `--miner.bids.netuids`: Target subnets (duplicate values allowed, e.g., `30 30 12`).
+- `--miner.bids.amounts`: α amounts per bid (e.g., `1000 500 200`).
+- `--miner.bids.discounts`: Discount per bid (bps by default).
+- `--miner.bids.raw_discount`: Treat `--miner.bids.discounts` as raw values (legacy mode).
+- `--miner.bids.validators`: Hotkeys to draw α from. Overrides payment validators if supplied.
+
+### Spend Management
+
+- `--bidding.max_total_alpha`: Cap total α spent during a session (`0` = unlimited).
+- `--bidding.min_stake_alpha`: Maintain a minimum α buffer before pausing bids.
+- `--bidding.stop_on_low_stake`: Halt bidding when the buffer drops below the threshold.
+
+### Payment Routing
+
+- `--payment.validators`: Pool of origin hotkeys (SS58) used round-robin for α payments.
+- `--payment.map`: Explicit subnet → hotkey map (`73:5G...`). Overrides `--payment.validators`.
+
+### Auto-Sell
+
+- `--autosell.enabled`: Enable automatic selling of subnet 73 α stake.
+- `--autosell.keep_alpha`: Amount of α to keep (defaults to 0).
+- `--autosell.subnet_id`: Subnet to monitor (default `73`).
+- `--autosell.check_interval`: Polling interval in seconds.
+- `--autosell.max_retries`: Retry count for failed transactions.
+- `--autosell.wait_for_inclusion`: Require inclusion before marking success.
+- `--autosell.wait_for_finalization`: Require finality confirmation.
+- `--autosell.period`: Block period to wait for confirmations.
+- `--autosell.total_alpha_target`: Total α to liquidate (`0` = unlimited).
+
+<Note>
+Review the latest miner flags with `python neurons/miner.py --help` after pulling updates—new options ship frequently.
+</Note>

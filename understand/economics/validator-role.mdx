@@ -1,0 +1,79 @@
+---
+title: Validator Role in MetaHash
+description: How validators safeguard fairness, consensus, and Treasury integrity across every epoch.
+---
+
+# Validators: Guardians of Fairness & Finality
+
+Validators sit between the α market and the treasury. They receive miner bids, rank them, settle auctions, and sign the transactions that release TAO. If miners supply energy and α supplies liquidity, validators provide the governance logic that keeps epochs honest.
+
+## 1. Core Responsibilities
+
+| Phase | Validator Function | Outcome |
+| --- | --- | --- |
+| **Bidding** | Receive, verify, and record incoming α bids. | Blocks malformed or duplicate submissions. |
+| **Clearing** | Rank bids with `effective_value = α × (1 – discount)`. | Determines deterministic winners. |
+| **Consensus** | Run Yuma Consensus to agree on final rankings. | Locks the epoch’s results immutably. |
+| **Settlement** | Submit signatures authorizing treasury payouts. | Releases TAO safely to miners + validators. |
+
+Validators therefore handle both economic clearing and cryptographic notarization every 72-minute cycle.
+
+## 2. Reputation System
+
+Each validator carries a live reputation score based on accuracy, uptime, and responsiveness.
+
+- **Earn reputation** by clearing correctly, submitting on-time signatures, and staying online.
+- **Lose reputation** for downtime, mismatched rankings, or consensus faults.
+- **Impact**: Higher reputation boosts tie-breaking priority, consensus weight, and potential reward multipliers.
+
+Reputation turns “network trust” into a measurable resource, discouraging collusion and rewarding long-term integrity.
+
+## 3. Validator Rewards
+
+Roughly 25% of every epoch’s emission is earmarked for validators. Rewards are subdivided into:
+
+| Reward Type | Trigger | Purpose |
+| --- | --- | --- |
+| **Clearing fee** | Accurate bid processing | Pays for computational + operational load. |
+| **Consensus bonus** | On-time epoch finalization | Incentivizes rapid agreement. |
+| **Reputation multiplier** | Sustained reliability | Scales payouts for high-trust operators. |
+
+In high-volume epochs validators may also receive α rebates as a liquidity incentive.
+
+## 4. Yuma Consensus & Finalization
+
+After bids close:
+
+1. **Propose** – Each validator broadcasts their local ranking.
+2. **Compare** – Nodes cross-check lists and flag discrepancies.
+3. **Vote** – Reputation-weighted signatures approve the majority list.
+4. **Finalize** – Once quorum hits, results post on-chain and the treasury executes payouts.
+
+No single validator can manipulate outcomes — multi-party agreement is required for finality.
+
+## 5. Security & Failure Handling
+
+MetaHash is resilient to partial failure:
+
+| Scenario | Response |
+| --- | --- |
+| Validator offline | Reputation drops; quorum recalculates without them. |
+| Double-clearing attempt | Invalid signature rejected; offender penalized. |
+| False ranking submission | Peers flag mismatch; bad list excluded. |
+| Extended downtime | Node temporarily ejected until reliability returns. |
+
+Automatic penalties and quorum requirements keep epochs honest even under stress.
+
+## 6. Economics in Context
+
+Validators juggle three pressures each epoch:
+
+- **Liquidity flow** – ingest and verify α bids.
+- **Consensus load** – reach agreement before the payment window opens.
+- **Reputation maintenance** – stay reliable to keep rewards compounding.
+
+High-performing validators effectively operate as economic routers, translating raw α market data into Treasury state transitions.
+
+## Next Step
+
+See [Miner Lifecycle](/understand/economics/miner-lifecycle) for the operator journey from registration through rewards.

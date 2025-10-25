@@ -1,0 +1,323 @@
+---
+title: UID111 Review
+description: Real-world experience setting up a MetaHash SN73 Miner on Finney Testnet
+---
+
+<Warning>
+**Community Question**: Why has my miner not placed a single bid even after running for several days?
+</Warning>
+
+# UID111 Review — MetaHash SN73 Miner
+
+A firsthand account of setting up and running a MetaHash miner on Subnet 73 (Finney Testnet).
+
+## Snapshot
+
+- **Platform**: Ubuntu 22.04 on AWS t3.medium
+- **Setup Time**: ~40 minutes using documented Python 3 + venv + `uv` flow
+- **Wallet**: Created with `btcli wallet new_coldkey` / `new_hotkey`, registered to Subnet 73
+- **UID**: 111
+- **Funding**: α sourced from Subnet 62, bidding 0.25 α at 500 bps
+- **Persistence**: Runs continuously with `screen` or systemd
+
+## What I Ran
+
+```bash
+# System setup
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y python3 python3-venv python3-pip git
+
+# Python environment
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip wheel uv
+uv pip install -e .
+pip install -U bittensor-cli
+
+# Wallet creation
+btcli wallet new_coldkey --wallet.name mywallet
+btcli wallet new_hotkey --wallet.name mywallet --wallet.hotkey miner1
+btcli subnets register --netuid 73 --wallet.name mywallet --wallet.hotkey miner1
+
+# Staking
+btcli stake add --netuid 62 --wallet.name mywallet --wallet.hotkey miner1 --amount 0.15
+
+# Running the miner
+python neurons/miner.py \
+  --netuid 73 \
+  --wallet.name mywallet \
+  --wallet.hotkey miner1 \
+  --subtensor.network finney \
+  --miner.bids.netuids 62 \
+  --miner.bids.amounts 0.25 \
+  --miner.bids.discounts 500 \
+  --axon.port 8091 \
+  --axon.external_port 8091 \
+  --logging.debug \
+  --blacklist.force_validator_permit \
+  --payment.validators 5H9WDbXXtJVoMRAGM3EgqZPZBk5A4d57PthhxsNrb6hBXsz7
+```
+
+## Run Experience
+
+### Environment Configuration
+
+`.env` lives in the repo root with these variables:
+
+```bash
+WALLET_NAME=mywallet
+WALLET_HOTKEY=miner1
+WALLET_PASSWORD=yourpassword
+BITTENSOR_NETWORK=finney
+```
+
+<Warning>
+Missing the `WALLET_PASSWORD` line had the miner looping for input until I fixed it.
+</Warning>
+
+### Successful Launch
+
+First good launch shows:
+
+```
+Axon served with: AxonInfo(5H9WDbXXt..., 18.xx.xx.xx:8091)
+Miner started
+Configured Bid Lines:
+  0 │ 62 │ 0.2500 α │ 500 bps
+Miner running…
+```
+
+### Auction Activity
+
+When working properly, logs show:
+
+```
+AuctionStart detected
+Win invoice received
+α payment sent
+```
+
+<Check>
+These logs confirm the validator path is working and your miner is participating in auctions.
+</Check>
+
+### Network Setup
+
+- **Port 8091**: Opened TCP 8091 in AWS security group
+- **Verification**: Used `ss -tulpn | grep 8091` to confirm listening
+- **Critical**: This was the gate to being seen on the network
+
+### Process Management
+
+- **Testing**: `screen -S miner` was fine for early testing
+- **Production**: Switched to systemd for auto-restarts
+- **Monitoring**: `journalctl -u metahash-miner -f` to watch logs
+
+## Gotchas I Hit
+
+<AccordionGroup>
+  <Accordion title="Python Command Issues">
+    **Problem**: Using `python` without the alias broke the flow
+
+    **Fix**: Needed to call `python3` explicitly in several spots
+  </Accordion>
+
+  <Accordion title="Dependency Version Mismatch">
+    **Problem**: Imports failed without correct async-substrate-interface version
+
+    **Fix**: Pinning to version 1.3.1 solved it:
+    ```bash
+    pip install async-substrate-interface==1.3.1
+    ```
+  </Accordion>
+
+  <Accordion title="Wrong Payment Validator">
+    **Problem**: Misconfigured `--payment.validators` to an unstaked hotkey
+
+    **Result**: Watched α burn with no rewards
+
+    **Fix**: Used `btcli stake overview` to align the correct address
+  </Accordion>
+
+  <Accordion title="Port Not Accessible">
+    **Problem**: When `AuctionStart` never appeared, port 8091 was closed
+
+    **Fix**: Once I opened it in AWS security group, bids flowed
+  </Accordion>
+
+  <Accordion title="Out of Memory (OOM)">
+    **Problem**: On a t3.micro dry run, the miner hit OOM and died
+
+    **Fix**: Upgraded to t3.medium and added 2G swapfile:
+    ```bash
+    sudo fallocate -l 2G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+    ```
+  </Accordion>
+
+  <Accordion title="CLI Command Changes">
+    **Problem**: Old `swap` command no longer worked
+
+    **Fix**: `btcli subnets alpha_to_tao` replaced the old syntax
+  </Accordion>
+
+  <Accordion title="Block Drift / Desync">
+    **Problem**: Block drift presented as "Extrinsic not included"
+
+    **Fix**: Running `python neurons/miner.py --fresh` pulled the miner back in sync
+  </Accordion>
+</AccordionGroup>
+
+## Key Learnings
+
+### Critical Configuration Points
+
+1. **`.env` file is mandatory** - Include all variables, especially `WALLET_PASSWORD`
+2. **Port 8091 must be open** - Both in AWS and locally accessible
+3. **Payment validator must have stake** - Otherwise α payments fail
+4. **Memory matters** - t3.micro insufficient; t3.medium recommended
+5. **Clock sync is important** - Install chrony to prevent drift
+
+### Recommended Instance Specs
+
+| Spec | Minimum | Recommended |
+|------|---------|-------------|
+| Instance Type | t3.small | t3.medium |
+| Memory | 2GB | 4GB |
+| Swap Space | 1GB | 2GB |
+| Disk Space | 10GB | 20GB |
+| Network | Standard | Enhanced |
+
+### Timeline Expectations
+
+| Milestone | Time |
+|-----------|------|
+| Initial setup | 30-40 minutes |
+| First successful start | +5 minutes |
+| Port verification | +5 minutes |
+| First auction event | Hours to days |
+| Consistent operation | Ongoing |
+
+<Info>
+Don't panic if you don't see auction events immediately. Validator activity varies, and it can take time for your miner to be selected.
+</Info>
+
+## Troubleshooting Tips from Experience
+
+### When Things Go Wrong
+
+1. **Check logs first**: `tail -f ~/.bittensor/miners/mywallet/miner1/netuid73/miner.log`
+2. **Verify port**: `ss -tulpn | grep 8091`
+3. **Check stake**: `btcli stake overview`
+4. **Monitor resources**: `htop` and `free -h`
+5. **Resync if needed**: `python neurons/miner.py --fresh`
+
+### Red Flags to Watch For
+
+- 🚨 No "Axon served" message on startup
+- 🚨 Password prompts appearing repeatedly
+- 🚨 Port 8091 not showing in `ss` output
+- 🚨 Memory usage climbing steadily
+- 🚨 "Killed" messages in logs
+
+### Green Lights
+
+- ✅ "Miner started" in logs
+- ✅ "Configured Bid Lines" displayed
+- ✅ Port 8091 listening externally
+- ✅ Stable memory usage
+- ✅ "AuctionStart" events appearing
+
+## Final Thoughts
+
+The setup process is **straightforward if you follow the documentation** carefully. Most issues stem from:
+
+- Missing or incorrect `.env` configuration
+- Closed or misconfigured ports
+- Wrong payment validator addresses
+- Insufficient system resources
+
+<Tip>
+Start with a t3.medium instance to avoid memory issues. You can always downsize later if your miner is stable and memory usage is low.
+</Tip>
+
+## Configuration That Worked
+
+This exact configuration ran successfully for multiple days:
+
+- **Instance**: AWS t3.medium (2 vCPU, 4GB RAM)
+- **OS**: Ubuntu 22.04 LTS
+- **Stake**: 0.15 TAO on Subnet 62
+- **Bid**: 0.25 α at 500 bps discount
+- **Port**: 8091 open (TCP inbound)
+- **Management**: systemd service with `Restart=always`
+- **Swap**: 2GB swapfile configured
+
+## Community Resources
+
+When I got stuck, these resources helped:
+
+- **Discord**: Active community for real-time help
+- **GitHub Issues**: Check for similar problems
+- **Documentation**: Comprehensive troubleshooting guides
+- **Twitter**: Updates on validator activity and network status
+
+## Recommendations for New Miners
+
+<Steps>
+  <Step title="Read the full documentation first">
+    Don't skip steps or assume defaults
+  </Step>
+
+  <Step title="Use recommended instance specs">
+    t3.medium or equivalent, not t3.micro
+  </Step>
+
+  <Step title="Double-check .env configuration">
+    All four variables must be present
+  </Step>
+
+  <Step title="Verify port accessibility">
+    Both locally and externally before waiting for auctions
+  </Step>
+
+  <Step title="Use systemd for production">
+    Screen is fine for testing only
+  </Step>
+
+  <Step title="Monitor regularly">
+    Check logs daily for the first week
+  </Step>
+
+  <Step title="Join the community">
+    Discord is invaluable for troubleshooting
+  </Step>
+</Steps>
+
+## Bottom Line
+
+UID111's experience shows that with proper setup and configuration, running a MetaHash miner is **achievable in under an hour**. The key is:
+
+- Following documentation precisely
+- Verifying each step before proceeding
+- Using adequate system resources
+- Monitoring logs for confirmation
+- Asking for help when stuck
+
+<Check>
+With this approach, your miner should be operational and participating in auctions successfully!
+</Check>
+
+---
+
+## Questions or Issues?
+
+If you experience similar issues or have questions about this setup:
+
+- [Discord Community](https://discord.com/channels/799672011265015819/1351969903132938302)
+- [GitHub Repository](https://github.com/fx-integral/metahash)
+- [Twitter @metahashsn73](https://x.com/metahashsn73)
+- [Full Setup Guide](/guides/getting-started/introduction)

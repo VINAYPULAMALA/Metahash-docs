@@ -1,0 +1,86 @@
+---
+title: Validator Simple Guide
+description: ollow this streamlined checklist to launch a MetaHash validator without touching advanced automation or custom logic.
+---
+
+## Prerequisites
+
+<Info color="orange">
+<span style={{ color: '#fbb12b' }}>
+- Subtensor lite node running with `--pruning=2000` (or access to `--subtensor.network archive`)
+- Python 3.10+ with `pip`/`venv`
+- Funded coldkey / hotkey pair already registered on subnet 73
+- Basic familiarity with `pm2` or systemd for process supervision
+</span>
+</Info>
+
+## Simple Validator
+
+<Steps>
+  <Step title="Clone and prepare the repo">
+    ```bash
+    git clone https://github.com/fx-integral/metahash.git
+    cd metahash
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -U pip wheel uv
+    uv pip install -e .
+    ```
+  </Step>
+  <Step title="Create .env">
+    ```bash
+    cat <<'EOF' > .env
+    BT_WALLET_NAME=metahash
+    BT_HOTKEY=validatorx
+    IPFS_API_URL=http://ipfs.metahash73.com:5001/api/v0
+    EOF
+    ```
+    Update the environment values if you use different wallet names or run your own IPFS endpoint.
+  </Step>
+</Steps>
+
+## Wallet & Registration
+
+```bash
+# coldkey
+btcli wallet new_coldkey --wallet.name metahash
+
+# validator hotkey
+btcli wallet new_hotkey --wallet.name metahash --wallet.hotkey validatorx
+
+# register on subnet 73
+btcli register --netuid 73 --wallet.name metahash --wallet.hotkey validatorx
+```
+
+## Run Validator (pm2)
+
+```bash
+pm2 start python \
+  --name metahash-validator \
+  -- \
+  neurons/validator.py \
+  --netuid 73 \
+  --subtensor.network archive \
+  --wallet.name metahash \
+  --wallet.hotkey validatorx \
+  --neuron.axon_off \
+  --logging.debug
+```
+
+## Run Validator (Python directly)
+
+```bash
+python neurons/validator.py \
+  --netuid 73 \
+  --subtensor.network archive \
+  --wallet.name metahash \
+  --wallet.hotkey validatorx \
+  --neuron.axon_off \
+  --logging.debug
+```
+
+<Tip>
+`--subtensor.network archive` is acceptable for testing, but production operators should point to their own node (`--pruning=2000`) to avoid dependency on external infrastructure.
+</Tip>
+
+Need to go deeper? Jump to the [Validator Advanced Guide](/guides/validators/validator-advanced-guide) for HA topologies, strategy overrides, and automation flags.

@@ -1,0 +1,185 @@
+---
+title: Port Setup
+description: Configure AWS security groups and verify port accessibility
+---
+
+# Port Setup (AWS)
+
+Configure your AWS EC2 security group to allow external connections on port 8091.
+
+## Why Port 8091?
+
+Your miner's axon server listens on port 8091 to receive connections from validators. Without this port open, validators cannot reach your miner, and you won't win any auctions.
+
+## AWS Security Group Configuration
+
+<Steps>
+  <Step title="Navigate to EC2 Security Groups">
+    1. Go to AWS EC2 Console
+    2. Click **Security Groups** in the left sidebar
+    3. Find the security group attached to your instance
+  </Step>
+
+  <Step title="Add Inbound Rule">
+    1. Click **Edit inbound rules**
+    2. Click **Add rule**
+    3. Configure:
+       - **Type**: Custom TCP
+       - **Port Range**: 8091
+       - **Source**: 0.0.0.0/0 (or specific validator IPs)
+    4. Click **Save rules**
+  </Step>
+</Steps>
+
+## Configuration Details
+
+| Setting | Value | Notes |
+|---------|-------|-------|
+| Type | Custom TCP | - |
+| Protocol | TCP | - |
+| Port Range | 8091 | Both internal and external |
+| Source | 0.0.0.0/0 | Allows all IPs (or restrict to validator IPs) |
+| Description | MetaHash Miner Axon | Optional but helpful |
+
+<Warning>
+Opening port 8091 to 0.0.0.0/0 allows connections from any IP address. This is generally safe for the miner axon, but ensure you're not exposing other sensitive services.
+</Warning>
+
+## Verification
+
+### Check Port Listening (Inside Ubuntu)
+
+Verify that Python is listening on port 8091:
+
+```bash
+ss -tulpn | grep 8091
+```
+
+**Expected output:**
+```
+tcp   LISTEN 0   128   [::]:8091   [::]:*   users:(("python",pid=12345,fd=3))
+```
+
+<Check>
+You should see Python listening on `[::]:8091`, indicating the miner's axon is running.
+</Check>
+
+### External Port Check
+
+Test external accessibility using an online port checker or from another machine:
+
+```bash
+nc -zv YOUR_INSTANCE_IP 8091
+```
+
+Replace `YOUR_INSTANCE_IP` with your EC2 instance's public IP address.
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Port not listening">
+    **Symptom**: `ss -tulpn | grep 8091` shows nothing
+
+    **Causes**:
+    - Miner not running
+    - Miner crashed
+    - Wrong port specified in miner command
+
+    **Fix**:
+    1. Verify miner is running: `ps aux | grep miner`
+    2. Check miner logs for errors
+    3. Confirm `--axon.port 8091` in your miner command
+  </Accordion>
+
+  <Accordion title="Port listening but not accessible externally">
+    **Symptom**: Port shows in `ss` but external checks fail
+
+    **Causes**:
+    - Security group rule not saved
+    - Wrong security group attached to instance
+    - Firewall (ufw) blocking port
+
+    **Fix**:
+    1. Verify security group is attached to your instance
+    2. Check if ufw is active: `sudo ufw status`
+    3. If active, allow port: `sudo ufw allow 8091/tcp`
+  </Accordion>
+
+  <Accordion title="No AuctionStart events after opening port">
+    **Symptom**: Port is open but still no validator connections
+
+    **Causes**:
+    - Validators may be paused
+    - Wrong payment validator address
+    - Network desync
+
+    **Fix**:
+    1. Check validator status: `btcli subnets metagraph --netuid 73 | grep validator`
+    2. Verify your `--payment.validators` address has staked TAO
+    3. Restart miner to resync: `python neurons/miner.py --fresh`
+  </Accordion>
+</AccordionGroup>
+
+## UFW (Firewall) Configuration
+
+If you're using UFW (Uncomplicated Firewall), allow port 8091:
+
+```bash
+# Check if UFW is active
+sudo ufw status
+
+# If active, allow port 8091
+sudo ufw allow 8091/tcp
+
+# Verify rule was added
+sudo ufw status numbered
+```
+
+## Elastic IP Considerations
+
+If using an AWS Elastic IP:
+
+1. Ensure the Elastic IP is associated with your instance
+2. Use the Elastic IP address in external port checks
+3. The miner will automatically detect and use this IP
+
+## Troubleshooting Checklist
+
+<Steps>
+  <Step title="Verify Miner Running">
+    ```bash
+    ps aux | grep miner
+    ```
+  </Step>
+
+  <Step title="Check Port Listening">
+    ```bash
+    ss -tulpn | grep 8091
+    ```
+  </Step>
+
+  <Step title="Verify Security Group">
+    Check AWS console for inbound rule on port 8091
+  </Step>
+
+  <Step title="Test External Access">
+    ```bash
+    nc -zv YOUR_INSTANCE_IP 8091
+    ```
+  </Step>
+
+  <Step title="Check Miner Logs">
+    ```bash
+    tail -f ~/.bittensor/miners/mywallet/miner1/netuid73/miner.log
+    ```
+    Look for "Axon served" message
+  </Step>
+</Steps>
+
+<Check>
+Once port 8091 is open and accessible, your miner can receive connections from validators!
+</Check>
+
+## Next Steps
+
+With ports configured, proceed to [Troubleshooting](/support/troubleshooting/troubleshooting) to learn about common issues and their solutions.

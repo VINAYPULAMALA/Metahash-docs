@@ -46,36 +46,68 @@ mintlify deploy
 
 ```
 .
-├── mint.json              # Mintlify configuration
-├── introduction.mdx       # Homepage
-├── understand.mdx         # Subnet deep dive
-├── announcements.mdx      # Announcements hub
-├── team.mdx               # Contributor roster
-├── setup/                 # Setup guide pages
-│   ├── introduction.mdx
-│   ├── miner-simple-guide.mdx
-│   ├── miner-advanced-guide.mdx
-│   ├── environment.mdx
-│   ├── wallet.mdx
-│   ├── configuration.mdx
-│   ├── staking.mdx
-│   ├── running-miner.mdx
-│   ├── port-setup.mdx
-│   ├── troubleshooting.mdx
-│   ├── keep-running.mdx
-│   ├── validator-simple-guide.mdx
-│   ├── validator-advanced-guide.mdx
-│   ├── commands.mdx
-│   └── checklist.mdx
-├── review/                # Review pages
+├── docs.json              # Mintlify configuration
+├── index.mdx              # Landing page
+├── introduction/
+│   └── overview.mdx       # MetaHash overview
+├── understand/
+│   ├── fundamentals/
+│   │   ├── auction-mechanics.mdx
+│   │   └── introduction.mdx
+│   ├── economics/
+│   │   ├── alpha-exchange.mdx
+│   │   ├── miner-lifecycle.mdx
+│   │   ├── treasury-structure.mdx
+│   │   └── validator-role.mdx
+│   └── network/
+│       ├── glossary.mdx
+│       └── interoperability.mdx
+├── guides/
+│   ├── getting-started/
+│   │   ├── introduction.mdx
+│   │   ├── safety-warnings.mdx
+│   │   └── which-guide-for-me.mdx
+│   ├── miners/
+│   │   ├── miner-advanced-guide.mdx
+│   │   └── miner-simple-guide.mdx
+│   ├── validators/
+│   │   ├── validator-advanced-guide.mdx
+│   │   └── validator-simple-guide.mdx
+│   ├── environment/
+│   │   ├── configuration.mdx
+│   │   ├── environment.mdx
+│   │   └── wallet.mdx
+│   └── operations/
+│       ├── port-setup.mdx
+│       ├── running-miner.mdx
+│       └── staking.mdx
+├── support/
+│   ├── troubleshooting/
+│   │   └── troubleshooting.mdx
+│   ├── operations/
+│   │   ├── commands.mdx
+│   │   └── keep-running.mdx
+│   └── checklists/
+│       └── checklist.mdx
+├── announcements/
+│   └── announcements.mdx
+├── team/
+│   └── team.mdx
+├── reviews/
 │   └── uid111-review.mdx
-└── icon/                  # Images and icons
-    └── favicon.png
+└── assets/
+    ├── icons/
+    │   └── favicon.png
+    ├── images/
+    │   ├── cycle.png
+    │   └── metahash-working.png
+    └── screenshots/
+        └── *.png
 ```
 
 ## Configuration
 
-All configuration is in `mint.json`:
+All configuration is in `docs.json`:
 
 - Navigation structure
 - Branding (colors, logo, favicon)
@@ -132,8 +164,8 @@ The following old HTML files are kept for reference but are no longer used:
 - `review.html` - Old review page
 - `styles.css` - Old CSS styles
 - `script.js` - Old JavaScript
-- `gpt.md` - Source markdown (migrated to setup/ pages)
-- `review.md` - Source markdown (migrated to review/ pages)
+- `gpt.md` - Source markdown (migrated to guides/ pages)
+- `review.md` - Source markdown (migrated to reviews/ pages)
 
 These can be safely deleted once you've verified the Mintlify version works correctly.
 
