@@ -42,62 +42,135 @@ mode: "custom"
   background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 159, 46, 0.08) 100%)',
   border: '2px solid rgba(255, 140, 0, 0.7)',
   borderRadius: '16px',
-  padding: '2.5rem 2rem',
+  padding: '2.75rem 2rem',
   marginBottom: '3rem',
   boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
   transition: 'all 0.3s ease'
 }}>
   <div style={{
-    display: 'flex',
-    alignItems: 'flex-start',
-    gap: '1.5rem',
-    marginBottom: '1.5rem'
+    maxWidth: '44rem',
+    margin: '0 auto',
+    textAlign: 'center'
   }}>
-    <div style={{
-      fontSize: '2.5rem',
-      filter: 'drop-shadow(0 2px 4px rgba(255, 140, 0, 0.3))'
+    <h3 style={{
+      fontSize: '2.15rem',
+      fontWeight: '700',
+      marginBottom: '0.75rem',
+      color: '#ffb347',
+      letterSpacing: '-0.02em',
+      textShadow: '0 0 18px rgba(255, 179, 71, 0.35)'
     }}>
-      💰
-    </div>
-    <div style={{ flex: 1 }}>
-      <h3 style={{
-        fontSize: '1.75rem',
-        fontWeight: '700',
-        marginBottom: '1rem',
-        color: '#fff',
-        letterSpacing: '-0.02em'
-      }}>
-        Deploy Big α Positions
-      </h3>
-      <p style={{
-        fontSize: '1.15rem',
-        lineHeight: '1.8',
-        marginBottom: '1rem',
-        color: 'rgba(255, 255, 255, 0.9)'
-      }}>
-        <strong style={{ color: '#ff8c00' }}>Scale α exits with confidence.</strong> Route big positions through deterministic auctions that match you with whitelisted demand, keep spreads tight, and free liquidity on your schedule.
-      </p>
-      <p style={{
-        fontSize: '1.05rem',
-        lineHeight: '1.7',
-        marginBottom: '1.5rem',
-        color: 'rgba(255, 255, 255, 0.85)'
-      }}>
-        Every tranche carries slippage-aware pricing, automated rollover options, and full audit trails—complete with IPFS commitments plus on-chain confirmations.
-      </p>
+      Over-the-counter
+    </h3>
+    <p style={{
+      fontSize: '1.25rem',
+      fontWeight: 600,
+      letterSpacing: '-0.01em',
+      color: 'rgba(255, 255, 255, 0.92)',
+      marginBottom: '1.5rem'
+    }}>
+      Move size without chaos
+    </p>
+    <p style={{
+      fontSize: '1.05rem',
+      lineHeight: '1.7',
+      marginBottom: '1.5rem',
+      color: 'rgba(255, 255, 255, 0.85)'
+    }}>
+      MetaHash’s deterministic Epoch auctions connect <strong style={{ color: '#ffb347' }}>α sellers</strong> (miners, subnet owners) with <strong style={{ color: '#ffb347' }}>capital allocators</strong> (funds, managers, strategists) — instantly and fairly.
+    </p>
+    <p style={{
+      fontSize: '1.05rem',
+      lineHeight: '1.7',
+      marginBottom: '1.5rem',
+      color: 'rgba(255, 255, 255, 0.85)'
+    }}>
+      Sell α OTC for instant liquidity <strong style={{ color: '#ffb347' }}>without hitting charts</strong>, or deploy capital to acquire discounted α <strong style={{ color: '#ffb347' }}>through transparent, validator-cleared auctions.</strong>
+    </p>
+    <p style={{
+      fontSize: '1.05rem',
+      lineHeight: '1.7',
+      marginBottom: '1.5rem',
+      color: 'rgba(255, 255, 255, 0.9)',
+      fontWeight: 600
+    }}>
+      One network. Two sides. <strong style={{ color: '#ff8c00' }}>Efficient α flow, real yield, zero noise.</strong>
+    </p>
+    <div style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      gap: '0.75rem'
+    }}>
+      <a
+        href="/guides/miners/miner-simple-guide"
+        style={{
+          flex: '1 1 200px',
+          maxWidth: '220px',
+          textAlign: 'center',
+          background: 'rgba(255, 140, 0, 0.15)',
+          border: '1px solid rgba(255, 140, 0, 0.8)',
+          color: '#fff',
+          padding: '0.85rem 1.25rem',
+          borderRadius: '10px',
+          fontWeight: '600',
+          fontSize: '1rem',
+          textDecoration: 'none',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 140, 0, 0.25)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 140, 0, 0.15)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        Launch as a Miner
+      </a>
+      <a
+        href="/guides/validators/validator-simple-guide"
+        style={{
+          flex: '1 1 200px',
+          maxWidth: '220px',
+          textAlign: 'center',
+          background: 'rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(255, 255, 255, 0.5)',
+          color: '#fff',
+          padding: '0.85rem 1.25rem',
+          borderRadius: '10px',
+          fontWeight: '600',
+          fontSize: '1rem',
+          textDecoration: 'none',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        Activate a Validator
+      </a>
       <a
         href="https://discord.com/channels/799672011265015819/1351969903132938302"
         style={{
-          display: 'inline-block',
+          flex: '1 1 200px',
+          maxWidth: '220px',
+          textAlign: 'center',
           background: '#ff8c00',
           color: '#000',
-          padding: '0.875rem 1.75rem',
+          padding: '0.85rem 1.25rem',
           borderRadius: '10px',
           fontWeight: '600',
-          fontSize: '1.05rem',
+          fontSize: '1rem',
           textDecoration: 'none',
           transition: 'all 0.2s ease',
-          boxShadow: '0 2px 8px rgba(255, 140, 0, 0.3)'
+          boxShadow: '0 2px 6px rgba(255, 140, 0, 0.3)'
         }}
         onMouseOver={(e) => {
           e.currentTarget.style.background = '#ff9f2e';
@@ -107,10 +180,10 @@ mode: "custom"
         onMouseOut={(e) => {
           e.currentTarget.style.background = '#ff8c00';
           e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 140, 0, 0.3)';
+          e.currentTarget.style.boxShadow = '0 2px 6px rgba(255, 140, 0, 0.3)';
         }}
       >
-        Book a liquidity drop → Chat with the MetaHash desk
+        Talk with MetaHash
       </a>
     </div>
   </div>

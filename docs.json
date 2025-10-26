@@ -164,10 +164,17 @@
     }
   },
   "navbar": {
+    "showSearch": true,
     "links": [
       {
-        "label": "Website",
-        "href": "https://metahash73.com"
+        "label": "Treasury",
+        "href": "https://metahash73.com/treasury",
+        "icon": "landmark"
+      },
+      {
+        "label": "Auctions",
+        "href": "https://metahash73.com/auction/current",
+        "icon": "pickaxe"
       },
       {
         "label": "Twitter",
