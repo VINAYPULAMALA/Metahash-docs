@@ -1,81 +1,50 @@
 ---
-title: Treasury & Reward Flow
-description: How MetaHash turns competitive α inflows into stable, verifiable TAO rewards every epoch.
+title: "Treasury & Reward Flow — MetaHash SN73 Liquidity Engine"
+description: "How the SN73 Treasury powers buybacks, airdrops, and validator weighting through deterministic Epoch settlements."
 ---
 
-# Overview
-The treasury is MetaHash’s settlement engine. Every epoch it ingests α from cleared auctions, send the Emmision α to miners and validators who made the market. Its mandate is simple: keep rewards proportional to economic contribution while smoothing volatility across epochs.
+## How the Treasury Works per Epoch
 
-## 1. Treasury Mission
+Each epoch the treasury executes three coordinated operations:
 
-1. **Proportional rewards** — SN73 α payouts mirror the α actually committed, not just static stake.
-2. **Emission stability** — Short-term bidding spikes shouldn’t whiplash the subnet’s emission schedule.
+1. **Inflow – α acquisition**  
+   α sold by miners and subnet owners (for example, subnet 62) enters through deterministic auction settlements. Validators verify every commitment so the treasury only accepts bids with matching on-chain records.
 
-## 2. Inflow Sources
+2. **Processing – liquidity conversion**  
+   Treasury contracts issue META or stable-denominated liquidity to the corresponding sellers, then stage the acquired α for staking, pairing, or future auctions.
 
-| Source | Description |
-| --- | --- |
-| **α bids** | Winning miners pay α into the treasury each epoch; this is the primary liquidity feed. |
-| **Validator fees** | A reserved slice of α/TAO that compensates validators for clearing and consensus. |
-| **Emission rollover** | Unspent TAO or α from prior epochs held back as a buffer. |
+3. **Outflow – value redistribution**  
+   Proceeds follow the 75/25 policy at the end of each epoch: 75 percent funds SN73 buybacks and liquidity support, while 25 percent is automatically airdropped to wallets that meet the `S_MIN_AIRDROP` threshold.
 
-At each epoch boundary the treasury snapshots:
+## Validator Integration
 
-```
-total_alpha_inflow
-total_validator_fees
-previous_epoch_balance
-```
+Validators participate as liquidity allocators, not just block producers.
 
-Those numbers define the emission pool for the next payout.
+| Function | Description |
+|----------|-------------|
+| Budget declaration | Validators announce META budgets each epoch and clear bids against treasury α supply. |
+| Settlement proofs | Every transfer to or from the treasury is hashed and stored on IPFS for later audit. |
+| Performance weighting | Validators that clear accurately gain higher weight for subsequent epoch allocations. |
 
-## 3. Conversion Cycle (α → TAO)
+> Performance equals liquidity accuracy — validators that settle on time and within budget expand their influence inside SN73.
 
-After Yuma Consensus finalizes Epoch E, the treasury runs a deterministic pipeline:
+## The Reward Feedback Loop
 
-1. **Assess performance** – Validators sign off on winning bids and their committed α.
-2. **Calculate emission target** – Compare fresh α inflows to the subnet’s emission quota; apply coefficient `k` to avoid over-issuance.
-3. **Distribute TAO rewards** – Mint or allocate TAO up to the allowed cap and weight payouts by each miner’s effective α share (validators collect their service fee here).
-4. **Re-open liquidity** – Once payouts finalize, the same α re-enters circulation for Epoch E+1 bidding.
-
-Lifecycle summary:
-
-```
-α inflow → Treasury pool → TAO emission → Miner & Validator rewards → α released
+```text
+Miners → Treasury → Funds and Validators → Buybacks and Airdrops → SN73 Holders → Next Epoch
 ```
 
-## 4. Distribution Curve (Typical)
+This closed loop ensures that liquidity never leaves the MetaHash economy, every participant contributes to the same yield cycle, and treasury transparency anchors trust between miners, validators, funds, and holders.
 
-| Recipient | Share | Purpose |
-| --- | --- | --- |
-| **Miners** | 60% | Performance rewards tied to effective α. |
-| **Validators** | 25% | Clearing fees + consensus incentives. |
-| **Treasury reserve** | 10% | Liquidity buffer and risk pool. |
-| **Development fund** | 5% | Tooling, analytics, and maintenance. |
+## Transparency & Audit Trail
 
-Percentages adjust via subnet governance, but the principle remains: miners receive the majority, validators get operational incentives, and a buffer safeguards future epochs.
+All treasury operations are recorded on-chain and anchored to IPFS artifacts.
 
-## 5. Balancing & Stabilization
+| Record Type | Description |
+|-------------|-------------|
+| Commitment files | Contain bid fills, pricing, and transfer references per epoch. |
+| Settlement receipts | Document fund-to-miner payments cleared during the epoch. |
+| Buyback transactions | Track SN73 repurchases, burns, and liquidity support events. |
+| Airdrop logs | Identify reward distribution wallets above the staking threshold. |
 
-- **Emission cap control** – If α inflows spike, the multiplier `k` drops to keep TAO issuance steady.
-- **Reserve recycling** – Unused rewards roll into the next epoch, dampening volatility.
-- **α burn option** – When liquidity overwhelms demand, a small fraction of α may be permanently retired.
-- **Floor reserve** – A minimum TAO balance guarantees payouts during quiet periods.
-
-## 6. Economic Effects
-
-- **Stability loop** – α demand drives emissions; emissions influence α value, creating a self-correcting cycle.
-- **Fairness** – Rewards scale with α efficiency instead of raw capital.
-- **Sustainability** – Caps and reserves prevent runaway inflation and protect TAO’s long-term value.
-- **Transparency** – Validator-signed commitments and on-chain transfers keep every payout auditable.
-
-## 7. Visual Mental Model
-
-Imagine a dark-themed diagram:
-
-1. Orange α streams enter a central **Treasury Vault**.
-2. Blue TAO flows branch out toward **Miners** and **Validators**.
-3. A circular arrow feeds α back into the next epoch.
-4. A shaded **Reserve bar** shows stored liquidity for balancing.
-
-That intake → conversion → payout → recharge loop is the heartbeat of MetaHash’s economy.
+Anyone can verify these records using the associated IPFS CIDs or block heights, making the SN73 treasury a fully auditable liquidity engine.

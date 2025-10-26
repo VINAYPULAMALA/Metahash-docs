@@ -1,75 +1,89 @@
+title: "Validator Role in MetaHash — Liquidity Allocation & Deterministic Settlement"
+description: "How validators manage budgets, execute deterministic auctions, and maintain liquidity integrity within the MetaHash SN73 ecosystem."
 ---
-title: Validator Role in MetaHash
-description: How validators safeguard fairness, consensus, and Treasury integrity across every epoch.
+
+# Validator Role in MetaHash
+
+Validators in MetaHash SN73 act as liquidity allocators. They connect the treasury’s META budget with miners’ α supply, ensuring every 72-minute epoch clears deterministically and settles on-chain without discretionary intervention.
+
 ---
 
-# Validators: Guardians of Fairness & Finality
+## Validator Mission
 
-Validators sit between the α market and the treasury. They receive miner bids, rank them, settle auctions, and sign the transactions that release TAO. If miners supply energy and α supplies liquidity, validators provide the governance logic that keeps epochs honest.
+Each epoch begins with validators declaring META budget and discount caps. From there they coordinate the deterministic flow between miners and the treasury so α transactions settle without volatility, manual clearing, or opaque order books.
 
-## 1. Core Responsibilities
+> Think of validators as rule-based market makers whose behavior is audited and enforced by consensus.
 
-| Phase | Validator Function | Outcome |
-| --- | --- | --- |
-| **Bidding** | Receive, verify, and record incoming α bids. | Blocks malformed or duplicate submissions. |
-| **Clearing** | Rank bids with `effective_value = α × (1 – discount)`. | Determines deterministic winners. |
-| **Consensus** | Run Yuma Consensus to agree on final rankings. | Locks the epoch’s results immutably. |
-| **Settlement** | Submit signatures authorizing treasury payouts. | Releases TAO safely to miners + validators. |
+---
 
-Validators therefore handle both economic clearing and cryptographic notarization every 72-minute cycle.
+## Core Responsibilities per Epoch
 
-## 2. Reputation System
+### 1. Budget declaration
+Validators publish their META allocation and discount ceiling (in basis points). These parameters are written to the treasury epoch ledger so miners know the maximum capacity and pricing bounds before bidding.
 
-Each validator carries a live reputation score based on accuracy, uptime, and responsiveness.
+### 2. Auction supervision
+During bidding windows validators:
+- Monitor α offers from miners and subnet owners.
+- Rank bids by discount-adjusted value.
+- Fill bids sequentially until their declared budget is consumed.
 
-- **Earn reputation** by clearing correctly, submitting on-time signatures, and staying online.
-- **Lose reputation** for downtime, mismatched rankings, or consensus faults.
-- **Impact**: Higher reputation boosts tie-breaking priority, consensus weight, and potential reward multipliers.
+### 3. Settlement and proof
+At auction close validators:
+- Execute settlements through treasury contracts.
+- Record every cleared trade (α amount, discount, counterparty) inside an IPFS commitment file.
+- Publish settlement receipts and block references so anyone can audit the flow.
 
-Reputation turns “network trust” into a measurable resource, discouraging collusion and rewarding long-term integrity.
+### 4. Weight update
+Validator weight recalculates at epoch transition using the following metrics.
 
-## 3. Validator Rewards
+| Metric | Impact |
+|--------|--------|
+| Settlement accuracy | Staying within budget increases future weight. |
+| Response time | Faster fills improve reliability scoring. |
+| Treasury alignment | Matching treasury receipts validates execution. |
+| IPFS commitment validity | Missing or invalid hashes reduce weight. |
 
-Roughly 25% of every epoch’s emission is earmarked for validators. Rewards are subdivided into:
+---
 
-| Reward Type | Trigger | Purpose |
-| --- | --- | --- |
-| **Clearing fee** | Accurate bid processing | Pays for computational + operational load. |
-| **Consensus bonus** | On-time epoch finalization | Incentivizes rapid agreement. |
-| **Reputation multiplier** | Sustained reliability | Scales payouts for high-trust operators. |
+## Validator Rewards and Treasury Link
 
-In high-volume epochs validators may also receive α rebates as a liquidity incentive.
+Validator incentives are performance-indexed: the better a validator clears auctions, the greater its future treasury budget share. Rewards flow directly from the 25 percent redistribution pool plus accuracy bonuses.
 
-## 4. Yuma Consensus & Finalization
+```text
+Treasury budget → Validator execution → Weight update → Treasury redistribution
+```
 
-After bids close:
+| Reward Source | Allocation |
+|---------------|-----------|
+| Validator accuracy bonus | META distributed immediately after settlement. |
+| Treasury redistribution | Share of the 25 percent pool based on weight. |
+| Performance multipliers | Additional boosts for validators that maintain full commitment uptime. |
 
-1. **Propose** – Each validator broadcasts their local ranking.
-2. **Compare** – Nodes cross-check lists and flag discrepancies.
-3. **Vote** – Reputation-weighted signatures approve the majority list.
-4. **Finalize** – Once quorum hits, results post on-chain and the treasury executes payouts.
+---
 
-No single validator can manipulate outcomes — multi-party agreement is required for finality.
+## Transparency and Governance
 
-## 5. Security & Failure Handling
+Every validator action is verifiable.
 
-MetaHash is resilient to partial failure:
+| Record | Description |
+|--------|-------------|
+| Commitment files (IPFS) | Proof of filled bids and discount terms. |
+| Budget declarations | On-chain metadata capturing per-epoch allocation. |
+| Weight changes | Stored at epoch transition with before-and-after metrics. |
 
-| Scenario | Response |
-| --- | --- |
-| Validator offline | Reputation drops; quorum recalculates without them. |
-| Double-clearing attempt | Invalid signature rejected; offender penalized. |
-| False ranking submission | Peers flag mismatch; bad list excluded. |
-| Extended downtime | Node temporarily ejected until reliability returns. |
+Governance monitors missed settlements, over-budget allocations, unverified hashes, and other compliance failures. Non-compliant validators automatically lose weight and redistribution share in the next epoch.
 
-Automatic penalties and quorum requirements keep epochs honest even under stress.
+---
 
-## 6. Economics in Context
+## Validators and Treasury: The Feedback Loop
 
-Validators juggle three pressures each epoch:
+```text
+Treasury → Validators → Miners → Treasury
+```
 
-- **Liquidity flow** – ingest and verify α bids.
-- **Consensus load** – reach agreement before the payment window opens.
-- **Reputation maintenance** – stay reliable to keep rewards compounding.
+1. Treasury issues META budget.
+2. Validators allocate it deterministically across α bids.
+3. Miners receive liquidity and send α back to the treasury.
+4. Treasury updates validator weights and redistributes rewards.
 
-High-performing validators effectively operate as economic routers, translating raw α market data into Treasury state transitions.
+This continuous loop keeps liquidity balanced between all actors and ensures MetaHash’s on-chain economy remains efficient, auditable, and trustless.

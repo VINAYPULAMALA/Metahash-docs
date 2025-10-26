@@ -1,88 +1,88 @@
+title: "Miner Lifecycle & Performance — α Production and Liquidity Participation"
+description: "How miners generate, bid, and recycle α through deterministic Epoch auctions in MetaHash SN73."
 ---
-title: Miner Lifecycle & Performance
-description: From registration to rewards—how miners participate across every MetaHash epoch.
+
+# Miner Lifecycle & Performance
+
+Miners in MetaHash SN73 are α producers. They transform computational output from other subnets into tradable liquidity, then route that liquidity through SN73’s deterministic auctions to receive META. Participation hinges on positioning α at the right discount and maintaining consistent execution every 72-minute epoch.
+
 ---
 
-# Miner Lifecycle Overview
+## The Miner Lifecycle
 
-Miners are the execution layer of MetaHash. They supply the compute, uptime, and α liquidity that keep subnets running. Validators guard fairness, treasuries clear rewards, but miners fuel the auction loop: **Join → Bid → Win → Commit → Earn → Reset**. Each full loop aligns with the ~72-minute epoch cadence.
+Every epoch follows a repeatable loop: source α, bid, clear, settle, and recycle.
 
-## Stage 1 — Join & Initialize
+1. **Source α supply**  
+   - α typically originates from subnet stakes such as subnet 62.  
+   - This supply represents the liquidity available to sell in the next auction window.
 
-1. **Create wallet + hotkey** to establish on-chain identity.
-2. **Configure environment** with SN73 parameters, ports, and dependencies.
-3. **Register on SN73** once so the node can auto-enroll in every subsequent epoch.
+2. **Submit bids**  
+   - Each bid specifies the α amount and a discount in basis points (for example, `500 bps = 5%`).  
+   - Multiple bids are allowed while the window is open, and miners can adjust parameters until cutoff.
 
-## Stage 2 — Bid with α
+3. **Auction clearance**  
+   - Validators rank bids by discount-adjusted value and fill them sequentially until the epoch budget is exhausted.  
+   - Cleared bids transfer the offered α into the treasury; uncleared bids immediately free the α for the next epoch.
 
-During the live auction window, miners submit bids such as:
+4. **Settlement and liquidity receipt**  
+   - Cleared miners receive META directly from treasury contracts with receipts anchored to IPFS.  
+   - Settlement proves which bids cleared, at what discount, and for which counterparties.
 
+5. **Performance feedback**  
+   - Miners with consistent participation and fair pricing maintain higher win probability.  
+   - Non-competitive bids or frequent gaps in participation result in lower fill rates and weaker telemetry scores.
+
+> Mining in SN73 rewards price discipline and execution reliability rather than raw hash power.
+
+---
+
+## Miner Incentives
+
+| Type | Description |
+|------|-------------|
+| Instant liquidity | α can be sold OTC without AMMs or manual OTC desks. |
+| Deterministic pricing | Auctions clear based on transparent logic, eliminating slippage and MEV. |
+| Treasury yield exposure | Cleared α powers treasury buybacks that lift long-term SN73 value. |
+| Continuous opportunities | Each 72-minute epoch resets bidding, giving miners frequent liquidity windows. |
+
+---
+
+## Miner Yield Recycling Loop
+
+```text
+Subnet 62 → Miner produces α → Bid in SN73 → META received → Treasury recycles proceeds → Buybacks and airdrops → Miner benefits indirectly
 ```
-(subnet_id=73, α=120, discount=10%)
-```
 
-- Multiple bids per epoch are allowed.
-- Discounts express willingness to trade margin for priority.
-- Bids remain editable until the window closes.
-- Validators see each signed bid instantly.
+This flow keeps miners engaged in both production and liquidity cycles, reinforcing the link between subnet work and treasury value.
 
-## Stage 3 — Win the Auction
+---
 
-When bidding ends:
+## Miner Performance Metrics
 
-- Validators rank miners via `effective_value = α × (1 – discount)`.
-- Top effective values clear; others have their α immediately freed for the next round.
-- Winners join the active mining set for the upcoming epoch.
+| Metric | Definition | Importance |
+|--------|------------|------------|
+| α supplied per epoch | Total α offered into auctions. | Determines participation weight. |
+| Bid discount (bps) | Price competitiveness metric. | Lower discount usually clears first. |
+| Fill rate | Percentage of bids that clear each epoch. | Measures efficiency and pricing accuracy. |
+| Settlement accuracy | Number of cleared bids correctly referenced on IPFS. | Confirms auditable participation. |
+| Uptime | Consistency of epoch participation. | Impacts reputation and validator trust. |
 
-## Stage 4 — Commit & Contribute
+Consistent miners build trust and deepen liquidity, both critical in a deterministic market.
 
-Winning miners must deliver:
+---
 
-- **Compute commitment** – run workloads, submit signals, maintain uptime.
-- **Liquidity commitment** – the winning α stays locked until settlement.
-- **Performance telemetry** – latency, health, and validation data stream to the network.
+## Miner–Treasury Relationship
 
-Missing performance targets can reduce rewards or trigger partial slashing.
+All miner liquidity flows through the SN73 Treasury, guaranteeing:
 
-## Stage 5 — Earn & Settle
+- Immediate META payment upon clearance.  
+- No manual settlement risk.  
+- Transparent accounting via commitment files and block references.
 
-After validators finalize the epoch:
+Because every transfer is verifiable on-chain, miners can prove execution and reconcile balance sheets without third-party escrow.
 
-- The treasury converts committed α into TAO emissions based on effective share.
-- Each miner receives rewards proportional to α contribution plus reliability.
-- The locked α returns to the miner’s wallet, ready for new bids.
+---
 
-All payouts are transparent and traceable on-chain.
+## Why Miner Behavior Matters
 
-## Stage 6 — Reset & Re-enter
-
-- Nodes automatically roll into the next auction unless paused.
-- Reputation and performance history carry forward.
-- Consistent miners often win at lower α cost because validators trust their reliability.
-
-## Performance Metrics
-
-| Metric | Definition | Impact |
-| --- | --- | --- |
-| **Emission share** | Portion of α converted into TAO | Determines payout weight |
-| **Uptime** | Active participation percentage per epoch | Affects eligibility next epoch |
-| **Reputation** | Multi-epoch reliability score | Influences future bid efficiency |
-
-Secondary metrics include latency, error rate, and bid consistency.
-
-## Behavior Across Epochs
-
-- **High-efficiency miners** reinvest rewards to scale α.
-- **Casual miners** drop in with smaller lots when conditions suit them.
-- **Strategic operators** track emission trends and bid during quieter windows.
-
-Over time the network self-organizes: competitive enough to maintain fairness, stable enough to retain sustainability.
-
-## Mental Model
-
-Picture a looping timeline:
-
-1. Orange α packets leave the miner toward validators.
-2. Validators confirm “WIN” and route commitments to the treasury.
-3. Blue TAO rewards flow back to the miner.
-4. The cycle repeats with the caption “Epoch → Epoch → Epoch.”
+Miner behavior defines liquidity depth for MetaHash. More miners submitting competitive α creates healthier price discovery and stronger treasury yields. SN73 miners are not passive yield farmers; they are active liquidity providers fueling the network’s self-balancing economy across every deterministic epoch.

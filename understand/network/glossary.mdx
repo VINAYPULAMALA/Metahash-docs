@@ -1,79 +1,93 @@
+title: "MetaHash Glossary"
+description: "Key terminology for understanding MetaHash SN73’s deterministic auction economy, OTC counter, and treasury flow."
 ---
-title: MetaHash Glossary
-description: Quick reference for α liquidity, auctions, consensus, and interoperability terminology.
+
+# MetaHash Glossary
+
+This glossary summarizes the terms used throughout MetaHash SN73 docs, covering auctions, epochs, α liquidity, validator responsibilities, and treasury mechanics.
+
 ---
 
-# Overview
-
-Use this glossary to align terminology across miners, validators, and researchers. It ties auction mechanics, liquidity concepts, and consensus tooling into one reference.
-
-## Core Economic Terms
+## Core Network Terms
 
 | Term | Definition |
-| --- | --- |
-| **α (Alpha)** | Internal liquidity unit for bidding and auctions. Miners deploy α (not raw TAO) to signal commitment. |
-| **TAO** | Base Bittensor token used for staking, emissions, and settlement; the asset α eventually converts into. |
-| **Epoch** | A ~72-minute cycle covering bidding, clearing, consensus, and payout. |
-| **Auction** | Live marketplace inside each epoch where miners bid α to earn TAO rewards. |
-| **Discount rate** | Percentage modifier miners apply to α bids to trade margin for priority. |
-| **Effective value** | Final ranking score `α × (1 – discount)` used by validators to determine winners. |
-| **Emission rate** | TAO distributed per epoch, tuned by treasury balancing as α inflows change. |
+|------|-------------|
+| **Bittensor** | Decentralized neural network protocol that hosts subnets such as SN73. |
+| **Subnet** | Specialized network focused on a distinct function or economy inside Bittensor. |
+| **Subnet 62** | Source subnet that produces α leveraged by MetaHash auctions. |
+| **SN73 (MetaHash)** | MetaHash’s subnet identifier; the deterministic α liquidity engine. |
+| **Validator** | Participant allocating META budgets and executing deterministic auctions per epoch. |
+| **Miner** | Participant producing α from upstream subnets and selling it through SN73’s OTC auctions. |
+| **Treasury** | On-chain vault managing liquidity inflow/outflow, buybacks, and reward redistribution. |
 
-## Treasury & Reward Terms
+---
 
-| Term | Definition |
-| --- | --- |
-| **Treasury** | MetaHash’s settlement hub; collects α, converts it to TAO, and redistributes payouts. |
-| **Reward distribution** | Process of turning committed α into TAO and splitting it by emission share + reliability. |
-| **Reserve balance** | Treasury funds held back to smooth future epochs. |
-| **Emission coefficient (k)** | Balancing constant that scales TAO output relative to α inflows. |
-| **α burn** | Mechanism that retires a slice of α when liquidity exceeds subnet capacity. |
-
-## Validator & Consensus Terms
+## Epoch and Auction Terms
 
 | Term | Definition |
-| --- | --- |
-| **Validator** | Node that verifies bids, ranks auctions, reaches consensus, and signs treasury payouts. |
-| **Reputation score** | Live trust metric for validators covering uptime, accuracy, and responsiveness. |
-| **Yuma Consensus** | Finalization protocol MetaHash uses to lock auction results and authorize emissions. |
-| **Clearing phase** | Step where validators finalize bid rankings based on effective value. |
-| **Consensus weight** | Influence of a validator’s vote inside Yuma, derived from reputation history. |
+|------|-------------|
+| **Epoch** | 72-minute deterministic cycle covering auction, clearing, settlement, and rewards. |
+| **Epoch cycle** | Notify → Bid → Clear → Commit → Settle → Reweight loop powering SN73. |
+| **Deterministic auction** | Rule-based auction where bids clear predictably based on disclosed budgets and discounts. |
+| **Discount (bps)** | Price reduction miners offer, quoted in basis points (100 bps = 1%). |
+| **Auction budget** | META amount validators allocate per epoch to purchase α. |
+| **Auction clearing** | Phase where validators rank bids and match them to budget sequentially. |
+| **Auction commitment** | Final record of cleared bids hashed to IPFS for audit. |
 
-## Miner Terms
+---
 
-| Term | Definition |
-| --- | --- |
-| **Miner** | Participant providing α liquidity and compute to earn TAO. |
-| **Hotkey** | Miner wallet identity for signing bids and receiving rewards. |
-| **Commit phase** | Period after winning when α locks and the miner must deliver workload/uptime. |
-| **Uptime** | Percentage of time a miner stays active during an epoch; critical for eligibility. |
-| **Emission share** | Portion of rewards assigned to a miner based on effective value and reliability. |
-
-## Interoperability & Network
+## Liquidity and OTC Terms
 
 | Term | Definition |
-| --- | --- |
-| **Subnet** | Specialized Bittensor network (e.g., SN73 for MetaHash). |
-| **Liquidity hub** | Subnet that redistributes α to stabilize emissions (MetaHash’s role). |
-| **Cross-subnet α flow** | Movement of α between subnets, logged by treasuries and validators. |
-| **Global α market** | Vision of shared α pools and auctions spanning multiple subnets. |
+|------|-------------|
+| **OTC counter** | The on-chain mechanism for direct α-for-META swaps outside AMMs. |
+| **Liquidity engine** | Treasury system that recycles auction inflows and redistributes rewards. |
+| **Buyback program** | Treasury operation allocating 75% of proceeds to SN73 buybacks or liquidity support. |
+| **Airdrop program** | Treasury distribution of the remaining 25% to wallets above `S_MIN_AIRDROP`. |
+| **α exchange** | Conversion between α supplied by miners and META provided by the treasury. |
+| **α liquidity flow** | Continuous movement of α among miners, treasury, and other subnets. |
 
-## MetaHash-Specific
+---
+
+## Validator and Miner Metrics
 
 | Term | Definition |
-| --- | --- |
-| **Meta-mining** | Mining liquidity itself by optimizing α bids, not just hardware. |
-| **Epoch finalization** | Moment consensus locks results and kicks off treasury distribution. |
-| **α velocity** | Speed at which α recycles between auctions—indicator of liquidity health. |
-| **Emission equilibrium** | State where α inflows, rewards, and performance stay balanced over many epochs. |
-| **SN73** | Network identifier for MetaHash within Bittensor. |
+|------|-------------|
+| **Validator weight** | Score dictating how much budget a validator can allocate based on accuracy. |
+| **Settlement accuracy** | Precision with which a validator executes settlements within limits. |
+| **IPFS commitment file** | Public log of bids, clears, and settlements per epoch. |
+| **Miner fill rate** | Share of a miner’s bids that clear each epoch. |
+| **α supply** | Total α a miner offers during an auction window. |
+| **Bid discount** | Specific discount applied by a miner to accelerate clearing. |
 
-## Notes
+---
 
-- Economic parameters (percentages, coefficients, epoch length) evolve through governance.
-- α is an internal accounting unit, not a transferable token.
-- Epochs run continuously — new bids begin immediately after settlement.
+## Interoperability Terms
 
-## End of Series
+| Term | Definition |
+|------|-------------|
+| **Cross-subnet liquidity** | Ability to move α and META across other subnets via SN73. |
+| **Treasury cross-link** | Accounting mechanism tracking α source and redistribution path. |
+| **Epoch sync** | Alignment of other subnets’ reward cycles with SN73’s auction window. |
+| **Liquidity routing** | Automated redirection of α or META to subnets where demand is detected. |
 
-This glossary caps the “Understand MetaHash” series, stitching together α, epochs, treasury flows, and interoperability into a shared language.
+---
+
+## Governance and Transparency
+
+| Term | Definition |
+|------|-------------|
+| **Commitment proof** | IPFS or on-chain reference confirming a validator’s settlement. |
+| **Weight decay** | Penalty applied when validators fail to supply valid commitments. |
+| **Settlement receipt** | On-chain acknowledgment of α and META exchange completion. |
+| **Governance audit** | Ongoing validation of epoch records, buybacks, and treasury movements. |
+
+---
+
+## Conceptual Overview
+
+```text
+Miners → Treasury → Validators → Buybacks → Stakers → Next Epoch
+```
+
+All SN73 terminology ultimately ties back to this loop: miners produce α, the treasury converts it into META, validators ensure deterministic settlement, and rewards recycle value back into the network.

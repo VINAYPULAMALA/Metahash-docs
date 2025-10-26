@@ -1,73 +1,72 @@
+title: "Subnet Interoperability & α Sharing"
+description: "How MetaHash SN73 connects subnet economies through deterministic liquidity routing and cross-network α flow."
 ---
-title: Subnet Interoperability & α Sharing
-description: How MetaHash connects liquidity with the wider Bittensor network and stabilizes subnet emissions.
+
+# Subnet Interoperability & α Sharing
+
+MetaHash SN73 acts as the liquidity router of the Bittensor subnet ecosystem. It provides a deterministic bridge that channels α between subnet producers, the treasury, and external liquidity participants so value generated anywhere can be exchanged, recycled, or rewarded without fragmentation.
+
 ---
 
-# MetaHash as a Liquidity Hub
+## What Interoperability Means in SN73
 
-MetaHash (SN73) isn’t a silo. Its α-based auctions deliberately interface with other Bittensor subnets, routing liquidity where it’s needed most. By sharing α inflows and reserves, MetaHash helps other subnets survive demand spikes, while inbound α from elsewhere keeps SN73 competitive.
+Interoperability is liquidity synchronization. SN73 allows α originating in one subnet to move into another subnet’s economy through structured auctions and treasury-backed routing.
 
-## Why Interoperability Matters
+| Type | Description |
+|------|-------------|
+| Economic interoperability | α can be sold, auctioned, or staked across subnets through the SN73 treasury. |
+| Operational interoperability | Validators and miners participate in multiple subnets, keeping cross-epoch liquidity aligned. |
+| Data interoperability | Commitment files and IPFS receipts are shared between ledgers for unified auditability. |
 
-- **Uneven liquidity** – Some subnets drown in demand while others starve. α sharing smooths those extremes.
-- **Shared incentives** – Healthy subnets boost overall TAO value; rescuing underfunded peers benefits everyone.
-- **Unified pricing** – Cross-subnet α circulation keeps market signals correlated instead of fragmented.
+---
 
-MetaHash aims to be the liquidity “router” that balances these uneven loads.
+## The Cross-Subnet Flow
 
-## Cross-Subnet α Flow
+```text
+Subnet 62 → SN73 Treasury → Validators and Funds → Buybacks and Airdrops → Other Subnets → Back to Treasury
+```
 
-- **Outbound α (SN73 → other subnets)** – MetaHash lends α when another subnet lacks internal participation, stabilizing their emission loops.
-- **Inbound α (other subnets → SN73)** – Surplus α from elsewhere boosts MetaHash auction depth, leading to better price discovery and TAO yields.
+1. **Source** – Production subnets such as 62 generate α and feed it into SN73 auctions.  
+2. **Routing** – Validators and the treasury allocate liquidity per epoch, distributing META or α where demand is highest.  
+3. **Redistribution** – The 75/25 treasury split recycles proceeds into buybacks, airdrops, and support for other subnets.  
+4. **Verification** – Each transfer is hashed to IPFS and finalized through deterministic epoch consensus.
 
-Every transfer observes deterministic governance rules:
+---
 
-1. Only vetted subnets can tap or supply α.
-2. The MetaHash treasury logs each flow and reconciles balances at epoch boundaries.
-3. Flow ratios adjust every few epochs to avoid over-exposure.
+## Interoperability Mechanics
 
-## Ecosystem Benefits
+| Mechanism | Function |
+|-----------|----------|
+| Epoch syncing | Subnets align reward cycles with SN73’s 72-minute epoch to enable predictable clearing. |
+| Deterministic routing | Treasury and validators reroute α or META automatically toward demand zones. |
+| Treasury cross-linking | Shared ledger entries track α source and destination to maintain one liquidity map. |
+| Subnet collaboration | Subnet operators can allocate part of their α budget to SN73 for yield or liquidity provisioning. |
 
-| Benefit | Impact |
-| --- | --- |
-| **Network stability** | Struggling subnets borrow liquidity instead of collapsing. |
-| **Emission efficiency** | Idle TAO/α finds productive use, reducing waste. |
-| **Market coherence** | α price discovery stays correlated across domains. |
-| **Economic interdependence** | Success on one subnet boosts others, creating equilibrium. |
+Any subnet can plug into SN73 for instant liquidity without rewriting its reward logic.
 
-## Treasury as Liquidity Anchor
+---
 
-MetaHash’s treasury already balances inflows/outflows each epoch, making it an ideal settlement hub:
+## Benefits of Cross-Subnet Liquidity
 
-- Tracks α exchanges and ensures no subnet overextends.
-- Reissues surplus α to SN73 miners or props up weaker subnets.
-- Maintains stable emission rates across multiple domains.
+| Participant | Benefit | Example |
+|-------------|---------|---------|
+| Miners (e.g., subnet 62) | Sell α instantly at deterministic prices. | Offload surplus α through SN73 auctions. |
+| Funds and validators | Access diversified α supply without managing multiple positions. | Acquire discounted α from several subnets via SN73. |
+| Subnet operators | Gain liquidity support and smoother reward payouts. | Direct α output into SN73 as a liquidity sink. |
+| SN73 holders | Capture yield from every subnet interacting with the treasury. | Increased volume drives buybacks and treasury growth. |
 
-### Example
+---
 
-1. SN50 (data subnet) faces a miner shortfall.
-2. MetaHash routes 5% of its reserve α to SN50.
-3. SN50’s emissions stabilize; once participation recovers, the treasury reels α back in.
+## How α Sharing Works
 
-This automated bridging protects both parties and keeps network-wide TAO rewards proportional.
+```text
+α production → Deterministic auction → META and rewards → Buybacks and airdrops → Reinjection into other subnets
+```
 
-## Future Vision — Global α Market
+This cycle ensures no α goes idle, liquidity remains distributed yet traceable, and each subnet benefits from shared demand and predictable treasury backing.
 
-MetaHash’s long-term roadmap imagines:
+---
 
-- **Inter-subnet α pools** – shared liquidity contracts spanning multiple treasuries.
-- **Cross-subnet auctions** – miners bidding across domains simultaneously.
-- **Shared governance councils** – validators jointly set α policies and safeguards.
-- **Global telemetry** – dashboards displaying α flow, utilization, and emission health across Bittensor.
+## Why It Matters
 
-α becomes a network currency of efficiency, not speculation.
-
-## Mental Model
-
-Visualize:
-
-1. MetaHash glowing orange at the center, tagged “Liquidity Hub (SN73)”.
-2. Peripheral nodes (SN50, SN64, SN77, SN88) connected via thin orange lines (α flow).
-3. Blue arrows looping back, representing TAO emissions balancing across the mesh.
-
-MetaHash participates and stabilizes simultaneously—keeping the rest in motion.
+Cross-subnet liquidity turns MetaHash from a single economic subnet into network-wide market infrastructure. It integrates miners, funds, and validators across multiple domains while preserving deterministic fairness and transparent accounting, keeping the entire Bittensor economy aligned on shared signals and liquidity standards.
