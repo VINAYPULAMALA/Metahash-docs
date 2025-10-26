@@ -22,7 +22,7 @@
         ]
       },
       {
-        "tab": "Introduction",
+        "tab": "OTC Guide",
         "groups": [
           {
             "group": "Overview",
@@ -85,22 +85,6 @@
             "pages": [
               "guides/validators/validator-simple-guide",
               "guides/validators/validator-advanced-guide"
-            ]
-          },
-          {
-            "group": "Environment & Wallet",
-            "pages": [
-              "guides/environment/environment",
-              "guides/environment/wallet",
-              "guides/environment/configuration"
-            ]
-          },
-          {
-            "group": "Operations",
-            "pages": [
-              "guides/operations/staking",
-              "guides/operations/running-miner",
-              "guides/operations/port-setup"
             ]
           }
         ]

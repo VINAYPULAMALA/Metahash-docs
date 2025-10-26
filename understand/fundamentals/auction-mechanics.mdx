@@ -1,87 +1,107 @@
 ---
 title: Epoch Lifecycle & Auction Timing
-description: Block-by-block timing for MetaHash's continuous epoch cadence, including preparation, bidding, close-out, commitments, and settlement windows.
+description: Deterministic MetaHash SN73 auction flow—notify, bid, clear, commit, settle, and reweight every 72-minute Epoch.
 ---
 
-## Continuous Cadence
+## Overview
 
-## Epoch T — Auction & Clearing
+MetaHash SN73 operates on a deterministic 72-minute Epoch cadence that keeps α sellers (miners) and capital allocators (validators, funds, and desks) perfectly in sync. Each Epoch is a self-contained market loop: ring the bell, collect bids, clear liquidity, settle payments, and push the network into the next round without downtime or guesswork.
 
-<Steps>
-  <Step title="Preparation (blocks 0–50)">
-    <Check>Finalize prior-Epoch rewards via Yuma Consensus</Check>
-    <Check>Stage budget, discount caps, and payment windows for the new Epoch</Check>
-    <Check>Reset auction state so every miner begins from a clean slate</Check>
-  </Step>
-  <Step title="Live bidding (blocks 50–340)">
-    <Check>Validators broadcast `AuctionStart` once preparation completes</Check>
-    <Check>Miners submit bids `(subnet_id, α_amount, discount)`; multiple bids allowed</Check>
-    <Check>Competition focuses on discounted value after slippage adjustments</Check>
-  </Step>
-  <Step title="Close-out (blocks 340–360)">
-    <Check>Validators rank bids by deterministic value and reputation limits</Check>
-    <Check>Winning bids are paired with payment instructions for the next Epoch</Check>
-  </Step>
-</Steps>
-
-## Epoch T+1 — Commitment & Payment Window
-
-<AccordionGroup>
-  <Accordion title="📋 Payment Instructions" icon="clipboard-list">
-    Winners receive **"pay by block X"** instructions once validators publish commitments (CID → IPFS). Each commitment includes:
-    - Winning bid amount
-    - Payment deadline (block number)
-    - Treasury wallet address
-    - Verification CID for transparency
-  </Accordion>
-
-  <Accordion title="⏱️ Payment Window" icon="clock">
-    Payment windows typically span **~100 blocks** (~20 minutes) to give miners sufficient time to:
-    - Verify their winning status
-    - Confirm α balance in payment hotkey
-    - Submit on-chain transfer to treasury
-    - Monitor transaction confirmation
-  </Accordion>
-
-  <Accordion title="✅ Payment Verification" icon="badge-check">
-    All α transfers to the whitelisted treasury account are:
-    - **On-chain verifiable** via Bittensor blockchain explorer
-    - **Immutable** once confirmed
-    - **Tracked** by validators for settlement scoring
-    - **Transparent** through IPFS commitments
-  </Accordion>
-</AccordionGroup>
-
-<Warning>
-**Critical:** Late or missing payments roll into the next Epoch as unpaid bids. Set up monitoring alerts on your payment hotkey to avoid missing deadlines!
-</Warning>
-
-## Epoch T+2 — Settlement
-
-<Steps>
-  <Step title="Payment Verification">
-    Validators scan the Bittensor chain for matching α transfers from winning miners. Each transaction is verified against the commitment CID published in the previous Epoch.
-  </Step>
-
-  <Step title="Rewards Distribution">
-    Final weights are applied on-chain (or previewed in testing mode), and TAO emissions flow per the treasury distribution rules. See [Treasury Structure](/understand/economics/treasury-structure) for payout logic.
-  </Step>
-</Steps>
-
-## Auction Duration
-
-<Note>
-**Epoch Duration:** Each complete cycle takes approximately **360 blocks (~72 minutes)**
-</Note>
-
-| Phase | Blocks | Duration | Key Actions |
-|-------|--------|----------|-------------|
-| **Auction (Epoch T)** | 0–360 | ~72 min | Prep → Live bids → Close-out |
-| **Payment (Epoch T+1)** | 360–470 | ~20 min | Commit winners → Accept α payments |
-| **Settlement (Epoch T+2)** | 470–540 | ~14 min | Verify payments → Apply weights |
+![MetaHash SN73 auction lifecycle](/assets/images/Auction.png)
 
 <Tip>
-Visual dashboards may label these phases as **Accepting Bids**, **Payment Window**, and **Rewards / Finalization**—same workflow, just different terminology!
+Use the diagram above as your north star: the top lane tracks validator/treasury actions, the bottom lane shows the miner experience, and the middle arrows represent α flowing one way while capital returns the other. Every arrow is deterministic logic, not a best-effort promise.
 </Tip>
 
----
+## Phase 1 — Notify & Stage
+**Actors:** Validators + Treasury
+
+**What happens**
+- Finalize prior-Epoch payouts via Yuma Consensus and lock rewards on-chain.
+- Publish the new Epoch’s budget, discount caps (in basis points), and target auction size.
+- Reset state by wiping expired bids and staging optional IPFS commitment templates so every participant starts clean.
+- Broadcast the “Epoch Start” signal so miner bidding modules activate automatically.
+
+**Outcome:** Validators enter with fresh budgets and transparent rules while miners know exactly when bidding begins.
+
+## Phase 2 — Bidding & Submission
+**Actors:** Miners / α holders ([See Miner Guide →](/guides/miners/miner-simple-guide))
+
+**What happens**
+- Each bid packages `subnet_id`, `α_amount`, and `discount_bps` (100 bps = 1 %).
+- The submission window (≈ blocks 50–340) stays open for edits; the newest valid bid replaces the previous one.
+- Validators verify signatures and stake coverage while ingesting bids on-chain in real time.
+- Discounts are normalized for expected slippage so miners compete on true economic value rather than timing tricks.
+
+**Outcome:** A transparent, immutable list of verified bids is locked for deterministic clearing. Miners can monitor standings without front-running risk.
+
+## Phase 3 — Clearing & Matching
+**Actors:** Validators + Treasury ([Learn how validators rank bids →](/guides/validators/validator-simple-guide))
+
+**What happens**
+- Validators sort bids by **discount-adjusted value** (α amount × post-slippage discount).
+- Starting with the most attractive discount, bids fill sequentially until the published budget or capacity (e.g., 148 α) is consumed.
+- The final bid can be partially filled; any remainder rolls into the next Epoch’s opportunity window.
+- Unfilled bids remain visible on-chain—no hidden queues, no off-book matching.
+
+**Outcome:** Everyone knows exactly who sold α, at what discount, and how much budget remains for settlement.
+
+## Phase 4 — Commitments & IPFS Records
+**Actors:** Validators + Network auditors
+
+**What happens**
+- Each validator generates a commitment file listing winning bid IDs, α amounts, clearing prices, wallet addresses, and block metadata.
+- The file is hashed and pinned to IPFS; its CID is anchored on-chain for public verification.
+- Validators cross-check CIDs, rejecting mismatches before payments go live.
+- The Epoch registry exposes the CID so any community node can retrieve the official results.
+
+**Outcome:** Every Epoch now has a tamper-proof receipt book. Anyone can prove fills without trusting a centralized desk.
+
+## Phase 5 — Payments & Settlement
+**Actors:** Validators + Miners + Treasury ([Treasury Structure →](/understand/economics/treasury-structure))
+
+**What happens**
+- Validators pay miners according to the commitment set (cleared α × discount-adjusted price).
+- Miners release the sold α from subnet 62 (or their respective subnet) to the validator hotkeys.
+- Treasury logs the matched transfers, broadcasting Epoch IDs alongside the commitment hash for transparency.
+- Validators that finish settlements on time gain priority next round; late payers lose weight and budget share.
+
+**Outcome:** Liquidity actually changes hands—miners exit instantly, validators acquire discounted α, and Treasury books the flow in real time.
+
+## Phase 6 — Weight Update & Next Epoch Preparation
+**Actors:** Validators + Treasury + Network ([Validator Role →](/understand/economics/validator-role))
+
+**What happens**
+- Performance scoring boosts validators who settled flawlessly, matched their declared budgets, and cleared the most α.
+- Treasury redistributes proceeds (e.g., 75 % buybacks, 25 % airdrops) and rolls any unfilled budget or α into the next window.
+- Validators issue a Next-Epoch notice with updated caps so miners can stage bids ahead of time.
+
+**Outcome:** The network restarts a fresh, deterministic loop every 72 minutes—notify → bid → clear → commit → settle → reweight.
+
+## Example Walkthrough
+1. Miner A offers 20 α from subnet 62 at a 500 bps (5 %) discount.
+2. Validator B allocates 100 α of budget and ranks Miner A near the top.
+3. Miner A clears in full; the commitment file (CID `QmXYZ…`) lands on-chain.
+4. Validator B transfers funds minus the agreed 5 % discount; Miner A sends 20 α to the validator hotkey.
+5. Treasury logs settlement ID #E214, closes the Epoch, and updates validator weights.
+
+**Result:** Miner A gains instant liquidity, Validator B acquires discounted α, and the Treasury keeps a verifiable record.
+
+## Technical Notes
+| Concept | Explanation |
+| --- | --- |
+| Epoch Length | ≈360 blocks (~72 minutes) per full auction loop. |
+| Discount (BPS) | Basis points system (100 bps = 1 %). [More on basis points →](/guides/miners/miner-simple-guide#bps) |
+| Budget Caps | Validator’s maximum α purchase per Epoch (e.g., 148 α). |
+| Source Subnet | Subnet supplying α (commonly 62). |
+| Slippage Adjustment | Normalizes bids for expected execution drift. |
+| Commitment CID | IPFS hash that proves who sold what, when. |
+| Weight Update Logic | Settlement performance translates to future validator weight. |
+| Treasury Cycle | Funds flow → buybacks + airdrops → liquidity roll-over. |
+
+<Note>
+Discounts are always quoted in **basis points (bps)**. Example: 500 bps = 5 %.
+</Note>
+
+## Legacy Note — Tempo vs. Epoch
+The old Tempo “T / T + 1 / T + 2” cadence is retired. MetaHash V3 compresses everything into a single continuous Epoch: validators notify the market, miners bid, deterministic clearing happens, commitments lock, payments settle, and weights reset—then the loop restarts without downtime. Every transfer and reward is now auditable, immutable, and on-chain.
