@@ -1,19 +1,6 @@
-title: "Validator Role in MetaHash — Liquidity Allocation & Deterministic Settlement"
-description: "How validators manage budgets, execute deterministic auctions, and maintain liquidity integrity within the MetaHash SN73 ecosystem."
 ---
-
-# Validator Role in MetaHash
-
-Validators in MetaHash SN73 act as liquidity allocators. They connect the treasury’s META budget with miners’ α supply, ensuring every 72-minute epoch clears deterministically and settles on-chain without discretionary intervention.
-
----
-
-## Validator Mission
-
-Each epoch begins with validators declaring META budget and discount caps. From there they coordinate the deterministic flow between miners and the treasury so α transactions settle without volatility, manual clearing, or opaque order books.
-
-> Think of validators as rule-based market makers whose behavior is audited and enforced by consensus.
-
+title: "Validator Role in MetaHash"
+description: "Validators in MetaHash SN73 act as liquidity allocators. They connect the treasury’s META budget with miners’ α supply, ensuring every 72-minute epoch clears deterministically and settles on-chain without discretionary intervention."
 ---
 
 ## Core Responsibilities per Epoch
@@ -43,8 +30,6 @@ Validator weight recalculates at epoch transition using the following metrics.
 | Treasury alignment | Matching treasury receipts validates execution. |
 | IPFS commitment validity | Missing or invalid hashes reduce weight. |
 
----
-
 ## Validator Rewards and Treasury Link
 
 Validator incentives are performance-indexed: the better a validator clears auctions, the greater its future treasury budget share. Rewards flow directly from the 25 percent redistribution pool plus accuracy bonuses.
@@ -59,8 +44,6 @@ Treasury budget → Validator execution → Weight update → Treasury redistrib
 | Treasury redistribution | Share of the 25 percent pool based on weight. |
 | Performance multipliers | Additional boosts for validators that maintain full commitment uptime. |
 
----
-
 ## Transparency and Governance
 
 Every validator action is verifiable.
@@ -72,8 +55,6 @@ Every validator action is verifiable.
 | Weight changes | Stored at epoch transition with before-and-after metrics. |
 
 Governance monitors missed settlements, over-budget allocations, unverified hashes, and other compliance failures. Non-compliant validators automatically lose weight and redistribution share in the next epoch.
-
----
 
 ## Validators and Treasury: The Feedback Loop
 
