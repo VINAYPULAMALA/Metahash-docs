@@ -222,15 +222,15 @@ Top up at least `0.001 TAO` to register and stake. Transfers arrive faster if bo
 |-------|---------|----------|
 | Port 8091 listening | `ss -tulpn \| grep 8091` | Miner shows `python` on `[::]:8091` |
 | Validator stake | `btcli stake overview` | Payment hotkey has >0 TAO |
-| Log activity | `tail -n 50 ~/.bittensor/miners/&lt;wallet&gt;/&lt;hotkey&gt;/netuid73/miner.log` | Look for `AuctionStart` + `WinSynapse` |
-| Memory headroom | `free -h` | Swap available, RAM usage <90% |
+| Log activity | `tail -n 50 ~/.bittensor/miners/<wallet>/<hotkey>/netuid73/miner.log` | Look for `AuctionStart` + `WinSynapse` |
+| Memory headroom | `free -h` | Swap available, RAM usage &lt;90% |
 | Disk space | `df -h` | >10% free on `/` and `/home` |
 
 ### Additional Commands
 
 - Check UID: `btcli subnets metagraph --netuid 73 | grep YOUR_HOTKEY`
 - List validators: `btcli subnets metagraph --netuid 73 | grep validator`
-- Follow logs live: `tail -f ~/.bittensor/miners/&lt;wallet&gt;/&lt;hotkey&gt;/netuid73/miner.log`
+- Follow logs live: `tail -f ~/.bittensor/miners/<wallet>/<hotkey>/netuid73/miner.log`
 
 ## Getting Help
 

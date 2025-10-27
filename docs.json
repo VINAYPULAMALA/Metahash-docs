@@ -1,13 +1,21 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
   "name": "MetaHash",
+  "theme": "mint",
   "colors": {
     "primary": "#ff8c00",
     "light": "#ff9f2e",
     "dark": "#e67d00"
   },
   "favicon": "/assets/icons/favicon.png",
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
+  },
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/fx-integral/metahash"
+  },
   "navigation": {
     "tabs": [
       {
