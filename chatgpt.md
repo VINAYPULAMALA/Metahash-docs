@@ -1,92 +1,103 @@
-glossary.mdx
+otc-guide.mdx (Full-Page Version)
 ---
-title: "MetaHash Glossary"
-description: "Key terminology for understanding MetaHash SN73’s deterministic auction economy, OTC counter, and treasury flow."
----
-
-# MetaHash Glossary
-
-This glossary summarizes the core terms used across the MetaHash SN73 documentation — covering auctions, epochs, α liquidity, and treasury mechanics.
-
+title: OTC Guide
+layout: full
+description: MetaHash’s Over-the-Counter layer connects miners and capital allocators through deterministic auctions.
 ---
 
-## 🏛️ Core Network Terms
+# Over-the-Counter Liquidity
+### Move size without chaos
 
-| Term | Definition |
-|------|-------------|
-| **Bittensor** | The decentralized neural network protocol that hosts subnets like SN73. |
-| **Subnet** | A specialized network within Bittensor that focuses on a specific function or economy. |
-| **Subnet 62** | The source subnet producing α used for MetaHash auctions and liquidity provisioning. |
-| **SN73 (MetaHash)** | The MetaHash subnet itself — a deterministic α liquidity engine connecting miners, funds, and the Treasury. |
-| **Validator** | A participant that allocates META budgets and executes deterministic auction settlements per Epoch. |
-| **Miner** | A participant producing α from subnets (e.g., 62) and selling it through SN73’s OTC auctions. |
-| **Treasury** | The on-chain vault managing liquidity inflows/outflows, buybacks, and reward redistribution. |
+MetaHash SN73 brings **instant, transparent liquidity** to subnet α without disturbing markets.  
+Our deterministic OTC auctions connect α holders and capital allocators in a fair, validator-cleared system.
 
 ---
 
-## ⏳ Epoch & Auction Terms
+## 💠 Two Sides, One Market
 
-| Term | Definition |
-|------|-------------|
-| **Epoch** | A 72-minute deterministic cycle that includes auction, clearing, settlement, and reward updates. |
-| **Epoch Cycle** | The continuous loop of Notify → Bid → Clear → Commit → Settle → Reweight that drives SN73. |
-| **Deterministic Auction** | The rule-based, transparent process where bids and budgets clear predictably per Epoch. |
-| **Discount (BPS)** | The price reduction miners offer in *basis points* (100 bps = 1%) when selling α. |
-| **Auction Budget** | The META amount validators allocate per Epoch to purchase α. |
-| **Auction Clearing** | The phase where validators rank bids and execute matching deterministically. |
-| **Auction Commitment** | The finalized record of cleared bids and results, hashed to IPFS for audit. |
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
 
----
+<div className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+<h3>🧱 For α Holders</h3>
+<p>Sell subnet α directly to the Treasury for META liquidity — without hitting charts or using AMMs.</p>
+<p>Participate in deterministic auctions and get filled at transparent discount rates (bps).</p>
+</div>
 
-## 💧 Liquidity & OTC Terms
+<div className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+<h3>🏦 For Funds & Capital Managers</h3>
+<p>Deploy META capital into productive subnet assets (α) with predictable pricing and validator-cleared settlement.</p>
+<p>Earn exposure, yield, and network alignment — all within the MetaHash ecosystem.</p>
+</div>
 
-| Term | Definition |
-|------|-------------|
-| **OTC Counter** | The on-chain MetaHash mechanism enabling direct α-for-META swaps outside of AMMs. |
-| **Liquidity Engine** | The dynamic Treasury system that recycles auction inflows and redistributes rewards. |
-| **Buyback Program** | Treasury operation where 75% of auction proceeds are used to purchase SN73 from open markets. |
-| **Airdrop Program** | Treasury distribution of the remaining 25% to stakers above `S_MIN_AIRDROP` threshold. |
-| **α Exchange** | The conversion process between α (from miners) and META (from Treasury) through deterministic auctions. |
-| **α Liquidity Flow** | The continuous movement of α between miners, Treasury, and other subnets. |
+</div>
 
 ---
 
-## ⚙️ Validator & Miner Metrics
+## ⚙️ How It Works
+MetaHash’s OTC layer runs through **deterministic Epoch auctions**, ensuring predictable liquidity and verifiable settlement.
 
-| Term | Definition |
-|------|-------------|
-| **Validator Weight** | A score determining how much budget a validator can allocate based on past accuracy. |
-| **Settlement Accuracy** | How precisely a validator executes auctions within budget and time limits. |
-| **IPFS Commitment File** | The public record of all bids, clears, and settlements per Epoch stored on IPFS. |
-| **Miner Fill Rate** | The percentage of submitted bids successfully cleared per Epoch. |
-| **α Supply** | The total α a miner offers for sale during the auction window. |
-| **Bid Discount** | The specific discount a miner assigns to α bids — higher discount = faster liquidity. |
+1. **Staging** — Validators publish META budgets, α caps, and discount limits.  
+2. **Bidding** — Miners submit α + discount bids (bps).  
+3. **Clearing** — Validators rank bids, allocate META, and finalize trades.  
+4. **Settlement** — α and META exchange on-chain through the Treasury.  
+5. **Redistribution** — The Treasury recycles yield into buybacks and rewards.
 
 ---
 
-## 🔗 Interoperability Terms
+## 🏛 Treasury Ecosystem Overview
 
-| Term | Definition |
-|------|-------------|
-| **Cross-Subnet Liquidity** | The ability of SN73 to move α and META across other subnets deterministically. |
-| **Treasury Cross-Link** | The shared accounting mechanism tracking α source and redistribution. |
-| **Epoch Sync** | Alignment of multiple subnets’ reward cycles with SN73’s 72-minute auction window. |
-| **Liquidity Routing** | Automated redirection of α or META to subnets where demand is detected. |
+<Figure src="/assets/images/treasury-ecosystem-overview.png" alt="MetaHash Treasury Ecosystem Overview" width="800" />
+
+> The Treasury acts as MetaHash’s coordination hub — connecting miners, validators, and funds through OTC deals, buybacks, and redistribution.
 
 ---
 
-## 📜 Governance & Transparency
+## 🔁 MetaHash Liquidity Loop
 
-| Term | Definition |
-|------|-------------|
-| **Commitment Proof** | The IPFS or on-chain reference confirming that a validator’s settlement occurred. |
-| **Weight Decay** | Penalty applied when validators fail to submit valid commitments. |
-| **Settlement Receipt** | On-chain acknowledgment confirming α and META exchange completion. |
-| **Governance Audit** | Continuous validation of Epoch records, buybacks, and treasury movements. |
+<Figure src="/assets/images/metahash-liquidity-loop.png" alt="MetaHash Liquidity Loop" width="800" />
+
+> α flows from miners to the Treasury, META flows back as liquidity.  
+> Validators clear auctions, funds deploy capital, and the Treasury recycles yield through buybacks and rewards — creating a self-balancing OTC economy.
 
 ---
 
-## 💠 Conceptual Overview
+## ⚡ Advantages
 
-```text
-Miners → Treasury → Validators → Buybacks → Stakers → Next Epoch
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+
+<div className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+<h3>🟧 For α Holders</h3>
+<ul>
+<li>Sell positions instantly with no slippage.</li>
+<li>Keep subnet liquidity and ranking intact.</li>
+<li>Earn clean exits through validator-cleared bids.</li>
+</ul>
+</div>
+
+<div className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800">
+<h3>🟦 For Funds</h3>
+<ul>
+<li>Access discounted α allocations transparently.</li>
+<li>Earn predictable yield via treasury cycling.</li>
+<li>Participate in an institutional-grade DeFi structure.</li>
+</ul>
+</div>
+
+</div>
+
+---
+
+## 🧠 In One Line
+
+> MetaHash’s OTC layer bridges α sellers and capital allocators through deterministic, validator-cleared auctions
+
+
+💡 Implementation Notes
+
+Use the Mintlify setting layout: full or remove side navigation for this tab (under docs.json).
+
+Keep background in neutral-900 or black (fits your existing theme).
+
+The hero text “Move size without chaos” mirrors your front card tone — clean, confident, institutional.
+
+Center both figures (Treasury + Liquidity Loop) for symmetry.
