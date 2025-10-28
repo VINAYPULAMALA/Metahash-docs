@@ -4,11 +4,31 @@ description: Everything you need to run miners and validators on Subnet 73
 mode: "custom"
 ---
 
+<style>{`
+  :root {
+    --hero-heading-color: #111827;
+    --hero-body-color: #1f2937;
+    --hero-supporting-color: rgba(17, 24, 39, 0.72);
+    --hero-cta-secondary-text-color: #111827;
+  }
+  html[data-theme='dark'],
+  body[data-theme='dark'],
+  [data-theme='dark'],
+  html.dark,
+  body.dark {
+    --hero-heading-color: #f9fafb;
+    --hero-body-color: rgba(255, 255, 255, 0.92);
+    --hero-supporting-color: rgba(255, 255, 255, 0.72);
+    --hero-cta-secondary-text-color: #ffffff;
+  }
+`}</style>
+
 <div style={{
   textAlign: 'center',
   maxWidth: '52rem',
   margin: '0 auto',
-  padding: '5rem 1.5rem 4rem'
+  padding: '5rem 1.5rem 4rem',
+  color: 'var(--hero-body-color)'
 }}>
   <h1 style={{
     fontSize: '3.5rem',
@@ -16,7 +36,7 @@ mode: "custom"
     letterSpacing: '-0.03em',
     lineHeight: '1.1',
     marginBottom: '1.25rem',
-    color: '#fff'
+    color: 'var(--hero-heading-color)'
   }}>
     Metahash V3
   </h1>
@@ -33,7 +53,7 @@ mode: "custom"
   <p style={{
     fontSize: '1.25rem',
     lineHeight: '1.7',
-    color: '#fff',
+    color: 'var(--hero-supporting-color)',
     maxWidth: '40rem',
     margin: '0 auto',
     fontWeight: '400'
@@ -45,7 +65,8 @@ mode: "custom"
 <div style={{
   maxWidth: '64rem',
   margin: '0 auto',
-  padding: '2rem 1.5rem'
+  padding: '2rem 1.5rem',
+  color: 'var(--hero-body-color)'
 }}>
 
 <div style={{
@@ -55,7 +76,8 @@ mode: "custom"
   padding: '2.75rem 2rem',
   marginBottom: '3rem',
   boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
-  transition: 'all 0.3s ease'
+  transition: 'all 0.3s ease',
+  color: 'var(--hero-body-color)'
 }}>
   <div style={{
     maxWidth: '58rem',
@@ -78,7 +100,7 @@ mode: "custom"
       fontSize: '1.25rem',
       fontWeight: 600,
       letterSpacing: '-0.01em',
-      color: 'rgba(255, 255, 255, 0.92)',
+      color: 'var(--hero-body-color)',
       marginBottom: '1.5rem',
       textAlign: 'center'
     }}>
@@ -88,7 +110,7 @@ mode: "custom"
       fontSize: '1.05rem',
       lineHeight: '1.7',
       marginBottom: '1.5rem',
-      color: 'rgba(255, 255, 255, 0.85)'
+      color: 'var(--hero-supporting-color)'
     }}>
       MetaHash’s deterministic Epoch auctions connect <strong style={{ color: '#ffb347' }}>α sellers</strong> (miners, subnet owners) with <strong style={{ color: '#ffb347' }}>capital allocators</strong> (funds, managers, strategists) — instantly and fairly.
     </p>
@@ -96,7 +118,7 @@ mode: "custom"
       fontSize: '1.05rem',
       lineHeight: '1.7',
       marginBottom: '1.5rem',
-      color: 'rgba(255, 255, 255, 0.85)'
+      color: 'var(--hero-supporting-color)'
     }}>
       Sell α OTC for instant liquidity <strong style={{ color: '#ffb347' }}>without hitting charts</strong>, or deploy capital to acquire discounted α <strong style={{ color: '#ffb347' }}>through transparent, validator-cleared auctions.</strong>
     </p>
@@ -104,7 +126,7 @@ mode: "custom"
       fontSize: '1.05rem',
       lineHeight: '1.7',
       marginBottom: '1.5rem',
-      color: 'rgba(255, 255, 255, 0.9)',
+      color: 'var(--hero-body-color)',
       fontWeight: 600
     }}>
       One network. Two sides. <strong style={{ color: '#ff8c00' }}>Efficient α flow, real yield, zero noise.</strong>
@@ -123,7 +145,7 @@ mode: "custom"
           textAlign: 'center',
           background: 'rgba(255, 140, 0, 0.15)',
           border: '1px solid rgba(255, 140, 0, 0.8)',
-          color: '#fff',
+          color: 'var(--hero-cta-secondary-text-color)',
           padding: '0.85rem 1.25rem',
           borderRadius: '10px',
           fontWeight: '600',
@@ -150,7 +172,7 @@ mode: "custom"
           textAlign: 'center',
           background: 'rgba(255, 255, 255, 0.15)',
           border: '1px solid rgba(255, 255, 255, 0.5)',
-          color: '#fff',
+          color: 'var(--hero-cta-secondary-text-color)',
           padding: '0.85rem 1.25rem',
           borderRadius: '10px',
           fontWeight: '600',
