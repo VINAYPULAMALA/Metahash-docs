@@ -122,10 +122,10 @@
         ]
       },
       {
-        "tab": "Announcements",
+        "tab": "Roadmap",
         "groups": [
           {
-            "group": "Announcements",
+            "group": "Roadmap",
             "pages": [
               "announcements/index"
             ]

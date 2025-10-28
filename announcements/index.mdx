@@ -1,36 +1,724 @@
 ---
-title: Announcements
-description: Stay up to date with MetaHash subnet milestones, releases, and community calls.
+title: MetaHash Roadmap
+description: Track MetaHash's evolution from concept to liquidity hub - V3, V2, and V1 milestones.
+mode: "custom"
 ---
 
-# Latest Updates
+<style>{`
+  :root {
+    --roadmap-accent: #ff8c00;
+    --roadmap-accent-light: #ffb347;
+    --roadmap-text: #1f2937;
+    --roadmap-text-muted: rgba(17, 24, 39, 0.65);
+    --roadmap-bg-card: rgba(255, 140, 0, 0.06);
+    --roadmap-border: rgba(255, 140, 0, 0.2);
+  }
+  html[data-theme='dark'],
+  body[data-theme='dark'],
+  [data-theme='dark'],
+  html.dark,
+  body.dark {
+    --roadmap-text: #f9fafb;
+    --roadmap-text-muted: rgba(255, 255, 255, 0.65);
+    --roadmap-bg-card: rgba(255, 140, 0, 0.08);
+    --roadmap-border: rgba(255, 140, 0, 0.25);
+  }
+`}</style>
 
-<Tip>
-Add new announcements in reverse chronological order so the most recent information stays on top.
-</Tip>
+<div style={{
+  textAlign: 'center',
+  maxWidth: '62rem',
+  margin: '0 auto 4rem',
+  padding: '4rem 1.5rem 3rem',
+  position: 'relative'
+}}>
+  <div style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: 'rgba(255, 140, 0, 0.15)',
+    border: '1px solid rgba(255, 140, 0, 0.3)',
+    color: 'var(--roadmap-accent)',
+    padding: '0.5rem 1rem',
+    borderRadius: '20px',
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    marginBottom: '1.5rem'
+  }}>
+    <Icon icon="map-pin" size={16} />
+    Product Roadmap
+  </div>
 
-## Example Entry
+  <h1 style={{
+    fontSize: '4rem',
+    fontWeight: '800',
+    marginBottom: '1.5rem',
+    background: 'linear-gradient(135deg, #ff8c00 0%, #ffb347 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    letterSpacing: '-0.04em',
+    lineHeight: '1.1'
+  }}>
+    MetaHash Evolution
+  </h1>
 
-- **Title** – Short headline (e.g., *Subnet 73 Validator Snapshot*).
-- **Date** – ISO format (`2025-02-12`) or human readable (`Feb 12, 2025`).
-- **Details** – One or two sentences covering the impact and any action items.
+  <p style={{
+    fontSize: '1.5rem',
+    lineHeight: '1.6',
+    color: 'var(--roadmap-text)',
+    fontWeight: '500',
+    maxWidth: '50rem',
+    margin: '0 auto 1.25rem'
+  }}>
+    Journey from initial concept to autonomous liquidity network
+  </p>
 
-```mdx
-### 2025-02-12 — Subnet 73 Validator Snapshot
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '1.5rem',
+    flexWrap: 'wrap',
+    marginTop: '2rem'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.75rem 1.25rem',
+      background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+      border: '1px solid rgba(16, 185, 129, 0.3)',
+      borderRadius: '12px'
+    }}>
+      <span style={{ fontSize: '1.25rem' }}>✓</span>
+      <div style={{ textAlign: 'left' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--roadmap-text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>V1 & V2</div>
+        <div style={{ fontSize: '0.95rem', color: '#10b981', fontWeight: '700' }}>Complete</div>
+      </div>
+    </div>
 
-- Validator committee expanded to five members.
-- Miners should verify `--payment.validators` contains at least one staked validator.
-```
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+      padding: '0.75rem 1.25rem',
+      background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 140, 0, 0.08) 100%)',
+      border: '1px solid rgba(255, 140, 0, 0.3)',
+      borderRadius: '12px'
+    }}>
+      <span style={{ fontSize: '1.25rem' }}>⟳</span>
+      <div style={{ textAlign: 'left' }}>
+        <div style={{ fontSize: '0.75rem', color: 'var(--roadmap-text-muted)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>V3</div>
+        <div style={{ fontSize: '0.95rem', color: '#ff8c00', fontWeight: '700' }}>In Progress</div>
+      </div>
+    </div>
+  </div>
 
-## Suggested Use Cases
+  <p style={{
+    fontSize: '0.875rem',
+    color: 'var(--roadmap-text-muted)',
+    marginTop: '2rem',
+    fontStyle: 'italic'
+  }}>
+    Last updated: October 27, 2025
+  </p>
+</div>
 
-- Release notes for miner or validator code changes.
-- Auction, treasury, and incentive program updates.
-- Meeting invites and community call summaries.
-- Incident reports and remediation timelines.
+<div style={{
+  maxWidth: '68rem',
+  margin: '0 auto',
+  padding: '0 1.5rem'
+}}>
 
-## Follow Along
+---
 
-- Join [Discord](https://discord.com/channels/799672011265015819/1351969903132938302) for real-time alerts.
-- Follow [Twitter](https://x.com/metahashsn73) for public roadmap updates.
-- Watch [Treasury](https://metahash73.com/treasury) to track funded initiatives.
+<div style={{
+  textAlign: 'center',
+  marginTop: '4rem',
+  marginBottom: '3rem'
+}}>
+  <div style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: '#ff8c00',
+    color: '#000',
+    padding: '0.5rem 1.25rem',
+    borderRadius: '24px',
+    fontSize: '0.875rem',
+    fontWeight: '700',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    marginBottom: '1.5rem'
+  }}>
+    <span style={{ fontSize: '1rem' }}>⟳</span>
+    IN PROGRESS
+  </div>
+  <h2 style={{
+    fontSize: '2.75rem',
+    fontWeight: '700',
+    marginBottom: '1rem',
+    color: 'var(--roadmap-text)'
+  }}>
+    V3 — Liquidity Era
+  </h2>
+  <p style={{
+    fontSize: '1.25rem',
+    color: 'var(--roadmap-text-muted)',
+    maxWidth: '46rem',
+    margin: '0 auto 2.5rem'
+  }}>
+    Buybacks, DAO, and Multi-Treasury Evolution (2025)
+  </p>
+</div>
+
+<div style={{
+  background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 159, 46, 0.08) 100%)',
+  border: '2px solid rgba(255, 140, 0, 0.4)',
+  borderRadius: '16px',
+  padding: '2.5rem 2rem',
+  marginBottom: '3rem'
+}}>
+  <p style={{
+    fontSize: '1.15rem',
+    lineHeight: '1.75',
+    color: 'var(--roadmap-text)',
+    marginBottom: '2.5rem',
+    textAlign: 'center'
+  }}>
+    MetaHash V3 marks the transition to an autonomous, self-balancing liquidity network with institutional-grade infrastructure.
+  </p>
+
+  <h3 style={{
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent-light)',
+    textAlign: 'center'
+  }}>
+    Key Achievements
+  </h3>
+
+  <CardGroup cols={2}>
+    <Card title="Treasury Expansion" icon="landmark">
+      <span style={{ color: '#ffffff' }}>**1000T+ $TAO** in treasury growth with **700T $TAO** buyback program launched</span>
+    </Card>
+    <Card title="Distributed Validators" icon="network-wired">
+      <span style={{ color: '#ffffff' }}>**Multi-Master Validators** now manage epoch coordination across the network</span>
+    </Card>
+    <Card title="Automation Upgrades" icon="wand-magic-sparkles">
+      <span style={{ color: '#ffffff' }}>**Auto-Stake & Auto-Sell** logic improving APR and reward distribution</span>
+    </Card>
+    <Card title="Governance Foundation" icon="users">
+      <span style={{ color: '#ffffff' }}>**MetaDAO** prototype testing internal governance mechanisms</span>
+    </Card>
+  </CardGroup>
+</div>
+
+### Current Status
+
+<CardGroup cols={2}>
+  <Card title="Core Protocol" icon="circle-check" color="#10b981">
+    **Status:** Live
+    V3 architecture fully operational and processing transactions
+  </Card>
+  <Card title="Treasury Operations" icon="coins" color="#f59e0b">
+    **Status:** Active
+    Buybacks and emission balancing running autonomously
+  </Card>
+  <Card title="Web Dashboard" icon="chart-line" color="#3b82f6">
+    **Status:** Upgrading
+    APR, margin, and validator analytics in development
+  </Card>
+  <Card title="DAO Governance" icon="flask" color="#8b5cf6">
+    **Status:** Testing
+    Proposal system in internal review phase
+  </Card>
+  <Card title="Documentation" icon="book-open" color="#10b981">
+    **Status:** Complete
+    V3 docs live on Mintlify platform
+  </Card>
+  <Card title="Multi-Master Validators" icon="server" color="#10b981">
+    **Status:** Active
+    Distributed epoch management operational
+  </Card>
+</CardGroup>
+
+### Roadmap Progress
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+  gap: '1.5rem',
+  marginTop: '2rem',
+  marginBottom: '3rem'
+}}>
+  <div style={{
+    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+    border: '2px solid rgba(16, 185, 129, 0.4)',
+    borderRadius: '12px',
+    padding: '2rem 1.5rem'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1rem'
+    }}>
+      <div style={{
+        background: '#10b981',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#000',
+        fontWeight: '700',
+        fontSize: '1.25rem'
+      }}>
+        ✓
+      </div>
+      <h4 style={{
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        color: '#10b981',
+        margin: 0
+      }}>
+        Completed
+      </h4>
+    </div>
+    <ul style={{
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      color: 'var(--roadmap-text)'
+    }}>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#10b981' }}>✓</span>
+        V3 Core Launch
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#10b981' }}>✓</span>
+        Web UI V3
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#10b981' }}>✓</span>
+        TVI 100%
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#10b981' }}>✓</span>
+        Auto-Stake Script
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#10b981' }}>✓</span>
+        Multi-Master Validators
+      </li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 140, 0, 0.08) 100%)',
+    border: '2px solid rgba(255, 140, 0, 0.4)',
+    borderRadius: '12px',
+    padding: '2rem 1.5rem'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1rem'
+    }}>
+      <div style={{
+        background: '#ff8c00',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#000',
+        fontWeight: '700',
+        fontSize: '1.25rem'
+      }}>
+        ⟳
+      </div>
+      <h4 style={{
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        color: '#ff8c00',
+        margin: 0
+      }}>
+        In Progress
+      </h4>
+    </div>
+    <ul style={{
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      color: 'var(--roadmap-text)'
+    }}>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#ff8c00' }}>●</span>
+        Buyback Optimization
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#ff8c00' }}>●</span>
+        Advanced Metrics Dashboard
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#ff8c00' }}>●</span>
+        MetaDAO Public Launch
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#ff8c00' }}>●</span>
+        Miner Auto-Sell Refinement
+      </li>
+    </ul>
+  </div>
+
+  <div style={{
+    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.08) 100%)',
+    border: '2px solid rgba(59, 130, 246, 0.4)',
+    borderRadius: '12px',
+    padding: '2rem 1.5rem'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1rem'
+    }}>
+      <div style={{
+        background: '#3b82f6',
+        borderRadius: '50%',
+        width: '40px',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#000',
+        fontWeight: '700',
+        fontSize: '1.25rem'
+      }}>
+        →
+      </div>
+      <h4 style={{
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        color: '#3b82f6',
+        margin: 0
+      }}>
+        Coming Soon
+      </h4>
+    </div>
+    <ul style={{
+      listStyle: 'none',
+      padding: 0,
+      margin: 0,
+      color: 'var(--roadmap-text)'
+    }}>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#3b82f6' }}>○</span>
+        Multi-Treasury Pages
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#3b82f6' }}>○</span>
+        Cross-Subnet Liquidity Bridges
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#3b82f6' }}>○</span>
+        Public DAO Framework
+      </li>
+      <li style={{ marginBottom: '0.5rem', paddingLeft: '1.5rem', position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 0, color: '#3b82f6' }}>○</span>
+        Enhanced Analytics
+      </li>
+    </ul>
+  </div>
+</div>
+
+---
+
+<div style={{
+  textAlign: 'center',
+  marginTop: '5rem',
+  marginBottom: '3rem'
+}}>
+  <div style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: '#10b981',
+    color: '#000',
+    padding: '0.5rem 1.25rem',
+    borderRadius: '24px',
+    fontSize: '0.875rem',
+    fontWeight: '700',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    marginBottom: '1.5rem'
+  }}>
+    <span style={{ fontSize: '1rem' }}>✓</span>
+    COMPLETED
+  </div>
+  <h2 style={{
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    marginBottom: '1rem',
+    color: 'var(--roadmap-text)'
+  }}>
+    V2 — Foundation & Stability
+  </h2>
+  <p style={{
+    fontSize: '1.15rem',
+    color: 'var(--roadmap-text-muted)',
+    maxWidth: '46rem',
+    margin: '0 auto 2.5rem'
+  }}>
+    Infrastructure & Market Formation (2024)
+  </p>
+</div>
+
+<div style={{
+  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+  border: '2px solid rgba(16, 185, 129, 0.4)',
+  borderRadius: '16px',
+  padding: '2.5rem 2rem',
+  marginBottom: '3rem'
+}}>
+  <p style={{
+    fontSize: '1.1rem',
+    lineHeight: '1.75',
+    color: 'var(--roadmap-text)',
+    marginBottom: '2rem',
+    textAlign: 'center'
+  }}>
+    V2 focused on building reliable infrastructure and establishing consistent network operations.
+  </p>
+
+  <h4 style={{
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent-light)',
+    textAlign: 'center'
+  }}>
+    Key Achievements
+  </h4>
+
+  <CardGroup cols={2}>
+    <Card title="Treasury Balancing" icon="scale-balanced" color="#ff8c00">
+      <span style={{ color: '#ffffff' }}>Introduced automated liquidity tracking and emission management systems</span>
+    </Card>
+    <Card title="Network Reliability" icon="shield-check" color="#10b981">
+      <span style={{ color: '#ffffff' }}>Achieved **95%+ uptime** consistency across validator network</span>
+    </Card>
+    <Card title="Auto-Compounding" icon="arrows-rotate" color="#3b82f6">
+      <span style={{ color: '#ffffff' }}>Deployed initial prototype for automated reward reinvestment</span>
+    </Card>
+    <Card title="Validator Onboarding" icon="user-plus" color="#8b5cf6">
+      <span style={{ color: '#ffffff' }}>Launched structured validator recruitment and TVI tracking</span>
+    </Card>
+  </CardGroup>
+
+  <h4 style={{
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    marginTop: '3rem',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent-light)',
+    textAlign: 'center'
+  }}>
+    Status Overview
+  </h4>
+
+  <CardGroup cols={2}>
+    <Card title="Core Network" icon="circle-check" color="#10b981">
+      **Status:** Stable
+      V2 maintained 95% uptime consistency
+    </Card>
+    <Card title="Treasury System" icon="vault" color="#10b981">
+      **Status:** Operational
+      Balancing and tracking mechanisms active
+    </Card>
+    <Card title="Validator Network" icon="users-gear" color="#10b981">
+      **Status:** Established
+      Beta pool successfully onboarded
+    </Card>
+    <Card title="Governance" icon="gears" color="#f59e0b">
+      **Status:** Internal
+      Pre-DAO reputation framework developed
+    </Card>
+  </CardGroup>
+</div>
+
+---
+
+<div style={{
+  textAlign: 'center',
+  marginTop: '5rem',
+  marginBottom: '3rem'
+}}>
+  <div style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: '#10b981',
+    color: '#000',
+    padding: '0.5rem 1.25rem',
+    borderRadius: '24px',
+    fontSize: '0.875rem',
+    fontWeight: '700',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    marginBottom: '1.5rem'
+  }}>
+    <span style={{ fontSize: '1rem' }}>✓</span>
+    COMPLETED
+  </div>
+  <h2 style={{
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    marginBottom: '1rem',
+    color: 'var(--roadmap-text)'
+  }}>
+    V1 — Concept & Genesis
+  </h2>
+  <p style={{
+    fontSize: '1.15rem',
+    color: 'var(--roadmap-text-muted)',
+    maxWidth: '46rem',
+    margin: '0 auto 2.5rem'
+  }}>
+    Proof of Concept Stage (2023)
+  </p>
+</div>
+
+<div style={{
+  background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+  border: '2px solid rgba(16, 185, 129, 0.4)',
+  borderRadius: '16px',
+  padding: '2.5rem 2rem',
+  marginBottom: '4rem'
+}}>
+  <p style={{
+    fontSize: '1.1rem',
+    lineHeight: '1.75',
+    color: 'var(--roadmap-text)',
+    marginBottom: '2rem',
+    textAlign: 'center'
+  }}>
+    V1 proved the viability of MetaHash as a meta-mining liquidity subnet on Bittensor.
+  </p>
+
+  <h4 style={{
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent-light)',
+    textAlign: 'center'
+  }}>
+    Key Milestones
+  </h4>
+
+  <CardGroup cols={2}>
+    <Card title="Initial Concept" icon="lightbulb" color="#ff8c00">
+      <span style={{ color: '#ffffff' }}>Established MetaHash as a bridge between miners and treasury liquidity</span>
+    </Card>
+    <Card title="Auction Prototype" icon="gavel" color="#8b5cf6">
+      <span style={{ color: '#ffffff' }}>Built and deployed first **α bidding** auction model</span>
+    </Card>
+    <Card title="Consensus Integration" icon="diagram-project" color="#3b82f6">
+      <span style={{ color: '#ffffff' }}>Integrated **Yuma Consensus** with validator coordination layer</span>
+    </Card>
+    <Card title="Manual Operations" icon="hand" color="#f59e0b">
+      <span style={{ color: '#ffffff' }}>Operated early α pools with manual intervention before automation</span>
+    </Card>
+  </CardGroup>
+
+  <h4 style={{
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    marginTop: '3rem',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent-light)',
+    textAlign: 'center'
+  }}>
+    Genesis Snapshot
+  </h4>
+
+  <CardGroup cols={2}>
+    <Card title="Network" icon="globe" color="#6366f1">
+      **Status:** Prototype
+      Initial subnet registration and genesis mining
+    </Card>
+    <Card title="Treasury" icon="coins" color="#f59e0b">
+      **Status:** Manual
+      Basic tracking and reward distribution
+    </Card>
+    <Card title="Validators" icon="brain" color="#8b5cf6">
+      **Status:** Conceptual
+      Early validator participation testing
+    </Card>
+    <Card title="Documentation" icon="file-lines" color="#3b82f6">
+      **Status:** Wiki
+      Initial documentation before formal docs
+    </Card>
+  </CardGroup>
+</div>
+
+---
+
+<div style={{
+  background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 159, 46, 0.08) 100%)',
+  border: '2px solid rgba(255, 140, 0, 0.3)',
+  borderRadius: '16px',
+  padding: '3rem 2.5rem',
+  marginTop: '4rem',
+  marginBottom: '4rem',
+  textAlign: 'center'
+}}>
+  <h3 style={{
+    fontSize: '2rem',
+    fontWeight: '700',
+    marginBottom: '1.5rem',
+    color: 'var(--roadmap-accent)'
+  }}>
+    From Concept to Autonomous Network
+  </h3>
+  <p style={{
+    fontSize: '1.25rem',
+    lineHeight: '1.8',
+    marginBottom: '1.25rem',
+    color: 'var(--roadmap-text)'
+  }}>
+    "Every version of MetaHash builds on the last. V1 proved the idea. V2 stabilized it. V3 made it autonomous."
+  </p>
+  <p style={{
+    fontSize: '1rem',
+    color: 'var(--roadmap-text-muted)',
+    fontStyle: 'italic'
+  }}>
+    — Core Development Team
+  </p>
+</div>
+
+---
+
+## Stay Connected
+
+<CardGroup cols={3}>
+  <Card title="Discord" icon="discord" href="https://discord.com/channels/799672011265015819/1351969903132938302">
+    Join discussions and get real-time updates
+  </Card>
+  <Card title="Twitter" icon="x-twitter" href="https://x.com/metahashsn73">
+    Follow for announcements and milestones
+  </Card>
+  <Card title="GitHub" icon="github" href="https://github.com/fx-integral/metahash">
+    Track development and contribute
+  </Card>
+</CardGroup>
+
+</div>
