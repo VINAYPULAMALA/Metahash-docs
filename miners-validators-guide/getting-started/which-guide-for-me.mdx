@@ -11,63 +11,65 @@ Short on time? Default to the simple guide for your first deployment. Graduate t
 
 | If you… | Start with… | Upgrade when… |
 | --- | --- | --- |
-| Just funded your first miner hotkey | [Miner Simple Guide](/guides/miners/miner-simple-guide) | You want automation, multiple bids, or monitoring hooks |
-| Already run miners elsewhere and juggle α sources | [Miner Advanced Guide](/guides/miners/miner-advanced-guide) | You need custom payment routing or auto-recovery scripts |
-| Run one validator and recently earned permits | [Validator Simple Guide](/guides/validators/validator-simple-guide) | You require redundancy, custom scoring, or telemetry |
-| Operate institutional infra with on-call coverage | [Validator Advanced Guide](/guides/validators/validator-advanced-guide) | You start delegating operations to multiple teams |
+| Just funded your first miner hotkey | [Miner Simple Guide](/miners-validators-guide/miners/miner-simple-guide) | You want automation, multiple bids, or monitoring hooks |
+| Already run miners elsewhere and juggle α sources | [Miner Advanced Guide](/miners-validators-guide/miners/miner-advanced-guide) | You need custom payment routing or auto-recovery scripts |
+| Run one validator and recently earned permits | [Validator Simple Guide](/miners-validators-guide/validators/validator-simple-guide) | You require redundancy, custom scoring, or telemetry |
+| Operate institutional infra with on-call coverage | [Validator Advanced Guide](/miners-validators-guide/validators/validator-advanced-guide) | You start delegating operations to multiple teams |
 
 ## Role-Specific Playbooks
 
 <Tabs>
   <Tab title="Miners">
     <CardGroup cols={2}>
-      <Card title="Simple Miner" icon="play" href="/guides/miners/miner-simple-guide">
+      <Card title="Simple Miner" icon="play" href="/miners-validators-guide/miners/miner-simple-guide">
         15–30 minute walkthrough with copy-paste commands, expected outputs, and single VPS focus.
       </Card>
-      <Card title="Advanced Miner" icon="sliders" href="/guides/miners/miner-advanced-guide">
+      <Card title="Advanced Miner" icon="sliders" href="/miners-validators-guide/miners/miner-advanced-guide">
         Multiple hotkeys, automation flags, payment routing, and monitoring/alerting hooks.
       </Card>
     </CardGroup>
     <Steps>
       <Step title="Profile Check">
-        <Check>Single VPS or EC2 instance?</Check>
-        <Check>Need to prove the flow end-to-end before scaling?</Check>
-        <p>If yes, stick with the simple guide. Otherwise jump straight to advanced.</p>
+        - Single VPS or EC2 instance?
+        - Need to prove the flow end-to-end before scaling?
+
+        If yes, stick with the simple guide. Otherwise jump straight to advanced.
       </Step>
       <Step title="Readiness Checks">
-        <Check>`btcli wallet list` shows your hotkey and coldkey.</Check>
-        <Check>Ports 8091/30303 open and reachable.</Check>
-        <Check>At least 0.15 TAO available for staking.</Check>
+        - `btcli wallet list` shows your hotkey and coldkey.
+        - Ports 8091/30303 open and reachable.
+        - At least 0.15 TAO available for staking.
       </Step>
       <Step title="Next Actions">
-        <Check>Bookmark [Running the Miner](/guides/operations/running-miner) for ongoing ops.</Check>
-        <Check>Plan for watchdogs or systemd once the simple flow is stable.</Check>
+        - Bookmark [Running the Miner](/support/operations/keep-running) for ongoing ops.
+        - Plan for watchdogs or systemd once the simple flow is stable.
       </Step>
     </Steps>
   </Tab>
   <Tab title="Validators">
     <CardGroup cols={2}>
-      <Card title="Simple Validator" icon="shield" href="/guides/validators/validator-simple-guide">
+      <Card title="Simple Validator" icon="shield" href="/miners-validators-guide/validators/validator-simple-guide">
         Minimal topology (one box, one hotkey, one treasury) with default scoring and payout cadence.
       </Card>
-      <Card title="Advanced Validator" icon="shield-halved" href="/guides/validators/validator-advanced-guide">
+      <Card title="Advanced Validator" icon="shield-halved" href="/miners-validators-guide/validators/validator-advanced-guide">
         Redundancy, Prometheus/Grafana telemetry, permit rotation, and automation triggers.
       </Card>
     </CardGroup>
     <Steps>
       <Step title="Profile Check">
-        <Check>First permit or operating a single instance?</Check>
-        <Check>Prefer manual validation of commitments and treasuries?</Check>
-        <p>Answering “yes” means the simple validator guide will get you live faster.</p>
+        - First permit or operating a single instance?
+        - Prefer manual validation of commitments and treasuries?
+
+        Answering "yes" means the simple validator guide will get you live faster.
       </Step>
       <Step title="Readiness Checks">
-        <Check>`btcli subnet list --netuid 73` shows permits and status.</Check>
-        <Check>Treasure keys backed up; `treasuries.py` ready for verification.</Check>
-        <Check>Monitoring/alerting expectations defined with your team.</Check>
+        - `btcli subnet list --netuid 73` shows permits and status.
+        - Treasure keys backed up; `treasuries.py` ready for verification.
+        - Monitoring/alerting expectations defined with your team.
       </Step>
       <Step title="Next Actions">
-        <Check>Schedule telemetry integration once uptime stabilizes.</Check>
-        <Check>Document failover and handoff procedures before scaling.</Check>
+        - Schedule telemetry integration once uptime stabilizes.
+        - Document failover and handoff procedures before scaling.
       </Step>
     </Steps>
   </Tab>
@@ -80,7 +82,7 @@ Short on time? Default to the simple guide for your first deployment. Graduate t
     <ul>
       <li><strong>Miner</strong> — Converting α to META through auctions.</li>
       <li><strong>Validator</strong> — Clearing auctions, publishing commitments, managing treasuries.</li>
-      <li><strong>Explorer</strong> — Still learning? Start with the <a href="/introduction">Introduction</a>.</li>
+      <li><strong>Explorer</strong> — Still learning? Start with the <a href="/welcome/overview">Welcome overview</a>.</li>
     </ul>
   </Step>
   <Step title="Match Experience Level">
@@ -90,7 +92,7 @@ Short on time? Default to the simple guide for your first deployment. Graduate t
     <ul>
       <li>Run <code>btcli wallet list</code> to confirm your hotkey exists.</li>
       <li>Check validator permits with <code>btcli subnet list --netuid 73</code> if you plan to accept bids.</li>
-      <li>Ensure hardware meets the <a href="/guides/environment/environment">environment prerequisites</a> and required ports are open.</li>
+      <li>Ensure hardware meets the <a href="/miners-validators-guide/getting-started/introduction">environment prerequisites</a> and required ports are open.</li>
     </ul>
   </Step>
 </Steps>

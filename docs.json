@@ -24,7 +24,7 @@
           {
             "group": "Overview",
             "pages": [
-              "index"
+              "welcome/overview"
             ]
           }
         ]
@@ -35,7 +35,7 @@
           {
             "group": "Overview",
             "pages": [
-              "introduction/otc-guide"
+              "otc-on-bittensor/otc-guide"
             ]
           }
         ]
@@ -43,29 +43,29 @@
       {
         "tab": "Understand MetaHash",
         "label": "Understand MetaHash",
-        "href": "/understand/fundamentals/introduction",
+        "href": "/understand-metahash/fundamentals/introduction",
         "groups": [
           {
             "group": "MetaHash Fundamentals",
             "pages": [
-              "understand/fundamentals/introduction",
-              "understand/fundamentals/auction-mechanics"
+              "understand-metahash/fundamentals/introduction",
+              "understand-metahash/fundamentals/auction-mechanics"
             ]
           },
           {
             "group": "Economic Mechanics",
             "pages": [
-              "understand/economics/alpha-exchange",
-              "understand/economics/treasury-structure",
-              "understand/economics/validator-role",
-              "understand/economics/miner-lifecycle"
+              "understand-metahash/economics/alpha-exchange",
+              "understand-metahash/economics/treasury-structure",
+              "understand-metahash/economics/validator-role",
+              "understand-metahash/economics/miner-lifecycle"
             ]
           },
           {
             "group": "Network Synergy",
             "pages": [
-              "understand/network/interoperability",
-              "understand/network/glossary"
+              "understand-metahash/network/interoperability",
+              "understand-metahash/network/glossary"
             ]
           }
         ]
@@ -76,23 +76,23 @@
           {
             "group": "Start Here",
             "pages": [
-              "guides/getting-started/which-guide-for-me",
-              "guides/getting-started/safety-warnings",
-              "guides/getting-started/introduction"
+              "miners-validators-guide/getting-started/which-guide-for-me",
+              "miners-validators-guide/getting-started/safety-warnings",
+              "miners-validators-guide/getting-started/introduction"
             ]
           },
           {
             "group": "Miner Guides",
             "pages": [
-              "guides/miners/miner-simple-guide",
-              "guides/miners/miner-advanced-guide"
+              "miners-validators-guide/miners/miner-simple-guide",
+              "miners-validators-guide/miners/miner-advanced-guide"
             ]
           },
           {
             "group": "Validator Guides",
             "pages": [
-              "guides/validators/validator-simple-guide",
-              "guides/validators/validator-advanced-guide"
+              "miners-validators-guide/validators/validator-simple-guide",
+              "miners-validators-guide/validators/validator-advanced-guide"
             ]
           }
         ]
@@ -127,7 +127,7 @@
           {
             "group": "Announcements",
             "pages": [
-              "announcements/announcements"
+              "announcements/index"
             ]
           }
         ]
@@ -138,7 +138,7 @@
           {
             "group": "Team",
             "pages": [
-              "team/team"
+              "team/index"
             ]
           }
         ]

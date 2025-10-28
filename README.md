@@ -47,10 +47,12 @@ mintlify deploy
 ```
 .
 ├── docs.json              # Mintlify configuration
-├── index.mdx              # Landing page
-├── introduction/
-│   └── overview.mdx       # MetaHash overview
-├── understand/
+├── index.mdx              # Landing page wrapper
+├── welcome/
+│   └── overview.mdx       # Welcome tab overview
+├── otc-on-bittensor/
+│   └── otc-guide.mdx      # OTC onboarding flow
+├── understand-metahash/
 │   ├── fundamentals/
 │   │   ├── auction-mechanics.mdx
 │   │   └── introduction.mdx
@@ -62,7 +64,7 @@ mintlify deploy
 │   └── network/
 │       ├── glossary.mdx
 │       └── interoperability.mdx
-├── guides/
+├── miners-validators-guide/
 │   ├── getting-started/
 │   │   ├── introduction.mdx
 │   │   ├── safety-warnings.mdx
@@ -70,17 +72,9 @@ mintlify deploy
 │   ├── miners/
 │   │   ├── miner-advanced-guide.mdx
 │   │   └── miner-simple-guide.mdx
-│   ├── validators/
-│   │   ├── validator-advanced-guide.mdx
-│   │   └── validator-simple-guide.mdx
-│   ├── environment/
-│   │   ├── configuration.mdx
-│   │   ├── environment.mdx
-│   │   └── wallet.mdx
-│   └── operations/
-│       ├── port-setup.mdx
-│       ├── running-miner.mdx
-│       └── staking.mdx
+│   └── validators/
+│       ├── validator-advanced-guide.mdx
+│       └── validator-simple-guide.mdx
 ├── support/
 │   ├── troubleshooting/
 │   │   └── troubleshooting.mdx
@@ -90,11 +84,14 @@ mintlify deploy
 │   └── checklists/
 │       └── checklist.mdx
 ├── announcements/
-│   └── announcements.mdx
+│   └── index.mdx
 ├── team/
-│   └── team.mdx
-├── reviews/
-│   └── uid111-review.mdx
+│   └── index.mdx
+├── internal/
+│   ├── reviews/
+│   │   └── uid111-review.mdx
+│   └── setup/
+│       └── safety-warnings.mdx
 └── assets/
     ├── icons/
     │   └── favicon.png
@@ -161,11 +158,11 @@ This is a helpful tip!
 The following old HTML files are kept for reference but are no longer used:
 
 - `index.html` - Old documentation homepage
-- `review.html` - Old review page
+- `review.html` - Old review page (superseded by `internal/reviews/uid111-review.mdx`)
 - `styles.css` - Old CSS styles
 - `script.js` - Old JavaScript
-- `gpt.md` - Source markdown (migrated to guides/ pages)
-- `review.md` - Source markdown (migrated to reviews/ pages)
+- `gpt.md` - Source markdown (migrated to tabbed pages above)
+- `review.md` - Source markdown (migrated to `internal/reviews/uid111-review.mdx`)
 
 These can be safely deleted once you've verified the Mintlify version works correctly.
 
