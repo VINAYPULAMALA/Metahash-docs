@@ -5,6 +5,8 @@ mode: "custom"
 description: MetaHash's Over-the-Counter layer connects miners and capital allocators through deterministic auctions.
 ---
 
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css' />
+
 <style>{`
   :root {
     --hero-heading-color: #111827;
@@ -151,20 +153,20 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
 </div>
 
 <Steps>
-  <Step title="Staging">
-    Validators publish META budgets, α caps, and discount limits.
+  <Step title="Staging" icon="rocket">
+    **Validators set the stage**: Publish META budgets, α capacity caps, and discount rate limits to establish auction parameters for the epoch.
   </Step>
-  <Step title="Bidding">
-    Miners submit α + discount bids (bps).
+  <Step title="Bidding" icon="coins">
+    **Miners submit offers**: α holders bid their tokens with desired discount rates (in basis points), competing for the best liquidity terms.
   </Step>
-  <Step title="Clearing">
-    Validators rank bids, allocate META, and finalize trades.
+  <Step title="Clearing" icon="check-circle">
+    **Validators execute matching**: Rank all submitted bids by discount rate, allocate available META to winning bids, and finalize trade pairs deterministically.
   </Step>
-  <Step title="Settlement">
-    α and META exchange on-chain through the Treasury.
+  <Step title="Settlement" icon="repeat">
+    **On-chain exchange**: α tokens and META liquidity are swapped atomically through the Treasury smart contract with full transparency.
   </Step>
-  <Step title="Redistribution">
-    The Treasury recycles yield into buybacks and rewards.
+  <Step title="Redistribution" icon="recycle">
+    **Treasury recycling**: Collected yield flows back into the ecosystem through META buybacks, validator rewards, and miner incentives — completing the loop.
   </Step>
 </Steps>
 
