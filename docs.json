@@ -105,19 +105,6 @@
             "pages": [
               "support/troubleshooting/troubleshooting"
             ]
-          },
-          {
-            "group": "Keep Your Miner Running",
-            "pages": [
-              "support/operations/keep-running",
-              "support/operations/commands"
-            ]
-          },
-          {
-            "group": "Checklists",
-            "pages": [
-              "support/checklists/checklist"
-            ]
           }
         ]
       },
