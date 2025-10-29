@@ -30,7 +30,7 @@
         ]
       },
       {
-        "tab": "OTC on Bittensor",
+        "tab": "OTC Desk",
         "groups": [
           {
             "group": "Overview",
@@ -67,6 +67,12 @@
               "understand-metahash/network/interoperability",
               "understand-metahash/network/glossary"
             ]
+          },
+          {
+            "group": "About Us",
+            "pages": [
+              "team/index"
+            ]
           }
         ]
       },
@@ -98,34 +104,12 @@
         ]
       },
       {
-        "tab": "Support",
-        "groups": [
-          {
-            "group": "Troubleshooting Guides",
-            "pages": [
-              "support/troubleshooting/troubleshooting"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "Roadmap",
         "groups": [
           {
             "group": "Roadmap",
             "pages": [
               "announcements/index"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Team",
-        "groups": [
-          {
-            "group": "Team",
-            "pages": [
-              "team/index"
             ]
           }
         ]
@@ -146,29 +130,24 @@
     "showSearch": true,
     "links": [
       {
-        "label": "Treasury",
-        "href": "https://metahash73.com/treasury",
-        "icon": "landmark"
-      },
-      {
-        "label": "Auctions",
-        "href": "https://metahash73.com/auction/current",
-        "icon": "gavel"
-      },
-      {
         "label": "Twitter",
         "href": "https://x.com/metahashsn73"
       },
       {
         "label": "Discord",
         "href": "https://discord.com/channels/799672011265015819/1351969903132938302"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/fx-integral/metahash",
+        "icon": "github"
+      },
+      {
+        "label": "Treasury",
+        "href": "https://metahash73.com/treasury",
+        "icon": "landmark"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "GitHub",
-      "href": "https://github.com/fx-integral/metahash"
-    }
+    ]
   },
   "footer": {
     "socials": {

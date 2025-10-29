@@ -70,157 +70,183 @@ mode: "custom"
 }}>
 
 <div style={{
-  background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 159, 46, 0.08) 100%)',
-  border: '2px solid rgba(255, 140, 0, 0.7)',
-  borderRadius: '16px',
-  padding: '2.75rem 2rem',
-  marginBottom: '3rem',
-  boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
-  transition: 'all 0.3s ease',
-  color: 'var(--hero-body-color)'
+  textAlign: 'center',
+  marginBottom: '2rem',
+  marginTop: '1rem'
+}}>
+  <h2 style={{
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    background: 'linear-gradient(135deg, #ff8c00 0%, #ffb347 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    marginBottom: '0.5rem',
+    letterSpacing: '-0.02em'
+  }}>
+    ⚡ Two Sides, One Market
+  </h2>
+  <p style={{
+    fontSize: '1.15rem',
+    color: 'var(--hero-supporting-color)',
+    maxWidth: '900px',
+    margin: '0 auto',
+    lineHeight: '1.8'
+  }}>
+    MetaHash SN73 delivers instant, transparent liquidity for subnet α through deterministic OTC auctions seamlessly connecting α holders and capital allocators in a fair, validator-cleared system.
+  </p>
+</div>
+
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: '2rem',
+  marginBottom: '3rem'
 }}>
   <div style={{
-    maxWidth: '58rem',
-    width: '100%',
-    margin: '0 auto',
-    textAlign: 'left'
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '2.5rem',
+    border: '2px solid rgba(255, 140, 0, 0.25)',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.08) 0%, rgba(255, 140, 0, 0.03) 100%)',
+    boxShadow: '0 4px 16px rgba(255, 140, 0, 0.1)',
+    transition: 'all 0.3s ease'
   }}>
-    <h3 style={{
-      fontSize: '2.15rem',
-      fontWeight: '700',
-      marginBottom: '0.75rem',
-      color: '#ffb347',
-      letterSpacing: '-0.02em',
-      textShadow: '0 0 18px rgba(255, 179, 71, 0.35)',
-      textAlign: 'center'
-    }}>
-      Over-the-counter
-    </h3>
-    <p style={{
-      fontSize: '1.25rem',
-      fontWeight: 600,
-      letterSpacing: '-0.01em',
-      color: 'var(--hero-body-color)',
-      marginBottom: '1.5rem',
-      textAlign: 'center'
-    }}>
-      Move size without chaos
-    </p>
-    <p style={{
-      fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
-      color: 'var(--hero-supporting-color)'
-    }}>
-      MetaHash’s deterministic Epoch auctions connect <strong style={{ color: '#ffb347' }}>α sellers</strong> (miners, subnet owners) with <strong style={{ color: '#ffb347' }}>capital allocators</strong> (funds, managers, strategists) — instantly and fairly.
-    </p>
-    <p style={{
-      fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
-      color: 'var(--hero-supporting-color)'
-    }}>
-      Sell α OTC for instant liquidity <strong style={{ color: '#ffb347' }}>without hitting charts</strong>, or deploy capital to acquire discounted α <strong style={{ color: '#ffb347' }}>through transparent, validator-cleared auctions.</strong>
-    </p>
-    <p style={{
-      fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
-      color: 'var(--hero-body-color)',
-      fontWeight: 600
-    }}>
-      One network. Two sides. <strong style={{ color: '#ff8c00' }}>Efficient α flow, real yield, zero noise.</strong>
-    </p>
     <div style={{
       display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-      gap: '0.75rem'
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1.25rem'
     }}>
-      <a
-        href="/miners-validators-guide/miners/miner-simple-guide"
-        style={{
-          flex: '1 1 240px',
-          maxWidth: '320px',
-          textAlign: 'center',
-          background: 'rgba(255, 140, 0, 0.15)',
-          border: '1px solid rgba(255, 140, 0, 0.8)',
-          color: 'var(--hero-cta-secondary-text-color)',
-          padding: '0.85rem 1.25rem',
-          borderRadius: '10px',
-          fontWeight: '600',
-          fontSize: '1rem',
-          textDecoration: 'none',
-          transition: 'all 0.2s ease'
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 140, 0, 0.25)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 140, 0, 0.15)';
-          e.currentTarget.style.transform = 'translateY(0)';
-        }}
-      >
-        Launch as a Miner
-      </a>
-      <a
-        href="/miners-validators-guide/validators/validator-simple-guide"
-        style={{
-          flex: '1 1 240px',
-          maxWidth: '320px',
-          textAlign: 'center',
-          background: 'rgba(255, 255, 255, 0.15)',
-          border: '1px solid rgba(255, 255, 255, 0.5)',
-          color: 'var(--hero-cta-secondary-text-color)',
-          padding: '0.85rem 1.25rem',
-          borderRadius: '10px',
-          fontWeight: '600',
-          fontSize: '1rem',
-          textDecoration: 'none',
-          transition: 'all 0.2s ease'
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-          e.currentTarget.style.transform = 'translateY(0)';
-        }}
-      >
-        Activate a Validator
-      </a>
-      <a
-        href="/otc-on-bittensor/otc-guide"
-        style={{
-          flex: '1 1 240px',
-          maxWidth: '320px',
-          textAlign: 'center',
-          background: '#ff8c00',
-          color: '#000',
-          padding: '0.85rem 1.25rem',
-          borderRadius: '10px',
-          fontWeight: '600',
-          fontSize: '1rem',
-          textDecoration: 'none',
-          transition: 'all 0.2s ease',
-          boxShadow: '0 2px 6px rgba(255, 140, 0, 0.3)'
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.background = '#ff9f2e';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 140, 0, 0.4)';
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.background = '#ff8c00';
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 2px 6px rgba(255, 140, 0, 0.3)';
-        }}
-      >
-        Want to know more?
-      </a>
+      <div style={{
+        padding: '0.5rem',
+        background: 'rgba(255, 140, 0, 0.15)',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Icon icon="coins" color="#ff8c00" size={28} />
+      </div>
+      <h3 style={{
+        margin: 0,
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        color: '#ff8c00'
+      }}>For α Holders</h3>
     </div>
+    <div style={{ flex: 1 }}>
+      <p style={{
+        lineHeight: '1.8',
+        marginBottom: '1rem',
+        color: 'var(--hero-body-color)',
+        fontSize: '1.05rem'
+      }}>
+        Sell subnet α directly to the Treasury for META liquidity — without hitting charts or using AMMs.
+      </p>
+      <p style={{
+        lineHeight: '1.8',
+        marginBottom: '0',
+        color: 'var(--hero-body-color)',
+        fontSize: '1.05rem'
+      }}>
+        Participate in deterministic auctions and get filled at transparent discount rates (bps).
+      </p>
+    </div>
+    <a href="/miners-validators-guide/miners/miner-simple-guide" style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.5rem',
+      padding: '0.875rem 1.75rem',
+      background: 'rgba(255, 140, 0, 0.1)',
+      color: '#ff8c00',
+      border: '2px solid rgba(255, 140, 0, 0.4)',
+      borderRadius: '10px',
+      fontWeight: '600',
+      fontSize: '1.05rem',
+      textDecoration: 'none',
+      transition: 'all 0.3s ease',
+      marginTop: '1.75rem',
+      boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+    }}>
+      Start Mining
+      <span style={{ fontSize: '1.2rem' }}>→</span>
+    </a>
+  </div>
+
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '2.5rem',
+    border: '2px solid rgba(255, 140, 0, 0.25)',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.08) 0%, rgba(255, 140, 0, 0.03) 100%)',
+    boxShadow: '0 4px 16px rgba(255, 140, 0, 0.1)',
+    transition: 'all 0.3s ease'
+  }}>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.75rem',
+      marginBottom: '1.25rem'
+    }}>
+      <div style={{
+        padding: '0.5rem',
+        background: 'rgba(255, 140, 0, 0.15)',
+        borderRadius: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Icon icon="building-columns" color="#ff8c00" size={28} />
+      </div>
+      <h3 style={{
+        margin: 0,
+        fontSize: '1.35rem',
+        fontWeight: '700',
+        color: '#ff8c00'
+      }}>For Funds & Capital Managers</h3>
+    </div>
+    <div style={{ flex: 1 }}>
+      <p style={{
+        lineHeight: '1.8',
+        marginBottom: '1rem',
+        color: 'var(--hero-body-color)',
+        fontSize: '1.05rem'
+      }}>
+        Deploy META capital into productive subnet assets (α) with predictable pricing and validator-cleared settlement.
+      </p>
+      <p style={{
+        lineHeight: '1.8',
+        marginBottom: '0',
+        color: 'var(--hero-body-color)',
+        fontSize: '1.05rem'
+      }}>
+        Earn exposure, yield, and network alignment — all within the MetaHash ecosystem.
+      </p>
+    </div>
+    <a href="/miners-validators-guide/validators/validator-simple-guide" style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.5rem',
+      padding: '0.875rem 1.75rem',
+      background: 'rgba(255, 140, 0, 0.1)',
+      color: '#ff8c00',
+      border: '2px solid rgba(255, 140, 0, 0.4)',
+      borderRadius: '10px',
+      fontWeight: '600',
+      fontSize: '1.05rem',
+      textDecoration: 'none',
+      transition: 'all 0.3s ease',
+      marginTop: '1.75rem',
+      boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+    }}>
+      Deploy Capital
+      <span style={{ fontSize: '1.2rem' }}>→</span>
+    </a>
   </div>
 </div>
 
