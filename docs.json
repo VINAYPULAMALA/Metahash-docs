@@ -49,12 +49,13 @@
             "group": "MetaHash Fundamentals",
             "pages": [
               "understand-metahash/fundamentals/introduction",
-              "understand-metahash/fundamentals/auction-mechanics"
+              "understand-metahash/fundamentals/otc-on-bittensor"
             ]
           },
           {
             "group": "Economic Mechanics",
             "pages": [
+              "understand-metahash/fundamentals/auction-mechanics",
               "understand-metahash/economics/alpha-exchange",
               "understand-metahash/economics/treasury-structure",
               "understand-metahash/economics/validator-role",

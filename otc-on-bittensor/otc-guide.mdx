@@ -28,7 +28,7 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
 
 <div style={{
   textAlign: 'center',
-  maxWidth: '52rem',
+  maxWidth: '58rem',
   margin: '0 auto',
   padding: '5rem 1.5rem 4rem',
   color: 'var(--hero-body-color)'
@@ -38,21 +38,84 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     fontWeight: '700',
     letterSpacing: '-0.03em',
     lineHeight: '1.1',
-    marginBottom: '1.25rem',
+    marginBottom: '1rem',
     color: '#ff8c00'
   }}>
-    Over-the-Counter Liquidity
+    MetaHash OTC Liquidity
   </h1>
-  
+
+  <h3 style={{
+    fontSize: '1.75rem',
+    fontWeight: '600',
+    letterSpacing: '-0.02em',
+    lineHeight: '1.3',
+    marginBottom: '2rem',
+    color: 'var(--hero-heading-color)',
+    opacity: 0.9
+  }}>
+    One network. Two sides. Real yield — zero noise.
+  </h3>
+
   <p style={{
-    fontSize: '1.25rem',
-    lineHeight: '1.7',
-    color: 'var(--hero-supporting-color)',
-    maxWidth: '48rem',
-    margin: '0 auto',
+    fontSize: '1.2rem',
+    lineHeight: '1.8',
+    color: 'var(--hero-body-color)',
+    maxWidth: '52rem',
+    margin: '0 auto 1.5rem',
     fontWeight: '400'
   }}>
-    MetaHash SN73 brings instant, transparent liquidity to subnet α without disturbing markets. Our deterministic OTC auctions connect α holders and capital allocators in a fair, validator-cleared system.
+    MetaHash SN73 bridges subnet miners and capital allocators through a deterministic, validator-cleared OTC layer.
+  </p>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '1.5rem',
+    maxWidth: '52rem',
+    margin: '0 auto 2rem',
+    textAlign: 'left'
+  }}>
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(255, 140, 0, 0.08)',
+      border: '1px solid rgba(255, 140, 0, 0.25)',
+      borderRadius: '12px'
+    }}>
+      <p style={{
+        fontSize: '1.05rem',
+        lineHeight: '1.7',
+        margin: 0,
+        color: 'var(--hero-body-color)'
+      }}>
+        For miners: <strong style={{ color: '#ff8c00' }}>instant liquidity</strong> — sell α directly to the Treasury without hitting charts.
+      </p>
+    </div>
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(255, 140, 0, 0.08)',
+      border: '1px solid rgba(255, 140, 0, 0.25)',
+      borderRadius: '12px'
+    }}>
+      <p style={{
+        fontSize: '1.05rem',
+        lineHeight: '1.7',
+        margin: 0,
+        color: 'var(--hero-body-color)'
+      }}>
+        For funds: <strong style={{ color: '#ff8c00' }}>transparent deal flow</strong> — deploy capital into discounted α through on-chain auctions.
+      </p>
+    </div>
+  </div>
+
+  <p style={{
+    fontSize: '1.15rem',
+    lineHeight: '1.7',
+    color: 'var(--hero-body-color)',
+    fontWeight: '600',
+    maxWidth: '48rem',
+    margin: '0 auto'
+  }}>
+    The result: <span style={{ color: '#ff8c00' }}>clean exits, predictable entries, and sustainable yield</span> across the subnet economy.
   </p>
 </div>
 
@@ -63,16 +126,14 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
   color: 'var(--hero-body-color)'
 }}>
 
----
-
 <div style={{
-  background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.12) 0%, rgba(255, 159, 46, 0.08) 100%)',
-  border: '2px solid rgba(255, 140, 0, 0.7)',
+  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%)',
+  border: '2px solid rgba(245, 158, 11, 0.6)',
   borderRadius: '16px',
   padding: '2.75rem 2rem',
   marginBottom: '3rem',
   marginTop: '2rem',
-  boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
+  boxShadow: '0 4px 20px rgba(245, 158, 11, 0.15)',
   transition: 'all 0.3s ease',
   color: 'var(--hero-body-color)'
 }}>
@@ -85,49 +146,118 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     <h3 style={{
       fontSize: '2.15rem',
       fontWeight: '700',
-      marginBottom: '0.75rem',
-      color: '#ffb347',
+      marginBottom: '0.5rem',
+      color: '#fbbf24',
       letterSpacing: '-0.02em',
-      textShadow: '0 0 18px rgba(255, 179, 71, 0.35)',
+      textShadow: '0 0 18px rgba(251, 191, 36, 0.35)',
       textAlign: 'center'
     }}>
-      Over-the-counter
+      The MetaHash OTC Market
     </h3>
     <p style={{
-      fontSize: '1.25rem',
+      fontSize: '1.15rem',
       fontWeight: 600,
       letterSpacing: '-0.01em',
       color: 'var(--hero-body-color)',
-      marginBottom: '1.5rem',
+      marginBottom: '2rem',
       textAlign: 'center'
     }}>
-      Move size without chaos
+      Deterministic, validator-cleared trading for α and META
     </p>
+
     <p style={{
-      fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
-      color: 'var(--hero-supporting-color)'
+      fontSize: '1.1rem',
+      lineHeight: '1.8',
+      marginBottom: '2rem',
+      color: 'var(--hero-body-color)'
     }}>
-      MetaHash's deterministic Epoch auctions connect <strong style={{ color: '#ffb347' }}>α sellers</strong> (miners, subnet owners) with <strong style={{ color: '#ffb347' }}>capital allocators</strong> (funds, managers, strategists) — instantly and fairly.
+      MetaHash's OTC layer operates like a structured on-chain marketplace — not an exchange, but a <strong style={{ color: '#fbbf24' }}>liquidity router</strong>. Each Epoch, deterministic auctions connect two sides of the network:
     </p>
-    <p style={{
-      fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
-      color: 'var(--hero-supporting-color)'
+
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr',
+      gap: '1rem',
+      marginBottom: '2rem'
     }}>
-      Sell α OTC for instant liquidity <strong style={{ color: '#ffb347' }}>without hitting charts</strong>, or deploy capital to acquire discounted α <strong style={{ color: '#ffb347' }}>through transparent, validator-cleared auctions.</strong>
-    </p>
+      <div style={{
+        padding: '1.5rem',
+        background: 'rgba(245, 158, 11, 0.08)',
+        border: '1px solid rgba(245, 158, 11, 0.3)',
+        borderRadius: '10px'
+      }}>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>α Sellers (Miners, Subnet Owners)</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Offer α to the Treasury through discount-based bids.
+        </p>
+      </div>
+
+      <div style={{
+        padding: '1.5rem',
+        background: 'rgba(245, 158, 11, 0.08)',
+        border: '1px solid rgba(245, 158, 11, 0.3)',
+        borderRadius: '10px'
+      }}>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Capital Allocators (Funds, Validators)</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Deploy META into α auctions to gain exposure and yield.
+        </p>
+      </div>
+
+      <div style={{
+        padding: '1.5rem',
+        background: 'rgba(245, 158, 11, 0.08)',
+        border: '1px solid rgba(245, 158, 11, 0.3)',
+        borderRadius: '10px'
+      }}>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Treasury</h4>
+        <p style={{
+          fontSize: '1.rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Acts as the clearinghouse — matching bids, settling payments, and redistributing yield.
+        </p>
+      </div>
+    </div>
+
     <p style={{
       fontSize: '1.05rem',
-      lineHeight: '1.7',
-      marginBottom: '1.5rem',
+      lineHeight: '1.8',
+      marginBottom: '2rem',
       color: 'var(--hero-body-color)',
-      fontWeight: 600
+      fontWeight: 600,
+      textAlign: 'center'
     }}>
-      One network. Two sides. <strong style={{ color: '#ff8c00' }}>Efficient α flow, real yield, zero noise.</strong>
+      These controlled auctions ensure <strong style={{ color: '#f59e0b' }}>fair pricing, transparent settlement, and continuous META circulation</strong> — without volatility or manual intervention.
     </p>
+
     <div style={{
       display: 'flex',
       flexWrap: 'wrap',
@@ -286,12 +416,10 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
   </Step>
 </Steps>
 
----
-
 <div style={{
   textAlign: 'center',
   marginBottom: '2rem',
-  marginTop: '2rem'
+  marginTop: '3rem'
 }}>
   <h2 style={{
     fontSize: '2.5rem',
@@ -303,9 +431,9 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     justifyContent: 'center',
     gap: '0.75rem'
   }}>
-    <Icon icon="landmark" color="#ff8c00" size={40} />
+    <Icon icon="landmark" color="#f59e0b" size={40} />
     <span style={{
-      background: 'linear-gradient(135deg, #ff8c00 0%, #ffb347 100%)',
+      background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text'
@@ -314,34 +442,125 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     </span>
   </h2>
   <p style={{
-    fontSize: '1.1rem',
+    fontSize: '1.15rem',
     color: 'var(--hero-supporting-color)',
-    maxWidth: '600px',
-    margin: '0 auto'
+    maxWidth: '700px',
+    margin: '0 auto',
+    lineHeight: '1.7'
   }}>
-    The coordination hub of MetaHash
+    The coordination hub powering MetaHash's OTC economy
   </p>
 </div>
 
 <div style={{
-  padding: '2rem',
-  background: 'rgba(255, 140, 0, 0.1)',
-  border: '2px solid rgba(255, 140, 0, 0.3)',
-  borderRadius: '12px',
-  marginTop: '1.5rem'
+  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.06) 100%)',
+  border: '2px solid rgba(245, 158, 11, 0.4)',
+  borderRadius: '16px',
+  padding: '2.5rem 2rem',
+  marginBottom: '3rem'
 }}>
   <p style={{
-    fontSize: '1.35rem',
+    fontSize: '1.25rem',
     lineHeight: '1.8',
-    marginBottom: 0,
+    marginBottom: '2rem',
     fontWeight: '500',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'var(--hero-body-color)'
   }}>
-    The Treasury acts as MetaHash's coordination hub — connecting miners, validators, and funds through OTC deals, buybacks, and redistribution.
+    The Treasury serves as the <strong style={{ color: '#f59e0b' }}>central clearinghouse</strong> for all OTC activity — managing liquidity, settling trades, and redistributing value across the network.
   </p>
-</div>
 
----
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '1.25rem',
+    marginTop: '1.5rem'
+  }}>
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      border: '1px solid rgba(245, 158, 11, 0.25)',
+      borderRadius: '10px'
+    }}>
+      <h4 style={{
+        fontSize: '1.1rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        marginBottom: '0.75rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem'
+      }}>
+        <Icon icon="handshake" color="#f59e0b" size={20} />
+        Auction Clearing
+      </h4>
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        margin: 0,
+        color: 'var(--hero-body-color)'
+      }}>
+        Matches α sellers with capital allocators each Epoch through deterministic bid ranking.
+      </p>
+    </div>
+
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      border: '1px solid rgba(245, 158, 11, 0.25)',
+      borderRadius: '10px'
+    }}>
+      <h4 style={{
+        fontSize: '1.1rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        marginBottom: '0.75rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem'
+      }}>
+        <Icon icon="arrow-right-left" color="#f59e0b" size={20} />
+        Settlement Layer
+      </h4>
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        margin: 0,
+        color: 'var(--hero-body-color)'
+      }}>
+        Executes on-chain swaps between α and META with full transparency and atomic finality.
+      </p>
+    </div>
+
+    <div style={{
+      padding: '1.5rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      border: '1px solid rgba(245, 158, 11, 0.25)',
+      borderRadius: '10px'
+    }}>
+      <h4 style={{
+        fontSize: '1.1rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        marginBottom: '0.75rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem'
+      }}>
+        <Icon icon="coins" color="#f59e0b" size={20} />
+        Yield Distribution
+      </h4>
+      <p style={{
+        fontSize: '1rem',
+        lineHeight: '1.7',
+        margin: 0,
+        color: 'var(--hero-body-color)'
+      }}>
+        Recycles collected α into buybacks, validator incentives, and ecosystem growth initiatives.
+      </p>
+    </div>
+  </div>
+</div>
 
 <div style={{
   textAlign: 'center',
@@ -358,50 +577,184 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     justifyContent: 'center',
     gap: '0.75rem'
   }}>
-    <Icon icon="recycle" color="#ff8c00" size={40} />
+    <Icon icon="repeat" color="#f59e0b" size={40} />
     <span style={{
-      background: 'linear-gradient(135deg, #ff8c00 0%, #ffb347 100%)',
+      background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text'
     }}>
-      MetaHash Liquidity Loop
+      The Liquidity Loop
     </span>
   </h2>
   <p style={{
-    fontSize: '1.1rem',
+    fontSize: '1.15rem',
     color: 'var(--hero-supporting-color)',
-    maxWidth: '600px',
-    margin: '0 auto'
+    maxWidth: '700px',
+    margin: '0 auto',
+    lineHeight: '1.7'
   }}>
-    Self-balancing α and META flows
+    Continuous value circulation creating sustainable subnet economics
   </p>
 </div>
 
 <div style={{
-  padding: '2rem',
-  background: 'rgba(255, 140, 0, 0.1)',
-  border: '2px solid rgba(255, 140, 0, 0.3)',
-  borderRadius: '12px',
-  marginTop: '1.5rem'
+  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.06) 100%)',
+  border: '2px solid rgba(245, 158, 11, 0.4)',
+  borderRadius: '16px',
+  padding: '2.5rem 2rem',
+  marginBottom: '3rem'
 }}>
-  <p style={{
-    fontSize: '1.35rem',
-    lineHeight: '1.8',
-    marginBottom: '1rem',
-    fontWeight: '600',
-    textAlign: 'center'
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: '1.5rem',
+    maxWidth: '800px',
+    margin: '0 auto'
   }}>
-    α flows from miners to the Treasury, META flows back as liquidity.
-  </p>
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      padding: '1.25rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderLeft: '4px solid #f59e0b',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        fontSize: '2rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        minWidth: '40px'
+      }}>1</div>
+      <div>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Miners Sell α</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Subnet owners and miners submit discount-based bids to the Treasury, offering α for instant META liquidity.
+        </p>
+      </div>
+    </div>
+
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      padding: '1.25rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderLeft: '4px solid #f59e0b',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        fontSize: '2rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        minWidth: '40px'
+      }}>2</div>
+      <div>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Validators Clear Auctions</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Validators rank bids, match buyers with sellers, and facilitate atomic settlement through the Treasury smart contract.
+        </p>
+      </div>
+    </div>
+
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      padding: '1.25rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderLeft: '4px solid #f59e0b',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        fontSize: '2rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        minWidth: '40px'
+      }}>3</div>
+      <div>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Capital Deploys META</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Funds and capital allocators acquire discounted α positions, injecting fresh META liquidity into the ecosystem.
+        </p>
+      </div>
+    </div>
+
+    <div style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '1rem',
+      padding: '1.25rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderLeft: '4px solid #f59e0b',
+      borderRadius: '8px'
+    }}>
+      <div style={{
+        fontSize: '2rem',
+        fontWeight: '700',
+        color: '#f59e0b',
+        minWidth: '40px'
+      }}>4</div>
+      <div>
+        <h4 style={{
+          fontSize: '1.15rem',
+          fontWeight: '700',
+          color: '#f59e0b',
+          marginBottom: '0.5rem'
+        }}>Treasury Redistributes Yield</h4>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          margin: 0,
+          color: 'var(--hero-body-color)'
+        }}>
+          Collected α flows back through buybacks, validator rewards, and network incentives — completing the sustainable loop.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <p style={{
-    fontSize: '1.25rem',
+    fontSize: '1.15rem',
     lineHeight: '1.8',
+    marginTop: '2rem',
     marginBottom: 0,
-    fontWeight: '400',
-    textAlign: 'center'
+    fontWeight: '600',
+    textAlign: 'center',
+    color: 'var(--hero-body-color)'
   }}>
-    Validators clear auctions, funds deploy capital, and the Treasury recycles yield through buybacks and rewards — creating a self-balancing OTC economy.
+    This continuous cycle creates <strong style={{ color: '#f59e0b' }}>self-sustaining liquidity</strong> — no external market pressure, no volatility, just predictable OTC economics.
   </p>
 </div>
 
@@ -464,9 +817,9 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
     justifyContent: 'center',
     gap: '0.75rem'
   }}>
-    <Icon icon="lightbulb" color="#ff8c00" size={40} />
+    <Icon icon="lightbulb" color="#f59e0b" size={40} />
     <span style={{
-      background: 'linear-gradient(135deg, #ff8c00 0%, #ffb347 100%)',
+      background: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       backgroundClip: 'text'
@@ -477,30 +830,79 @@ description: MetaHash's Over-the-Counter layer connects miners and capital alloc
   <p style={{
     fontSize: '1.1rem',
     color: 'var(--hero-supporting-color)',
-    maxWidth: '600px',
-    margin: '0 auto'
+    maxWidth: '700px',
+    margin: '0 auto',
+    lineHeight: '1.6'
   }}>
-    The essence of MetaHash OTC
+    The core value proposition of MetaHash OTC
   </p>
 </div>
 
 <div style={{
-  padding: '1.5rem',
-  background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.15) 0%, rgba(255, 140, 0, 0.08) 100%)',
-  border: '2px solid rgba(255, 140, 0, 0.4)',
-  borderRadius: '12px',
+  padding: '2.5rem 2rem',
+  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%)',
+  border: '2px solid rgba(245, 158, 11, 0.6)',
+  borderRadius: '16px',
   marginTop: '2rem',
-  boxShadow: '0 4px 12px rgba(255, 140, 0, 0.1)',
-  textAlign: 'center'
+  boxShadow: '0 4px 20px rgba(245, 158, 11, 0.15)',
+  textAlign: 'center',
+  color: 'var(--hero-body-color)'
 }}>
   <p style={{
-    fontSize: '1.2rem',
+    fontSize: '1.35rem',
     lineHeight: '1.8',
-    marginBottom: 0,
-    fontWeight: 500
+    marginBottom: '1.5rem',
+    fontWeight: 600,
+    color: '#f59e0b'
   }}>
-    MetaHash's OTC layer bridges α sellers and capital allocators through deterministic, validator-cleared auctions.
+    MetaHash OTC bridges α sellers and capital allocators through deterministic, validator-cleared auctions — delivering instant liquidity, transparent pricing, and sustainable yield across the subnet economy.
   </p>
+
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '1rem',
+    marginTop: '1.5rem'
+  }}>
+    <div style={{
+      padding: '1rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderRadius: '8px',
+      border: '1px solid rgba(245, 158, 11, 0.25)'
+    }}>
+      <div style={{
+        fontSize: '0.95rem',
+        fontWeight: '600',
+        color: '#f59e0b'
+      }}>Instant Liquidity</div>
+    </div>
+
+    <div style={{
+      padding: '1rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderRadius: '8px',
+      border: '1px solid rgba(245, 158, 11, 0.25)'
+    }}>
+      <div style={{
+        fontSize: '0.95rem',
+        fontWeight: '600',
+        color: '#f59e0b'
+      }}>Transparent Pricing</div>
+    </div>
+
+    <div style={{
+      padding: '1rem',
+      background: 'rgba(245, 158, 11, 0.08)',
+      borderRadius: '8px',
+      border: '1px solid rgba(245, 158, 11, 0.25)'
+    }}>
+      <div style={{
+        fontSize: '0.95rem',
+        fontWeight: '600',
+        color: '#f59e0b'
+      }}>Sustainable Yield</div>
+    </div>
+  </div>
 </div>
 
 </div>
