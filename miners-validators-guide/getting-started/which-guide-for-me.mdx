@@ -4,36 +4,31 @@ description: Use this decision helper to match your goals, experience, and hardw
 ---
 
 <Info>
-Short on time? Default to the simple guide for your first deployment. Graduate to the advanced guide once you automate bids, scale infrastructure, or share ops with a team.
+The playbooks now bundle the quickstart flow with the production runbooks—use the tabs below to jump straight to the sections that match your experience.
 </Info>
 
 ## TL;DR Decision Matrix
 
-| If you… | Start with… | Upgrade when… |
+| Role | Start with… | Core outcomes |
 | --- | --- | --- |
-| Just funded your first miner hotkey | [Miner Simple Guide](/miners-validators-guide/miners/miner-simple-guide) | You want automation, multiple bids, or monitoring hooks |
-| Already run miners elsewhere and juggle α sources | [Miner Advanced Guide](/miners-validators-guide/miners/miner-advanced-guide) | You need custom payment routing or auto-recovery scripts |
-| Run one validator and recently earned permits | [Validator Simple Guide](/miners-validators-guide/validators/validator-simple-guide) | You require redundancy, custom scoring, or telemetry |
-| Operate institutional infra with on-call coverage | [Validator Advanced Guide](/miners-validators-guide/validators/validator-advanced-guide) | You start delegating operations to multiple teams |
+| Miners bringing a first rig online or automating multiple bids | [Miner Guide](/miners-validators-guide/miners/miner-advanced-guide) | Copy-paste bootstrap, spend controls, payment routing, automation hooks |
+| Validators preparing to accept auctions or hardening existing infrastructure | [Validator Guide](/miners-validators-guide/validators/validator-advanced-guide) | Environment prep, process managers, strategy tuning, telemetry, redundancy |
 
 ## Role-Specific Playbooks
 
 <Tabs>
   <Tab title="Miners">
-    <CardGroup cols={2}>
-      <Card title="Simple Miner" icon="play" href="/miners-validators-guide/miners/miner-simple-guide">
-        15–30 minute walkthrough with copy-paste commands, expected outputs, and single VPS focus.
-      </Card>
-      <Card title="Advanced Miner" icon="sliders" href="/miners-validators-guide/miners/miner-advanced-guide">
-        Multiple hotkeys, automation flags, payment routing, and monitoring/alerting hooks.
+    <CardGroup cols={1}>
+      <Card title="Miner Playbook" icon="sliders" href="/miners-validators-guide/miners/miner-advanced-guide">
+        Quickstart commands, multi-bid orchestration, monitoring, and operations checklists in one place.
       </Card>
     </CardGroup>
     <Steps>
-      <Step title="Profile Check">
-        - Single VPS or EC2 instance?
-        - Need to prove the flow end-to-end before scaling?
+      <Step title="Before You Start">
+        - Single VPS or multi-node rollout?
+        - Wallets funded and registered?
 
-        If yes, stick with the simple guide. Otherwise jump straight to advanced.
+        The guide flows from the copy-paste bootstrap into automation toggles—work through sequentially on your first pass.
       </Step>
       <Step title="Readiness Checks">
         - `btcli wallet list` shows your hotkey and coldkey.
@@ -42,25 +37,22 @@ Short on time? Default to the simple guide for your first deployment. Graduate t
       </Step>
       <Step title="Next Actions">
         - Bookmark [Running the Miner](/support/operations/keep-running) for ongoing ops.
-        - Plan for watchdogs or systemd once the simple flow is stable.
+        - Layer in watchdogs, systemd, or Terraform once the base flow is stable.
       </Step>
     </Steps>
   </Tab>
   <Tab title="Validators">
-    <CardGroup cols={2}>
-      <Card title="Simple Validator" icon="shield" href="/miners-validators-guide/validators/validator-simple-guide">
-        Minimal topology (one box, one hotkey, one treasury) with default scoring and payout cadence.
-      </Card>
-      <Card title="Advanced Validator" icon="shield-halved" href="/miners-validators-guide/validators/validator-advanced-guide">
-        Redundancy, Prometheus/Grafana telemetry, permit rotation, and automation triggers.
+    <CardGroup cols={1}>
+      <Card title="Validator Playbook" icon="shield-halved" href="/miners-validators-guide/validators/validator-advanced-guide">
+        Infrastructure hardening, pm2/systemd launch patterns, strategy tuning, telemetry, and operational handoffs.
       </Card>
     </CardGroup>
     <Steps>
-      <Step title="Profile Check">
-        - First permit or operating a single instance?
-        - Prefer manual validation of commitments and treasuries?
+      <Step title="Before You Start">
+        - Permits earned and collateral ready?
+        - Subtensor access planned (self-hosted or trusted peer)?
 
-        Answering "yes" means the simple validator guide will get you live faster.
+        Follow the quickstart sections first; revisit automation and redundancy chapters as you scale.
       </Step>
       <Step title="Readiness Checks">
         - `btcli subnet list --netuid 73` shows permits and status.
@@ -86,7 +78,7 @@ Short on time? Default to the simple guide for your first deployment. Graduate t
     </ul>
   </Step>
   <Step title="Match Experience Level">
-    <p>Simple guides favor copy-paste flows on a single box. Advanced guides assume comfort with automation flags, multiple instances, or monitoring stacks.</p>
+    <p>The playbooks open with copy-paste quickstarts and branch into automation, redundancy, and monitoring. Skim the headings and dive deepest where your operations need it.</p>
   </Step>
   <Step title="Verify Readiness">
     <ul>

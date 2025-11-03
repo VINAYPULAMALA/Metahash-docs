@@ -89,16 +89,9 @@
             ]
           },
           {
-            "group": "Miner Guides",
+            "group": "Miner & Validator Playbooks",
             "pages": [
-              "miners-validators-guide/miners/miner-simple-guide",
-              "miners-validators-guide/miners/miner-advanced-guide"
-            ]
-          },
-          {
-            "group": "Validator Guides",
-            "pages": [
-              "miners-validators-guide/validators/validator-simple-guide",
+              "miners-validators-guide/miners/miner-advanced-guide",
               "miners-validators-guide/validators/validator-advanced-guide"
             ]
           }

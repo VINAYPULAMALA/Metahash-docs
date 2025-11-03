@@ -25,7 +25,7 @@ Use the diagram above as your north star: the top lane tracks validator/treasury
 **Outcome:** Validators enter with fresh budgets and transparent rules while miners know exactly when bidding begins.
 
 ## Phase 2 — Bidding & Submission
-**Actors:** Miners / α holders ([See Miner Guide →](/miners-validators-guide/miners/miner-simple-guide))
+**Actors:** Miners / α holders ([See Miner Guide →](/miners-validators-guide/miners/miner-advanced-guide))
 
 **What happens**
 - Each bid packages `subnet_id`, `α_amount`, and `discount_bps` (100 bps = 1 %).
@@ -36,7 +36,7 @@ Use the diagram above as your north star: the top lane tracks validator/treasury
 **Outcome:** A transparent, immutable list of verified bids is locked for deterministic clearing. Miners can monitor standings without front-running risk.
 
 ## Phase 3 — Clearing & Matching
-**Actors:** Validators + Treasury ([Learn how validators rank bids →](/miners-validators-guide/validators/validator-simple-guide))
+**Actors:** Validators + Treasury ([Learn how validators rank bids →](/miners-validators-guide/validators/validator-advanced-guide))
 
 **What happens**
 - Validators sort bids by **discount-adjusted value** (α amount × post-slippage discount).
@@ -91,7 +91,7 @@ Use the diagram above as your north star: the top lane tracks validator/treasury
 | Concept | Explanation |
 | --- | --- |
 | Epoch Length | ≈360 blocks (~72 minutes) per full auction loop. |
-| Discount (BPS) | Basis points system (100 bps = 1 %). [More on basis points →](/miners-validators-guide/miners/miner-simple-guide#bps) |
+| Discount (BPS) | Basis points system (100 bps = 1 %). [More on basis points →](/miners-validators-guide/miners/miner-advanced-guide#bid-controls) |
 | Budget Caps | Validator’s maximum α purchase per Epoch (e.g., 148 α). |
 | Source Subnet | Subnet supplying α (commonly 62). |
 | Slippage Adjustment | Normalizes bids for expected execution drift. |

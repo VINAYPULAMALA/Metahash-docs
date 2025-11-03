@@ -70,11 +70,9 @@ mintlify deploy
 │   │   ├── safety-warnings.mdx
 │   │   └── which-guide-for-me.mdx
 │   ├── miners/
-│   │   ├── miner-advanced-guide.mdx
-│   │   └── miner-simple-guide.mdx
+│   │   └── miner-advanced-guide.mdx
 │   └── validators/
-│       ├── validator-advanced-guide.mdx
-│       └── validator-simple-guide.mdx
+│       └── validator-advanced-guide.mdx
 ├── support/
 │   ├── troubleshooting/
 │   │   └── troubleshooting.mdx

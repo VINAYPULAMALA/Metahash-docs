@@ -1,121 +1,531 @@
 ---
-title: Validator Advanced Guide
-description: Use this playbook once you have the basics handled in the [Validator Simple Guide](/miners-validators-guide/validators/validator-simple-guide). It focuses on production-ready configuration, reliability, and fine-grained control over validator behavior.
+title: Validator Guide
+description: "Technical guide for developers running MetaHash validators on Subnet 73. Covers v3 pipeline: Auction -> Clearing -> Commitments -> Settlement."
 ---
+
+<Note>
+**Developer-focused guide:** This documentation is for operators with existing Bittensor knowledge. For conceptual background, see [Understand MetaHash](/understand-metahash/fundamentals/introduction).
+</Note>
 
 ## Prerequisites
 
-<Info color="orange">
-<span style={{ color: '#fbb12b' }}>
-- Subtensor lite node running with `--pruning=2000` **or** your own archive node (recommended for production).
-- Python 3.10+ with `pip`/`venv` and the ability to run process managers such as `pm2` or systemd.
-- Funded coldkey / hotkey pair registered on subnet 73 with sufficient stake for validator collateral.
-- SSH access to a hardened server (CPU ≥ 4 vCPU, RAM ≥ 8 GB) and familiarity with firewall configuration.
-</span>
-</Info>
+<Tabs>
+  <Tab title="Infrastructure">
+    - Subtensor lite node with `--pruning=2000` (or archive node)
+    - Python 3.10+
+    - Process manager (pm2, systemd, or Docker)
+    - IPFS access for commitment publication
+  </Tab>
 
-## Base Environment Setup
+  <Tab title="Wallet">
+    - Funded coldkey/hotkey pair
+    - Registered on Subnet 73
+    - Sufficient stake to qualify for validator operations
+  </Tab>
+
+  <Tab title="Configuration">
+    - Treasury coldkey mapped in `metahash/treasuries.py`
+    - Subnet weights defined in `weights.yml`
+    - Environment variables in `.env`
+  </Tab>
+</Tabs>
+
+## Quick Start
 
 <Steps>
-  <Step title="Clone and bootstrap the repository">
+  <Step title="Clone and install">
     ```bash
-    git clone https://github.com/fx-integral/metahash.git
-    cd metahash
-    python -m venv .venv
-    source .venv/bin/activate
+    git clone https://github.com/fx-integral/metahash && cd metahash
+    python3 -m venv .venv && source .venv/bin/activate
     pip install -U pip wheel uv
     uv pip install -e .
     ```
   </Step>
-  <Step title="Provision runtime secrets">
+
+  <Step title="Configure environment">
     ```bash
-    cat <<'EOF' > .env
-    BT_WALLET_NAME=metahash
-    BT_HOTKEY=validatorx
-    IPFS_API_URL=http://ipfs.metahash73.com:5001/api/v0
-    EOF
+    cp .env.template .env
+    # Edit .env with BT_WALLET_NAME, BT_HOTKEY, IPFS_API_URL
     ```
-    Adjust the wallet names and IPFS endpoint to match your environment. Keep `.env` out of version control.
+  </Step>
+
+  <Step title="Create wallet (if needed)">
+    ```bash
+    btcli wallet new_coldkey --wallet.name validator-wallet
+    btcli wallet new_hotkey --wallet.name validator-wallet --wallet.hotkey validator-hotkey
+    btcli subnets register --wallet.name validator-wallet --wallet.hotkey validator-hotkey --netuid 73
+    ```
+  </Step>
+
+  <Step title="Run validator">
+    ```bash
+    pm2 start python --name metahash-validator -- \
+      neurons/validator.py \
+      --netuid 73 \
+      --subtensor.network archive \
+      --wallet.name validator-wallet \
+      --wallet.hotkey validator-hotkey \
+      --neuron.axon_off \
+      --logging.debug
+    ```
   </Step>
 </Steps>
 
-## Wallet & Registration
-
-```bash
-# create secure coldkey
-btcli wallet new_coldkey --wallet.name metahash
-
-# create validator hotkey
-btcli wallet new_hotkey --wallet.name metahash --wallet.hotkey validatorx
-
-# register the hotkey on subnet 73
-btcli register --netuid 73 --wallet.name metahash --wallet.hotkey validatorx
-```
-
-## Launch Options
-
-### Run with pm2 (recommended for restarts)
-
-```bash
-pm2 start python \
-  --name metahash-validator \
-  -- \
-  neurons/validator.py \
-  --netuid 73 \
-  --subtensor.network archive \
-  --wallet.name metahash \
-  --wallet.hotkey validatorx \
-  --neuron.axon_off \
-  --logging.debug
-```
-
-### Run directly with Python
-
-```bash
-python neurons/validator.py \
-  --netuid 73 \
-  --subtensor.network archive \
-  --wallet.name metahash \
-  --wallet.hotkey validatorx \
-  --neuron.axon_off \
-  --logging.debug
-```
-
-<Tip>
-`--subtensor.network archive` is fine for testing, but production operators should connect to their own node (`--pruning=2000`) to avoid dependence on shared infrastructure and to reduce latency.
-</Tip>
-
-## Strategy & Weight Tuning
-
-MetaHash validators determine bid acceptance, scoring, and payments using `weights.yml` and custom logic within `metahash/validator/strategy.py`.
-
-```yaml title="weights.yml (sample)"
-default: 1.0   # baseline weight for unspecified subnets
-
-0: 0           # disable subnet 0
-73: 0          # disable subnet 73 (self)
-136: 1         # prefer subnet 136
-```
-
-- Adjust `weights.yml` to prioritize or disable specific subnets when sourcing α.
-- Extend `validator/strategy.py` to experiment with alternative scoring heuristics or delegation policies.
-- Keep a copy of your custom strategy in source control—upgrades may overwrite local changes.
-
-## Alpha Acquisition & Payments
+## Epoch Lifecycle
 
 <Info>
-- Maintain separate hotkeys for α sourcing (`--payment.validators`) to compartmentalize risk.
-- Use `btcli stake overview` regularly to confirm funding hotkeys retain sufficient stake.
-- Consider staggering α deposits across multiple subnets to prevent auction stalls if one α pool drains.
+For detailed auction mechanics, see [Epoch Lifecycle & Auction Timing](/understand-metahash/fundamentals/auction-mechanics).
 </Info>
 
-## Operational Playbook
+Validators manage three consecutive epochs:
 
-- **Monitoring**: Forward logs to a centralized system (e.g., CloudWatch, Loki) and alert on missing `AuctionStart` or `WinSynapse` events.
-- **Security**: Restrict SSH access, keep system packages updated, and rotate wallet passwords stored in `.env`.
-- **Backups**: Snapshot the validator host and the wallet directory `~/.bittensor/wallets/` before upgrades.
-- **Upgrades**: Use a blue/green pattern—bring up a secondary validator, verify performance, then decommission the old node.
+<Tabs>
+  <Tab title="Epoch e: Auction & Clearing">
+    1. **AuctionStart:** Broadcast start marker
+    2. **Collect bids:** Receive `(subnet_id, alpha_amount, discount_bps)` from miners
+    3. **Clearing:** Rank by TAO value with slippage/reputation caps; partial fills allowed
+    4. **Win invoices:** Notify winners with payment window `[as, de]` for epoch e+1
+    5. **Stage commitment:** Capture winners snapshot and budget telemetry (bt_mu, bl_mu)
+  </Tab>
 
-<Note>
-Share your successful configurations or automation scripts with the community on Discord—collective learnings harden the subnet for everyone.
-</Note>
+  <Tab title="Epoch e+1: Publish Commitments">
+    6. **On-chain CID:** Publish commitment CID for epoch e (strict publisher, no catch-up)
+    7. **IPFS payload:** Push full JSON commitment to IPFS gateways
+  </Tab>
+
+  <Tab title="Epoch e+2: Settlement & Weights">
+    8. **Payment scan:** Verify α transfers within `[as, de]` to known treasuries (obey `STRICT_PER_SUBNET` rules)
+    9. **Burn underfill:** Send unused budget to UID 0
+    10. **Set weights:** Call `set_weights()` unless `TESTING=true`
+  </Tab>
+</Tabs>
+
+## Deployment Options
+
+<Tabs>
+  <Tab title="pm2 (Recommended)">
+    ```bash
+    pm2 start python --name metahash-validator -- \
+      neurons/validator.py \
+      --netuid 73 \
+      --subtensor.network archive \
+      --wallet.name validator-wallet \
+      --wallet.hotkey validator-hotkey \
+      --neuron.axon_off \
+      --logging.debug
+    ```
+
+    **Monitor:**
+    ```bash
+    pm2 logs metahash-validator
+    pm2 status
+    ```
+
+    **Auto-restart on reboot:**
+    ```bash
+    pm2 startup
+    pm2 save
+    ```
+  </Tab>
+
+  <Tab title="Docker">
+    ```bash
+    docker run --rm \
+      -v ~/.bittensor:/root/.bittensor:ro \
+      ghcr.io/fx-integral/metahash:latest \
+      neurons/validator.py \
+        --netuid 73 \
+        --subtensor.network archive \
+        --wallet.name validator-wallet \
+        --wallet.hotkey validator-hotkey \
+        --neuron.axon_off \
+        --logging.debug
+    ```
+
+    **Docker Compose:**
+    ```yaml
+    version: '3.8'
+    services:
+      validator:
+        image: ghcr.io/fx-integral/metahash:latest
+        volumes:
+          - ~/.bittensor:/root/.bittensor:ro
+        command: >
+          neurons/validator.py
+          --netuid 73
+          --subtensor.network archive
+          --wallet.name validator-wallet
+          --wallet.hotkey validator-hotkey
+          --neuron.axon_off
+          --logging.debug
+        restart: unless-stopped
+    ```
+  </Tab>
+
+  <Tab title="systemd">
+    Create `/etc/systemd/system/metahash-validator.service`:
+
+    ```ini
+    [Unit]
+    Description=MetaHash Validator
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=validator
+    WorkingDirectory=/home/validator/metahash
+    ExecStart=/home/validator/metahash/.venv/bin/python neurons/validator.py \
+      --netuid 73 \
+      --subtensor.network archive \
+      --wallet.name validator-wallet \
+      --wallet.hotkey validator-hotkey \
+      --neuron.axon_off \
+      --logging.debug
+    Restart=always
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    **Enable:**
+    ```bash
+    sudo systemctl daemon-reload
+    sudo systemctl enable metahash-validator
+    sudo systemctl start metahash-validator
+    sudo systemctl status metahash-validator
+    ```
+
+    **Monitor:**
+    ```bash
+    journalctl -u metahash-validator -f
+    ```
+  </Tab>
+</Tabs>
+
+
+## Configuration Reference
+
+All configuration lives in `metahash/config.py`. Override via environment variables in `.env`.
+
+<Tabs>
+  <Tab title="Network">
+    <ParamField path="BITTENSOR_NETWORK" type="string">
+      Bittensor network endpoint
+    </ParamField>
+
+    <ParamField path="START_V3_BLOCK" type="int">
+      Starting block for v3 protocol
+    </ParamField>
+
+    <ParamField path="TESTING" type="boolean">
+      Enable preview mode (no weight setting)
+    </ParamField>
+
+    <ParamField path="EPOCH_LENGTH_OVERRIDE" type="int">
+      Override epoch length for testing
+    </ParamField>
+  </Tab>
+
+  <Tab title="Auction & Clearing">
+    <ParamField path="AUCTION_BUDGET_ALPHA" type="float">
+      Total α budget per auction
+    </ParamField>
+
+    <ParamField path="MAX_BIDS_PER_MINER" type="int">
+      Maximum bids per miner per epoch
+    </ParamField>
+
+    <ParamField path="K_SLIP" type="float">
+      Slippage coefficient
+    </ParamField>
+
+    <ParamField path="SLIP_TOLERANCE" type="float">
+      Slippage tolerance threshold
+    </ParamField>
+
+    <ParamField path="SAMPLE_POINTS" type="int">
+      Sample points for slippage calculation
+    </ParamField>
+  </Tab>
+
+  <Tab title="Reputation">
+    <ParamField path="REPUTATION_ENABLED" type="boolean">
+      Enable reputation system
+    </ParamField>
+
+    <ParamField path="REPUTATION_BASELINE_CAP_FRAC" type="float">
+      Baseline reputation cap fraction
+    </ParamField>
+
+    <ParamField path="REPUTATION_MAX_CAP_FRAC" type="float">
+      Maximum reputation cap fraction
+    </ParamField>
+  </Tab>
+
+  <Tab title="Settlement">
+    <ParamField path="STRICT_PER_SUBNET" type="boolean">
+      Require α payments from source subnet
+    </ParamField>
+
+    <ParamField path="JAIL_EPOCHS_*" type="int">
+      Jail duration for violations (various types)
+    </ParamField>
+  </Tab>
+
+  <Tab title="IPFS">
+    <ParamField path="IPFS_API_URL" type="string">
+      IPFS API endpoint (e.g., `http://ipfs.metahash73.com:5001/api/v0`)
+    </ParamField>
+
+    <ParamField path="IPFS_GATEWAYS" type="string[]">
+      List of IPFS gateway URLs for commitment retrieval
+    </ParamField>
+  </Tab>
+</Tabs>
+
+
+## State Management
+
+Validators maintain local JSON files with atomic writes:
+
+| File | Purpose |
+|------|---------|
+| `validated_epochs.json` | Epochs finalized on-chain |
+| `pending_commits.json` | Commitments awaiting publication |
+| `reputation.json` | Per-coldkey reputation and caps |
+| `jailed_coldkeys.json` | Enforcement state |
+
+**Inspect state:**
+```bash
+cat validated_epochs.json | jq
+cat reputation.json | jq '.["5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"]'
+cat jailed_coldkeys.json | jq
+```
+
+
+## Treasury Configuration
+
+Edit `metahash/treasuries.py` to map validator hotkeys to treasury coldkeys:
+
+```python
+TREASURIES = {
+    "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY": "5GHot...Treasury1",
+    "5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw": "5GHot...Treasury2",
+}
+```
+
+**Only mapped treasuries receive settlement credit.**
+
+
+## Subnet Weights
+
+Default weights are defined in `weights.yml`:
+
+```yaml
+weights:
+  30: 0.15
+  12: 0.10
+  73: 1.00
+```
+
+Edit this file and restart the validator to apply changes.
+
+## Operational Notes
+
+### Logging
+
+Structured logs cover all phases:
+- Auction start/end markers
+- Bid collection and clearing results
+- Commitment publication (CID + IPFS)
+- Payment verification and settlement
+- Weight setting outcomes
+
+**Debug mode:**
+```bash
+python neurons/validator.py --logging.debug
+```
+
+### IPFS Requirements
+
+Commitments are published on-chain as CIDs with payloads served from IPFS. Ensure:
+- `IPFS_API_URL` is accessible
+- `IPFS_GATEWAYS` list includes reliable gateways
+- IPFS daemon is running if self-hosting
+
+### Reputation System
+
+Reputation caps limit per-miner auction allocation:
+- `REPUTATION_ENABLED=true` activates the system
+- `REPUTATION_BASELINE_CAP_FRAC` sets minimum cap
+- `REPUTATION_MAX_CAP_FRAC` sets maximum cap
+- Caps adjust based on payment history (see `reputation.json`)
+
+### Jailing
+
+Miners violating rules (late payment, wrong subnet, etc.) are jailed for `JAIL_EPOCHS_*` epochs. View jailed coldkeys:
+```bash
+cat jailed_coldkeys.json | jq
+```
+
+## Monitoring & Debugging
+
+<CodeGroup>
+```bash View Live Logs (pm2)
+pm2 logs metahash-validator
+```
+
+```bash View Live Logs (systemd)
+journalctl -u metahash-validator -f
+```
+
+```bash Check Validator Permits
+btcli subnet list --netuid 73
+```
+
+```bash View Metagraph
+btcli subnet metagraph --netuid 73
+```
+
+```bash Check Wallet Balance
+btcli wallet balance --wallet.name validator-wallet
+```
+
+```bash Inspect Pending Commits
+cat pending_commits.json | jq
+```
+
+```bash Verify Treasury Mappings
+cat metahash/treasuries.py
+```
+
+```bash Test IPFS Connectivity
+curl -X POST ${IPFS_API_URL}/id
+```
+</CodeGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Commitments not publishing" icon="cloud-xmark">
+    **Check:**
+    - IPFS daemon running and accessible via `IPFS_API_URL`
+    - Network connectivity to IPFS gateways
+    - `pending_commits.json` contains staged commitments
+    - Validator has sufficient TAO for on-chain transactions
+  </Accordion>
+
+  <Accordion title="Payments not verified" icon="circle-xmark">
+    **Common causes:**
+    - α transferred outside payment window `[as, de]`
+    - Payment sent to wrong treasury (verify `metahash/treasuries.py`)
+    - If `STRICT_PER_SUBNET=true`, α not sourced from correct subnet
+    - Miner coldkey jailed (check `jailed_coldkeys.json`)
+  </Accordion>
+
+  <Accordion title="Weights not setting" icon="scale-unbalanced">
+    **Verify:**
+    - `TESTING=false` in `.env`
+    - Validator has sufficient stake/permit
+    - No errors in settlement phase logs
+    - `set_weights()` call succeeded (check debug logs)
+  </Accordion>
+
+  <Accordion title="Reputation not updating" icon="chart-line">
+    **Check:**
+    - `REPUTATION_ENABLED=true`
+    - `reputation.json` contains coldkey entries
+    - Settlement phase completed successfully
+    - Reputation adjustments logged in debug output
+  </Accordion>
+</AccordionGroup>
+
+## CLI Commands
+
+<CodeGroup>
+```bash Restart Validator (pm2)
+pm2 restart metahash-validator
+```
+
+```bash Restart Validator (systemd)
+sudo systemctl restart metahash-validator
+```
+
+```bash Stop Validator (pm2)
+pm2 stop metahash-validator
+```
+
+```bash Stop Validator (systemd)
+sudo systemctl stop metahash-validator
+```
+
+```bash View Process Status (pm2)
+pm2 status
+```
+
+```bash View Process Status (systemd)
+systemctl status metahash-validator
+```
+
+```bash Interactive Run (Debug)
+python neurons/validator.py --logging.debug --netuid 73 --wallet.name validator-wallet
+```
+</CodeGroup>
+
+## Production Checklist
+
+<Steps>
+  <Step title="Pre-deployment">
+    - [ ] Treasury mapping added to `metahash/treasuries.py`
+    - [ ] Subnet weights configured in `weights.yml`
+    - [ ] Environment variables set in `.env`
+    - [ ] IPFS connectivity verified
+    - [ ] Wallet funded with sufficient TAO
+  </Step>
+
+  <Step title="Post-deployment">
+    - [ ] Validator appears in metagraph: `btcli subnet metagraph --netuid 73`
+    - [ ] Logs show auction start markers
+    - [ ] Commitments publishing to IPFS
+    - [ ] Settlement phase completing successfully
+    - [ ] Weights setting on-chain
+  </Step>
+
+  <Step title="Ongoing operations">
+    - [ ] Monitor `validated_epochs.json` for progression
+    - [ ] Review `reputation.json` for miner standing
+    - [ ] Check `jailed_coldkeys.json` for enforcement actions
+    - [ ] Track IPFS gateway availability
+    - [ ] Rotate logs periodically
+  </Step>
+</Steps>
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `metahash/config.py` | Configuration defaults |
+| `metahash/treasuries.py` | Validator → treasury mappings |
+| `weights.yml` | Subnet weight defaults |
+| `.env` | Environment variable overrides |
+| `validated_epochs.json` | Epoch finalization state |
+| `reputation.json` | Miner reputation data |
+| `jailed_coldkeys.json` | Enforcement records |
+
+## Resources
+
+<CardGroup cols={4}>
+  <Card title="GitHub Repository" icon="github" href="https://github.com/fx-integral/metahash">
+    Source code and issues
+  </Card>
+  <Card title="Epoch Mechanics" icon="clock" href="/understand-metahash/fundamentals/auction-mechanics">
+    Detailed auction timing
+  </Card>
+  <Card title="Validator Economics" icon="scale-balanced" href="/understand-metahash/economics/validator-role">
+    Validator role and incentives
+  </Card>
+  <Card title="Bittensor Docs" icon="book" href="https://docs.bittensor.com/">
+    Official Bittensor documentation
+  </Card>
+</CardGroup>
