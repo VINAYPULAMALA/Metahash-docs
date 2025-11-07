@@ -1,6 +1,6 @@
 ---
-title: "Deterministic Alpha Exchange"
-description: "Understand how MetaHash SN73 routes subnet α across Bittensor through deterministic auctions, treasury coordination, and network interoperability."
+title: "MetaHash Liquidity Cycle"
+description: "Understand how MetaHash SN73 routes subnet α across Bittensor through predictable auctions, treasury coordination, and network interoperability."
 ---
 
 <div style={{
@@ -16,14 +16,12 @@ description: "Understand how MetaHash SN73 routes subnet α across Bittensor thr
     margin: 0,
     color: 'inherit'
   }}>
-    MetaHash SN73 serves as Bittensor's liquidity coordination layer — transforming subnet output (α) into usable liquidity through validator-run deterministic auctions and routing that liquidity across the network's ecosystem of subnets and treasuries.
+    MetaHash SN73 serves as Bittensor's liquidity coordination layer — transforming subnet output (α) into usable liquidity through validator-run predictable auctions and routing that liquidity across the network's ecosystem of subnets and treasuries.
   </p>
 </div>
 
 Every **360 blocks** (≈72 minutes), MetaHash completes a synchronized cycle of α exchange, reward distribution, and liquidity rebalancing.
 This repeating process is what keeps subnet economies connected, efficient, and fair.
-
----
 
 ## 1. The Purpose of the MetaHash Exchange
 
@@ -33,7 +31,7 @@ But α alone isn't liquid — it needs a bridge to convert into spendable assets
 MetaHash provides that bridge.
 
 It does this through:
-- **Deterministic auctions:** predictable, validator-cleared α sales.
+- **Predictable auctions:** validator-cleared α sales that follow the same rules every epoch.
 - **Distributed treasuries:** many Master Validators (MVs), each managing their own liquidity budgets.
 - **Interoperable flow:** liquidity moving seamlessly between subnets through treasury settlements.
 
@@ -56,9 +54,7 @@ It does this through:
   </p>
 </div>
 
----
-
-## 2. The Deterministic Auction System (360 Blocks)
+## 2. The Predictable Auction Cycle (360 Blocks)
 
 Every 360 blocks, MetaHash executes its liquidity cycle through validator-managed auctions.
 
@@ -149,7 +145,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Bids are scored deterministically using the formula: Score = α_amount × (1 - discount).</td>
+      }}>Bids are scored using the shared formula: Score = α_amount × (1 - discount), so every validator reaches the same result.</td>
     </tr>
     <tr>
       <td style={{
@@ -191,8 +187,6 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
   </p>
 </div>
 
----
-
 ## 3. Treasury & Reward Flow
 
 After settlement, each treasury automatically redistributes proceeds according to a transparent split:
@@ -222,8 +216,6 @@ Validators are rewarded for running fair auctions, verifying bids, and maintaini
     These actions keep liquidity balanced, circulating, and auditable across the network.
   </p>
 </div>
-
----
 
 ## 4. Network Interoperability: How MetaHash Connects Subnets
 
@@ -262,8 +254,6 @@ SN73 acts as a **clearing hub**, ensuring α and liquidity stay in balance throu
   </p>
 </div>
 
----
-
 ## 5. The MetaHash Liquidity Loop
 
 Every 360 blocks, the same cycle repeats — linking subnet production, validator auctions, and treasury recycling into one continuous flow.
@@ -278,9 +268,118 @@ This continuous loop creates a **self-sustaining liquidity engine** where:
 - Treasuries support network growth.
 - The cycle repeats every 360 blocks, forever.
 
----
+### Benefits of Cross-Subnet Liquidity
+
+<table style={{
+  borderCollapse: 'collapse',
+  width: '100%',
+  margin: '1.5rem 0',
+  border: '2px solid rgba(255, 140, 0, 0.4)'
+}}>
+  <thead>
+    <tr>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Participant</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Benefit</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Miners (e.g., subnet 62)</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Sell α instantly at predictable prices.</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Offload surplus α through SN73 auctions.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Funds and validators</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Access diversified α supply without managing multiple positions.</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Acquire discounted α from several subnets via SN73.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Subnet operators</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Gain liquidity support and smoother reward payouts.</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Direct α output into SN73 as a liquidity sink.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>SN73 holders</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Capture yield from every subnet interacting with the treasury.</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Increased volume drives buybacks and treasury growth.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Continue Learning
-
-➡️ **Next:** [**Auction Mechanics →**](/understand-metahash/fundamentals/auction-mechanics)
+**Next:** [**Auction Mechanics →**](/understand-metahash/fundamentals/auction-mechanics)
 Explore the detailed block-by-block timing and phases of MetaHash auctions.
