@@ -50,29 +50,11 @@
             "pages": [
               "understand-metahash/fundamentals/introduction",
               "understand-metahash/fundamentals/epoch-auction-economics",
-              "understand-metahash/fundamentals/otc-on-bittensor"
-            ]
-          },
-          {
-            "group": "Economic Mechanics",
-            "pages": [
               "understand-metahash/fundamentals/auction-mechanics",
-              "understand-metahash/economics/alpha-exchange",
-              "understand-metahash/economics/treasury-structure",
               "understand-metahash/economics/validator-role",
-              "understand-metahash/economics/miner-lifecycle"
-            ]
-          },
-          {
-            "group": "Network Synergy",
-            "pages": [
+              "understand-metahash/economics/miner-lifecycle",
               "understand-metahash/network/interoperability",
-              "understand-metahash/network/glossary"
-            ]
-          },
-          {
-            "group": "About Us",
-            "pages": [
+              "understand-metahash/network/glossary",
               "team/index"
             ]
           }
