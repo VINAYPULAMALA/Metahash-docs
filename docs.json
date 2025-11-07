@@ -35,7 +35,7 @@
           {
             "group": "Overview",
             "pages": [
-              "otc-on-bittensor/otc-guide"
+              "otc-desk/overview"
             ]
           }
         ]
@@ -55,7 +55,7 @@
               "understand-metahash/economics/miner-lifecycle",
               "understand-metahash/network/interoperability",
               "understand-metahash/network/glossary",
-              "team/index"
+              "understand-metahash/community/team"
             ]
           }
         ]
@@ -86,7 +86,7 @@
           {
             "group": "Roadmap",
             "pages": [
-              "announcements/index"
+              "roadmap/index"
             ]
           }
         ]

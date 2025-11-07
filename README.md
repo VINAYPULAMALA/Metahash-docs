@@ -50,8 +50,8 @@ mintlify deploy
 ├── index.mdx              # Landing page wrapper
 ├── welcome/
 │   └── overview.mdx       # Welcome tab overview
-├── otc-on-bittensor/
-│   └── otc-guide.mdx      # OTC onboarding flow
+├── otc-desk/
+│   └── overview.mdx       # OTC onboarding flow
 ├── understand-metahash/
 │   ├── fundamentals/
 │   │   ├── auction-mechanics.mdx
@@ -61,9 +61,11 @@ mintlify deploy
 │   │   ├── miner-lifecycle.mdx
 │   │   ├── treasury-structure.mdx
 │   │   └── validator-role.mdx
-│   └── network/
-│       ├── glossary.mdx
-│       └── interoperability.mdx
+│   ├── network/
+│   │   ├── glossary.mdx
+│   │   └── interoperability.mdx
+│   └── community/
+│       └── team.mdx
 ├── miners-validators-guide/
 │   ├── getting-started/
 │   │   ├── introduction.mdx
@@ -81,9 +83,7 @@ mintlify deploy
 │   │   └── keep-running.mdx
 │   └── checklists/
 │       └── checklist.mdx
-├── announcements/
-│   └── index.mdx
-├── team/
+├── roadmap/
 │   └── index.mdx
 ├── internal/
 │   ├── reviews/
