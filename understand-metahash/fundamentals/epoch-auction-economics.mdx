@@ -254,12 +254,124 @@ SN73 acts as a **clearing hub**, ensuring α and liquidity stay in balance throu
   </p>
 </div>
 
-## 5. The MetaHash Liquidity Loop
+## 5. Multi-Treasury Coordination
+
+Each treasury operates autonomously but remains synchronized through shared epoch timing.
+This coordination ensures liquidity and rewards are distributed evenly across all validator-led treasuries.
+
+<table style={{
+  borderCollapse: 'collapse',
+  width: '100%',
+  margin: '1.5rem 0',
+  border: '2px solid rgba(255, 140, 0, 0.4)'
+}}>
+  <thead>
+    <tr>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Layer</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Validator Treasury</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Collects α from miners during auctions and distributes META/TAO post-settlement.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Global Sync Layer</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Ensures every treasury clears in the same 360-block rhythm, avoiding liquidity drift.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Inter-Treasury Rebalancing</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Enables optional balancing between validator pools if one exceeds or falls short of its target liquidity.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Audit Layer (IPFS + Chain)</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Keeps an immutable record of all treasury movements for transparency and verification.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    By linking many treasuries through predictable timing, MetaHash forms a coordinated liquidity web rather than a single centralized pool. The network becomes more stable as validator diversity increases.
+  </p>
+</div>
+
+## 6. The MetaHash Liquidity Loop
 
 Every 360 blocks, the same cycle repeats — linking subnet production, validator auctions, and treasury recycling into one continuous flow.
 
-```
-Miners sell α → Validators buy & verify → Treasuries redistribute → Subnets receive liquidity → repeat
+```mermaid
+flowchart TD
+    A[α Producers (Miners & Subnets)] -->|Submit α via bid| B[Validators Run Predictable Auctions]
+    B -->|Scored and Verified| C[Treasuries Acquire α]
+    C -->|Redistribute 75% Buybacks| D[Market Liquidity Support]
+    C -->|Airdrop 25% Rewards| E[Participants & Wallets]
+    D -->|Strengthens| F[META/TAO Ecosystem]
+    E -->|Reinforces participation| A
 ```
 
 This continuous loop creates a **self-sustaining liquidity engine** where:
