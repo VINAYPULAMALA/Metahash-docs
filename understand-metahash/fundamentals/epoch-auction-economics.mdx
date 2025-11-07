@@ -1,0 +1,402 @@
+---
+title: "Deterministic Alpha Exchange"
+description: "Understand how MetaHash SN73 transforms subnet α into network-wide liquidity through deterministic validator auctions, synchronized treasuries, and transparent reward flows."
+---
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(128, 128, 128, 0.08)',
+  border: '1px solid rgba(128, 128, 128, 0.2)',
+  borderRadius: '8px',
+  margin: 0
+}}>
+  <p style={{
+    fontSize: '1rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: 'inherit'
+  }}>
+    MetaHash SN73 is the liquidity engine of the Bittensor network — connecting subnet production (α) with capital allocation (META and TAO) through deterministic, validator-cleared auctions.
+  </p>
+</div>
+
+Every **360 blocks** (around 72 minutes), the system synchronizes:
+miners submit α, validators run auctions, treasuries execute buybacks, and rewards flow back into the ecosystem.
+This repeating process keeps the network in balance — predictable, transparent, and fair.
+
+## 1. The Purpose of the Alpha Exchange
+
+Each subnet in Bittensor produces **α** — its unique representation of value or output.
+However, α by itself isn't liquid. It must be exchanged for tokens that can circulate (META or TAO).
+The **Deterministic Alpha Exchange** provides the infrastructure for that conversion.
+
+The exchange is not a market in the traditional sense.
+There are no random trades, no bids racing against each other, and no price volatility.
+Instead, MetaHash runs a **scheduled clearing process** every 360 blocks, where:
+
+- Miners sell α in predictable auctions.
+- Validators verify and commit bids to the chain.
+- Treasuries redistribute proceeds automatically.
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    This design replaces speculation with coordination.
+  </p>
+</div>
+
+## 2. How Deterministic Auctions Work
+
+At the center of the system are **Master Validators (MVs)** — validators that manage their own treasuries and run auctions using budgets tied to their stake.
+Each MV operates independently but follows the same 360-block schedule.
+
+### Auction Cycle (per Epoch)
+Each deterministic auction follows four stages, all timed by block height:
+
+<table style={{
+  borderCollapse: 'collapse',
+  width: '100%',
+  margin: '1.5rem 0',
+  border: '2px solid rgba(255, 140, 0, 0.4)'
+}}>
+  <thead>
+    <tr>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Stage</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Block Range</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Preparation</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>0–50</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Each MV resets its treasury budget and finalizes previous settlements.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Bidding Window</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>50–300</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Miners submit α offers (amount + discount). Validators record and rank bids.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Verification</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>300–350</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Bids are scored deterministically and sorted. Winning offers fill the budget.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Settlement</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>350–360</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Treasuries clear results, send rewards, and prepare for the next epoch.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    All Master Validators settle simultaneously — creating a global liquidity pulse that repeats every 360 blocks.
+  </p>
+</div>
+
+## 3. Deterministic Scoring and Fair Ranking
+
+Each validator uses the same transparent formula to score bids:
+
+```
+Bid Score = α_amount × (1 - discount)
+```
+
+This means miners offering larger α or smaller discounts rank higher.
+Bids are filled in order of score until a treasury's budget runs out.
+Once rankings are finalized, they cannot change — guaranteeing fairness across all validators.
+
+### Why This Matters
+- No miner can jump ahead or bribe for position.
+- No validator can modify a bid after submission.
+- Everyone knows how the system behaves before it runs.
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    The result is trust through predictability.
+  </p>
+</div>
+
+---
+
+## 4. The Role of Master Validators and Treasuries
+
+Each **Master Validator** acts as an independent liquidity manager.
+Their goal: buy α efficiently, manage their treasury responsibly, and synchronize with the rest of the network.
+
+<table style={{
+  borderCollapse: 'collapse',
+  width: '100%',
+  margin: '1.5rem 0',
+  border: '2px solid rgba(255, 140, 0, 0.4)'
+}}>
+  <thead>
+    <tr>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Property</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Budget</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Determined by the validator's staked TAO. Larger stake = higher liquidity capacity.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Autonomy</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Each MV chooses its own α acquisition strategy.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Synchronization</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>All auctions start and end together, every 360 blocks.</td>
+    </tr>
+    <tr>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)',
+        fontWeight: '600'
+      }}><strong>Transparency</strong></td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Auction and treasury data stored on the Bittensor chain + IPFS.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    All treasuries are equal — there's no "main" treasury. Instead, dozens of validators form a federated market layer that shares one global rhythm.
+  </p>
+</div>
+
+---
+
+## 5. Treasury and Reward Flow
+
+When an epoch ends, the liquidity collected by each treasury doesn't just stay there.
+It is **redistributed automatically** through buybacks and airdrops.
+
+### Treasury Actions
+1. **Buybacks (75%)** —
+   Used to stabilize liquidity and support META and subnet markets.
+   Buybacks help balance prices and maintain network depth.
+2. **Airdrops (25%)** —
+   Sent directly to miners, α sellers, and participant wallets as yield.
+   These encourage ongoing participation in the ecosystem.
+
+### Validator Rewards
+Validators also receive compensation for:
+- Running and verifying auctions correctly.
+- Maintaining on-chain and IPFS state.
+- Keeping the exchange synchronized and deterministic.
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    Together, these flows ensure both sides of the system — miners and validators — stay aligned.
+  </p>
+</div>
+
+---
+
+## 6. The Liquidity Loop
+
+Every epoch, MetaHash completes the same predictable cycle:
+
+```
+Miners sell α → Validators buy & verify → Treasuries redistribute → Miners receive yield → repeat
+```
+
+This continuous loop creates a **self-sustaining liquidity engine** where:
+- α holders get instant exits.
+- Validators earn from clearing trades.
+- Treasuries support network growth.
+- The cycle repeats every 360 blocks, forever.
+
+---
+
+## Continue Learning
+
+➡️ **Next:** [**Auction Mechanics →**](/understand-metahash/fundamentals/auction-mechanics)
+Explore the detailed block-by-block timing and phases of MetaHash auctions.

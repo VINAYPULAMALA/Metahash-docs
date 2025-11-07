@@ -49,6 +49,7 @@
             "group": "MetaHash Fundamentals",
             "pages": [
               "understand-metahash/fundamentals/introduction",
+              "understand-metahash/fundamentals/epoch-auction-economics",
               "understand-metahash/fundamentals/otc-on-bittensor"
             ]
           },
