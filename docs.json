@@ -50,11 +50,22 @@
             "pages": [
               "understand-metahash/fundamentals/introduction",
               "understand-metahash/fundamentals/epoch-auction-economics",
-              "understand-metahash/fundamentals/auction-mechanics",
-              "understand-metahash/economics/validator-role",
+              "understand-metahash/fundamentals/auction-mechanics"
+              
+            ]
+          },
+          {
+            "group": "Network Roles",
+            "pages": [
               "understand-metahash/economics/miner-lifecycle",
-              "understand-metahash/network/interoperability",
-              "understand-metahash/network/glossary",
+              "understand-metahash/economics/validator-role",
+              "understand-metahash/network/glossary"
+              
+            ]
+          },
+          {
+            "group": "About Us",
+            "pages": [
               "understand-metahash/community/team"
             ]
           }

@@ -80,25 +80,6 @@ Each role contributes to the network's equilibrium:
 
 Together, these components create a self-rebalancing system: α moves from **production → verification → redistribution** in each epoch.
 
-## The Role of Master Validators and Distributed Treasuries
-
-MetaHash replaces the notion of a single, centralized treasury with a **network of decentralized treasuries**,  
-
-Each Master Validator functions like an on-chain **fund manager**:
-
-- **Independent strategy:** decides how to acquire α or which subnets to support.  
-- **Budget allocation:** proportional to its staked TAO.  
-- **Autonomous auctions:** runs its own predictable auction each epoch.  
-
-All treasuries operate on equal footing — there is no hierarchy, only synchronized independence.  
-Each MV governs its own budget, clears bids, and executes liquidity events using its local treasury.  
-
-Information about auctions, bids, and settlements isn’t stored in a database; it’s shared across the **Bittensor chain and IPFS**, allowing validators to coordinate securely without central infrastructure.  
-
-This structure makes MetaHash **decentralized at the liquidity layer**:  
-many auctions, many treasuries, one synchronized epoch.
-
-
 ## How MetaHash Works
 
 MetaHash functions on a **predictable epoch cycle** that's continuous.

@@ -54,6 +54,44 @@ It does this through:
   </p>
 </div>
 
+## The Role of Master Validators and Distributed Treasuries
+
+MetaHash replaces the notion of a single, centralized treasury with a **network of decentralized treasuries**,  
+
+Each Master Validator functions like an on-chain **fund manager**:
+
+- **Independent strategy:** decides how to acquire α or which subnets to support.  
+- **Budget allocation:** proportional to its staked TAO.  
+- **Autonomous auctions:** runs its own predictable auction each epoch.  
+
+All treasuries operate on equal footing — there is no hierarchy, only synchronized independence.  
+Each MV governs its own budget, clears bids, and executes liquidity events using its local treasury.  
+
+Information about auctions, bids, and settlements isn’t stored in a database; it’s shared across the **Bittensor chain and IPFS**, allowing validators to coordinate securely without central infrastructure.  
+
+This structure makes MetaHash **decentralized at the liquidity layer**:  
+many auctions, many treasuries, one synchronized epoch.
+
+## 6. The MetaHash Liquidity Loop
+
+Every 360 blocks, the same cycle repeats — linking subnet production, validator auctions, and treasury recycling into one continuous flow.
+
+```mermaid
+flowchart TD
+    A["Alpha Producers (Miners & Subnets)"] -->|"Submit alpha via bid"| B["Validators Run Predictable Auctions"]
+    B -->|"Scored and Verified"| C["Treasuries Acquire Alpha"]
+    C -->|"Redistribute 75% Buybacks"| D["Market Liquidity Support"]
+    C -->|"Airdrop 25% Rewards"| E["Participants & Wallets"]
+    D -->|"Strengthens"| F["META/TAO Ecosystem"]
+    E -->|"Reinforces participation"| A
+```
+
+This continuous loop creates a **self-sustaining liquidity engine** where:
+- α holders get instant exits.
+- Validators earn from clearing trades.
+- Treasuries support network growth.
+- The cycle repeats every 360 blocks, forever.
+
 ## 2. The Predictable Auction Cycle (360 Blocks)
 
 Every 360 blocks, MetaHash executes its liquidity cycle through validator-managed auctions.
@@ -184,36 +222,6 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
     fontWeight: '600'
   }}>
     All auctions across MetaHash run in parallel — synchronized by block height — creating a network-wide liquidity pulse every 360 blocks.
-  </p>
-</div>
-
-## 3. Treasury & Reward Flow
-
-After settlement, each treasury automatically redistributes proceeds according to a transparent split:
-
-- **75% → Buybacks & Liquidity Support**
-  Used to stabilize subnet liquidity, META pairs, and validator operations.
-- **25% → Airdrops & Wallet Rewards**
-  Sent to miners, α sellers, and long-term holders.
-
-Validators are rewarded for running fair auctions, verifying bids, and maintaining chain/IPFS state integrity.
-
-<div style={{
-  padding: '0.75rem 1rem',
-  background: 'rgba(255, 140, 0, 0.12)',
-  border: '2px solid rgba(255, 140, 0, 0.5)',
-  borderRadius: '8px',
-  margin: 0,
-  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
-}}>
-  <p style={{
-    fontSize: '1.05rem',
-    lineHeight: '1.6',
-    margin: 0,
-    color: '#ff8c00',
-    fontWeight: '600'
-  }}>
-    These actions keep liquidity balanced, circulating, and auditable across the network.
   </p>
 </div>
 
@@ -360,25 +368,36 @@ This coordination ensures liquidity and rewards are distributed evenly across al
   </p>
 </div>
 
-## 6. The MetaHash Liquidity Loop
 
-Every 360 blocks, the same cycle repeats — linking subnet production, validator auctions, and treasury recycling into one continuous flow.
+## 3. Treasury & Reward Flow
 
-```mermaid
-flowchart TD
-    A["Alpha Producers (Miners & Subnets)"] -->|"Submit alpha via bid"| B["Validators Run Predictable Auctions"]
-    B -->|"Scored and Verified"| C["Treasuries Acquire Alpha"]
-    C -->|"Redistribute 75% Buybacks"| D["Market Liquidity Support"]
-    C -->|"Airdrop 25% Rewards"| E["Participants & Wallets"]
-    D -->|"Strengthens"| F["META/TAO Ecosystem"]
-    E -->|"Reinforces participation"| A
-```
+After settlement, each treasury automatically redistributes proceeds according to a transparent split:
 
-This continuous loop creates a **self-sustaining liquidity engine** where:
-- α holders get instant exits.
-- Validators earn from clearing trades.
-- Treasuries support network growth.
-- The cycle repeats every 360 blocks, forever.
+- **75% → Buybacks & Liquidity Support**
+  Used to stabilize subnet liquidity, META pairs, and validator operations.
+- **25% → Airdrops & Wallet Rewards**
+  Sent to miners, α sellers, and long-term holders.
+
+Validators are rewarded for running fair auctions, verifying bids, and maintaining chain/IPFS state integrity.
+
+<div style={{
+  padding: '0.75rem 1rem',
+  background: 'rgba(255, 140, 0, 0.12)',
+  border: '2px solid rgba(255, 140, 0, 0.5)',
+  borderRadius: '8px',
+  margin: 0,
+  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+}}>
+  <p style={{
+    fontSize: '1.05rem',
+    lineHeight: '1.6',
+    margin: 0,
+    color: '#ff8c00',
+    fontWeight: '600'
+  }}>
+    These actions keep liquidity balanced, circulating, and auditable across the network.
+  </p>
+</div>
 
 ## Continue Learning
 **Next:** [**Auction Mechanics →**](/understand-metahash/fundamentals/auction-mechanics)
