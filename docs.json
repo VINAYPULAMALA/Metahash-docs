@@ -50,8 +50,9 @@
             "pages": [
               "understand-metahash/fundamentals/introduction",
               "understand-metahash/fundamentals/epoch-auction-economics",
-              "understand-metahash/fundamentals/auction-mechanics"
-              
+              "understand-metahash/fundamentals/auction-mechanics",
+              "understand-metahash/fundamentals/faq"
+
             ]
           },
           {
@@ -59,8 +60,10 @@
             "pages": [
               "understand-metahash/economics/miner-lifecycle",
               "understand-metahash/economics/validator-role",
+              "understand-metahash/economics/master-validator-role",
+              "understand-metahash/economics/staker-role",
               "understand-metahash/network/glossary"
-              
+
             ]
           },
           {

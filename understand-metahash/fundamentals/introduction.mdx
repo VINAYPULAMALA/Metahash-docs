@@ -22,6 +22,25 @@ title: "Understand Metahash SN73"
 Every decentralized system needs a rhythm like a predictable way for value to move between creation and circulation.
 **MetaHash SN73** brings that rhythm to Bittensor Ecosystem.
 
+Subnet 73 (SN73) is Bittensor's dedicated liquidity coordination layer. It runs as a purpose-built subnet whose sole job is to convert raw α rewards from any production subnet into META-denominated liquidity without exposing contributors to speculative order books. SN73 sits between the metagraph's commodity-producing subnets and the capital allocators, acting like the settlement rail that keeps the broader Bittensor economy in phase.
+
+The overview below shows how MetaHash links α-producing subnets, validators, and the treasury into a single circulation loop.
+
+<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
+  <img
+    src="/assets/main diagram/Untitled-2025-11-08-1718.png"
+    alt="MetaHash Network Diagram"
+    style={{ maxWidth: '100%', height: 'auto' }}
+    className="block dark:hidden"
+  />
+  <img
+    src="/assets/main diagram/Untitled-2025-11-08-1700.excalidraw.png"
+    alt="MetaHash Network Diagram"
+    style={{ maxWidth: '100%', height: 'auto' }}
+    className="hidden dark:block"
+  />
+</div>
+
 Metahash acts as the **liquidity router** of the network, transforming subnet 'α' into liquid, tradable value through **predictable OTC auctions**.
 Instead of chaotic order books or speculative markets, MetaHash relies on fixed epoch interval to connect miners, validators, and the treasury in a transparent, fair system of exchange.
 
@@ -31,16 +50,13 @@ Bittensor's subnets generate a variety of digital commodities each representing 
 However, the rewards earned within those subnets often remain siloed as α.
 While miners produce value, and investors seek productive yield, the two rarely meet without creating price noise or on-chain friction, so **MetaHash** was designed to solve this imbalance.
 
+MetaHash fixes that mismatch by enforcing deterministic OTC auctions every epoch, guaranteeing that α supply hits the treasury at pre-committed prices and sizes. Validators synchronize bids across subnets, then the treasury recycles the cleared META back into the network through buybacks and targeted airdrops. Discount bands are posted before the epoch based on the META budget earmarked by the treasury, so sellers know the exact window they will clear. The result is a tight feedback loop: production subnets know when liquidity will arrive, and capital providers can deploy without destabilizing the metagraph.
 
 
-- **Liquidity → unified market.**
-  SN73 allows α from any subnet to be exchanged for META through predictable OTC auctions.
 
-- **No market shocks.**
-  Epochs clear trades in timed cycles, aligning sellers and buyers at the same moment.
-
-- **Real yield, not speculation.**
-  Liquidity flows back into the ecosystem through buybacks and airdrops, recycling value rather than draining it.
+- **Liquidity → unified market.** SN73 allows α from any subnet to be exchanged for META through predictable OTC auctions.
+- **No market shocks.** Epochs clear trades in timed cycles, aligning sellers and buyers at the same moment.
+- **Real yield, not speculation.** Liquidity flows back into the ecosystem through buybacks and airdrops, recycling value rather than draining it.
 
 <div style={{
   padding: '0.75rem 1rem',
@@ -89,22 +105,7 @@ Each epoch follows a structured flow:
 2. **Validation Phase** — Validators review, verify, and commit winning bids to the ledger.
 3. **Settlement Phase** — The treasury executes payments, conducts buybacks, and redistributes rewards.
 
-After settlement, the next epoch begins—forming a continuous liquidity cycle that never overlaps or drifts off-schedule.This design keeps MetaHash synchronized across all participants, allowing value to flow predictably and fairly throughout the Bittensor network.
-
-<div style={{ display: 'flex', justifyContent: 'center', margin: '2rem 0' }}>
-  <img
-    src="/assets/main diagram/Untitled-2025-11-08-1718.png"
-    alt="MetaHash Network Diagram"
-    style={{ maxWidth: '100%', height: 'auto' }}
-    className="block dark:hidden"
-  />
-  <img
-    src="/assets/main diagram/Untitled-2025-11-08-1700.excalidraw.png"
-    alt="MetaHash Network Diagram"
-    style={{ maxWidth: '100%', height: 'auto' }}
-    className="hidden dark:block"
-  />
-</div>
+After settlement, the next epoch begins—forming a continuous liquidity cycle that never overlaps or drifts off-schedule. This design keeps MetaHash synchronized across all participants, allowing value to flow predictably and fairly throughout the Bittensor network.
 
 ## Why It Matters
 
@@ -119,88 +120,22 @@ It ensures that intelligence work, computation, and capital form a single econom
 
 ## Simplified MetaHash Network
 
-**MetaHash SN73** can be understood as three interlinked flows:
+**Example flow**
 
-<table style={{
-  borderCollapse: 'collapse',
-  width: '100%',
-  margin: '1.5rem 0',
-  border: '2px solid rgba(255, 140, 0, 0.4)'
-}}>
-  <thead>
-    <tr>
-      <th style={{
-        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
-        color: '#ff8c00',
-        fontWeight: '700',
-        padding: '0.875rem 1rem',
-        border: '2px solid rgba(255, 140, 0, 0.4)',
-        textAlign: 'left'
-      }}>Flow</th>
-      <th style={{
-        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
-        color: '#ff8c00',
-        fontWeight: '700',
-        padding: '0.875rem 1rem',
-        border: '2px solid rgba(255, 140, 0, 0.4)',
-        textAlign: 'left'
-      }}>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)',
-        fontWeight: '600'
-      }}><strong>α Production</strong></td>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)'
-      }}>Miners create subnet output that represents productive work.</td>
-    </tr>
-    <tr>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)',
-        fontWeight: '600'
-      }}><strong>Auction & Verification</strong></td>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)'
-      }}>Validators run predictable OTC cycles every epoch to verify bids and match liquidity.</td>
-    </tr>
-    <tr>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)',
-        fontWeight: '600'
-      }}><strong>Treasury Recycling</strong></td>
-      <td style={{
-        padding: '0.875rem 1rem',
-        border: '1px solid rgba(255, 140, 0, 0.3)',
-        background: 'rgba(255, 140, 0, 0.05)'
-      }}>The treasury clears all payments, buys back META, and redistributes yield to miners and holders.</td>
-    </tr>
-  </tbody>
-</table>
+1. Subnet 5 ends an epoch with 1,000 α. Miners bundle that output and post it to the next SN73 auction window.
+2. The auction clears at the posted discount band for that epoch. Validators confirm the bids and forward the totals to the treasury.
+3. The treasury pays the miners in META, uses 75% of remaining META for buybacks, and airdrops the other 25% to aligned holders.
 
-This design allows MetaHash to function like an *economic router* inside Bittensor where α finds its optimal path, liquidity circulates constantly, and rewards compound transparently.
+This simple path shows how MetaHash routes work output into fresh liquidity and puts the proceeds back into the network without noise.
 
 ## At a Glance
 
--  **Epoch cadence:** Every 360 Blocks
--  **Auction model:** Deterministic OTC cycle
--  **Liquidity loop:** Miners → Validators → Treasury → Miners
--  **Reward split:** 75 % Buybacks / 25 % Airdrops
--  **Purpose:** Convert α into liquid, productive yield across the Bittensor network
+- **Epoch cadence:** Every 360 blocks
+- **Auction model:** Deterministic OTC cycle
+- **Liquidity loop:** Miners → Validators → Treasury → Miners
+- **Reward split:** 75% buybacks / 25% airdrops
+- **Purpose:** Convert α into liquid, productive yield across the Bittensor network
 
-## Continue Learning
+## Next Steps
 
-Next: [**Understand MetaHash Fundamentals →**](/understand-metahash/fundamentals/introduction)
-Learn how epochs synchronize miners and validators, and explore the mechanisms that keep liquidity moving predictably through MetaHash's economic design.
+Head to the miners-validators guide (start with the getting-started chapter) to see how to register, place bids, and keep your operations aligned with the SN73 schedule.
