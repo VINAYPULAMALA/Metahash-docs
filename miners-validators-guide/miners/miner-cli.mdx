@@ -1,0 +1,271 @@
+---
+title: "Miner CLI Reference"
+description: "Command-line utilities for setting up, managing, and monitoring a MetaHash Miner on the Bittensor network."
+---
+
+<Note>
+**Developer-focused reference:** This page lists the most common CLI commands for managing a MetaHash Miner within the Bittensor network. Use these commands to configure wallets, launch your miner, verify registration, and troubleshoot runtime issues.
+</Note>
+
+<Warning>
+Commands assume Ubuntu 22.04 LTS and a functioning Bittensor installation. For conceptual guidance, see the [Miner's Setup Guide →](/miners-validators-guide/miners/miner-advanced-guide).
+</Warning>
+
+## Wallet & Key Management
+
+Create and manage your coldkey/hotkey pairs.
+
+<CodeGroup>
+```bash Create a new coldkey
+btcli wallet new_coldkey --wallet.name miner_wallet
+```
+
+```bash Create a new hotkey
+btcli wallet new_hotkey --wallet.name miner_wallet
+```
+
+```bash List all wallets
+btcli wallet list
+```
+
+```bash Show wallet overview
+btcli wallet overview --wallet.name miner_wallet
+```
+</CodeGroup>
+
+<Tip>
+Keep your coldkey secure and offline. Only the hotkey needs to be on the server running the miner.
+</Tip>
+
+## Miner Setup & Launch
+
+Initialize and start your MetaHash miner.
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/fx-integral/metahash.git
+    cd metahash
+    ```
+  </Step>
+
+  <Step title="Install dependencies">
+    ```bash
+    pip install -r requirements.txt
+    ```
+  </Step>
+
+  <Step title="Verify Python environment">
+    ```bash
+    python3 --version
+    pip list | grep bittensor
+    ```
+  </Step>
+
+  <Step title="Launch the miner">
+    ```bash
+    python3 -m metahash.miner --wallet miner_wallet --hotkey miner_hotkey
+    ```
+  </Step>
+</Steps>
+
+<Info>
+For advanced launch configurations with bid parameters, see the [Miner Guide →](/miners-validators-guide/miners/miner-advanced-guide#quick-start).
+</Info>
+
+## Network & Registration Checks
+
+Verify miner registration and subnet connectivity.
+
+<CodeGroup>
+```bash List all active subnets
+# Ensure SN73 appears in the list
+btcli subnets list
+```
+
+```bash Verify registration on SN73
+btcli subnets list --netuid 73
+```
+
+```bash Check staking status
+btcli stake list --wallet.name miner_wallet
+```
+
+```bash Display current block height
+btcli chain overview
+```
+</CodeGroup>
+
+<Accordion title="What if SN73 doesn't appear?">
+If SN73 doesn't appear in the subnet list, verify your connection to the Bittensor network:
+- Check your `--subtensor.network` parameter
+- Ensure your node is synced
+- Verify network connectivity
+</Accordion>
+
+## Logs & Diagnostics
+
+Monitor runtime activity and debug issues.
+
+<Tabs>
+  <Tab title="Real-time logs">
+    ```bash
+    # View miner logs in real time
+    tail -f ~/.bittensor/miner.log
+    ```
+  </Tab>
+
+  <Tab title="Filter errors">
+    ```bash
+    # Show only error messages
+    grep "ERROR" ~/.bittensor/miner.log
+    ```
+  </Tab>
+
+  <Tab title="Recent logs">
+    ```bash
+    # Check last 50 lines of logs
+    tail -n 50 ~/.bittensor/miner.log
+    ```
+  </Tab>
+
+  <Tab title="System resources">
+    ```bash
+    # Verify system resource usage
+    htop
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+Common log locations:
+- Miner logs: `~/.bittensor/miner.log`
+- System logs: `/var/log/syslog`
+- Application logs: Check your miner's `--logging.logging_dir` parameter
+</Tip>
+
+## Maintenance & Updates
+
+Keep your miner software up to date and healthy.
+
+<Steps>
+  <Step title="Pull latest changes">
+    ```bash
+    git pull origin main
+    ```
+  </Step>
+
+  <Step title="Update dependencies">
+    ```bash
+    pip install -r requirements.txt --upgrade
+    ```
+  </Step>
+
+  <Step title="Restart miner">
+    ```bash
+    pkill -f metahash.miner
+    python3 -m metahash.miner --wallet miner_wallet --hotkey miner_hotkey
+    ```
+  </Step>
+
+  <Step title="Update system packages">
+    ```bash
+    sudo apt update && sudo apt upgrade -y
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+Always backup your wallet files before performing major updates:
+```bash
+cp -r ~/.bittensor/wallets ~/wallet-backup-$(date +%Y%m%d)
+```
+</Warning>
+
+## Common Troubleshooting Commands
+
+Quick reference for resolving common issues.
+
+<AccordionGroup>
+  <Accordion title="Check if miner is running">
+    ```bash
+    ps aux | grep metahash.miner
+    ```
+  </Accordion>
+
+  <Accordion title="Verify network connectivity">
+    ```bash
+    # Ping the subtensor network
+    ping -c 4 <subtensor-node-ip>
+
+    # Check open ports
+    netstat -tuln | grep 9944
+    ```
+  </Accordion>
+
+  <Accordion title="Reset miner state">
+    ```bash
+    # Caution: This will reset your miner's local state
+    rm -rf ~/.bittensor/miners/netuid73/
+    ```
+  </Accordion>
+
+  <Accordion title="Check disk space">
+    ```bash
+    df -h
+    du -sh ~/.bittensor
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Configuration
+
+Environment variables and configuration options.
+
+<ParamField path="WALLET_PASSWORD" type="string">
+  Password for unlocking your wallet. Set in `.env` file.
+</ParamField>
+
+<ParamField path="BITTENSOR_NETWORK" type="string" default="finney">
+  Bittensor network to connect to (finney, test, local).
+</ParamField>
+
+<ParamField path="LOGGING_LEVEL" type="string" default="INFO">
+  Logging verbosity level (DEBUG, INFO, WARNING, ERROR).
+</ParamField>
+
+<CodeGroup>
+```bash .env configuration
+WALLET_PASSWORD=your_secure_password
+BITTENSOR_NETWORK=finney
+LOGGING_LEVEL=DEBUG
+```
+
+```bash Run with custom config
+python3 -m metahash.miner \
+  --wallet.name miner_wallet \
+  --wallet.hotkey miner_hotkey \
+  --subtensor.network finney \
+  --logging.debug
+```
+</CodeGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Miner Guide" icon="book" href="/miners-validators-guide/miners/miner-advanced-guide">
+    Deep dive into auction mechanics and bidding strategies
+  </Card>
+
+  <Card title="Auction Mechanics" icon="gavel" href="/understand-metahash/fundamentals/auction-mechanics">
+    Understand the epoch lifecycle and timing
+  </Card>
+
+  <Card title="Safety Warnings" icon="shield" href="/miners-validators-guide/getting-started/safety-warnings">
+    Important security considerations
+  </Card>
+
+  <Card title="GitHub Repository" icon="github" href="https://github.com/fx-integral/metahash">
+    View source code and contribute
+  </Card>
+</CardGroup>

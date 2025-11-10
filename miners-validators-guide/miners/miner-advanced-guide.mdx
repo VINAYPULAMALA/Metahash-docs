@@ -1,33 +1,26 @@
 ---
-title: Miner Guide
-description: Technical guide for developers running MetaHash miners on Subnet 73. Assumes familiarity with Bittensor, Python environments, and CLI operations.
+title: "Miner's Setup Guide"
+description: "This guide walks you through the **basic setup** (environment, wallet + hotkey), the **miner ↔ validator flow**, and how to run the miner so your α payments are correctly counted during settlement."
 ---
 
-<Note>
-**Developer-focused guide:** This documentation is for operators with existing Bittensor knowledge. For conceptual background, see [Understand MetaHash](/understand-metahash/fundamentals/introduction).
-</Note>
 
-## Quick Start
+## Setup instructions
 
 <Steps>
-  <Step title="Clone and install">
+  <Step title="Install MetaHash">
     ```bash
     git clone https://github.com/fx-integral/metahash.git
     cd metahash
     python -m venv .venv && source .venv/bin/activate
     pip install -U pip wheel uv
     uv pip install -e .
-    ```
-  </Step>
-
-  <Step title="Configure environment">
-    ```bash
     cp .env.template .env
-    # Edit .env with WALLET_PASSWORD and optional BITTENSOR_NETWORK override
+    # Edit .env with WALLET_PASSWORD and optionally BITTENSOR_NETWORK
+    # Or unlock wallet interactively by starting the miner
     ```
   </Step>
 
-  <Step title="Create wallet and register">
+  <Step title="Create wallet & hotkey; register on SN73">
     ```bash
     btcli wallet new_coldkey --wallet.name mywallet
     btcli wallet new_hotkey --wallet.name mywallet --wallet.hotkey miner1
@@ -35,322 +28,158 @@ description: Technical guide for developers running MetaHash miners on Subnet 73
     ```
   </Step>
 
-  <Step title="Run miner">
-    ```bash
-    python neurons/miner.py \
-      --netuid 73 \
-      --wallet.name mywallet \
-      --wallet.hotkey miner1 \
-      --subtensor.network "ws://x.x.x.x:9944" \
-      --miner.bids.netuids 71 72 73 \
-      --miner.bids.amounts 1.0 0.5 0.25 \
-      --miner.bids.discounts 500 700 900 \
-      --axon.port 8091 \
-      --axon.external_port 8091 \
-      --logging.debug \
-      --payment.validators HOTKEY_A HOTKEY_B HOTKEY_C
-    ```
+  <Step title="Fund the wallet">
+    Ensure your coldkey has enough TAO to register and process transactions to operate.
   </Step>
 </Steps>
 
 
-## Auction Flow
+## Run the Miner
 
-<Info>
-For detailed epoch mechanics, see [Epoch Lifecycle & Auction Timing](/understand-metahash/fundamentals/auction-mechanics).
-</Info>
-
-The miner participates in a three-epoch cycle:
-
-<Tabs>
-  <Tab title="Epoch e: Bid">
-    1. Receive `AuctionStart` signal from validators
-    2. Submit bid lines: `(subnet_id, alpha_amount, discount_bps)`
-    3. Validator ranks bids by TAO value (with slippage/reputation caps)
-    4. Receive `Win` notification with payment window `[as, de]` for epoch e+1
-  </Tab>
-
-  <Tab title="Epoch e+1: Pay">
-    5. Transfer α within `[as, de]` to treasury hotkey (see `metahash/treasuries.py`)
-    6. If `STRICT_PER_SUBNET=true`, each line must settle from its source subnet
-  </Tab>
-
-  <Tab title="Epoch e+2: Settle">
-    7. Validator verifies payment, burns underfill to UID 0
-    8. Validator broadcasts updated weights on-chain
-  </Tab>
-</Tabs>
-
-## Discount Mechanics
-
-### Understanding `discount_bps`
-
-Each bid includes a `discount_bps` field defining the **maximum haircut** you accept after subnet weights and slippage adjustments.
-
-**Basis point conversions:**
-- `500` bps = 5%
-- `700` bps = 7%
-- `2500` bps = 25%
-
-### How Weights Affect Effective Discount
-
-Subnet weights impose an implicit discount. Example:
-- Weight `0.8` = 20% baseline haircut
-- If you set `discount_bps=2500` (25%), the miner can offer an additional 5% discount
-- **Result:** You receive 75% of α's full value
-
-If the baseline weight haircut exceeds your `discount_bps`, the bid is **withheld**.
-
-### Discount Modes
-
-<CardGroup cols={2}>
-  <Card title="Effective (Default)" icon="calculator">
-    Auto-adjusts discounts to respect your `discount_bps` cap after applying subnet weights
-  </Card>
-  <Card title="Raw Mode" icon="code">
-    Pass `--miner.bids.raw_discount` to send bps values exactly as entered (no weight adjustment)
-  </Card>
-</CardGroup>
-
-## CLI Reference
-
-### Bid Configuration
-
-<ParamField path="--miner.bids.netuids" type="int[]" required>
-  Target subnet IDs (duplicates allowed: `30 30 12`)
-</ParamField>
-
-<ParamField path="--miner.bids.amounts" type="float[]" required>
-  α amounts per bid (`1000 500 200`)
-</ParamField>
-
-<ParamField path="--miner.bids.discounts" type="int[]" required>
-  Discount per bid in bps (default mode) or raw if `--miner.bids.raw_discount` set
-</ParamField>
-
-<ParamField path="--miner.bids.raw_discount" type="boolean">
-  Treat discounts as raw values (bypass effective discount calculation)
-</ParamField>
-
-<ParamField path="--miner.bids.validators" type="string[]">
-  Hotkeys to source α from (overrides `--payment.validators` if supplied)
-</ParamField>
-
-### Spend Management
-
-<ParamField path="--bidding.max_total_alpha" type="float" default="0">
-  Cap total α spent per session (`0` = unlimited)
-</ParamField>
-
-<ParamField path="--bidding.min_stake_alpha" type="float">
-  Minimum α buffer before pausing bids
-</ParamField>
-
-<ParamField path="--bidding.stop_on_low_stake" type="boolean">
-  Halt bidding when buffer drops below threshold
-</ParamField>
-
-### Payment Routing
-
-<ParamField path="--payment.validators" type="string[]" required>
-  Pool of origin hotkeys (SS58) for round-robin α payments
-</ParamField>
-
-<ParamField path="--payment.map" type="string">
-  Explicit subnet → hotkey map (`73:5G...`). Overrides `--payment.validators`
-</ParamField>
-
-### Auto-Sell
-
-<ParamField path="--autosell.enabled" type="boolean">
-  Enable automatic α stake liquidation
-</ParamField>
-
-<ParamField path="--autosell.keep_alpha" type="float" default="0">
-  Retain this amount of α (sell surplus)
-</ParamField>
-
-<ParamField path="--autosell.subnet_id" type="int" default="73">
-  Subnet to monitor for auto-sell
-</ParamField>
-
-<ParamField path="--autosell.check_interval" type="int">
-  Polling interval (seconds)
-</ParamField>
-
-<ParamField path="--autosell.max_retries" type="int">
-  Retry attempts for failed transactions
-</ParamField>
-
-<ParamField path="--autosell.wait_for_inclusion" type="boolean">
-  Require block inclusion before marking success
-</ParamField>
-
-<ParamField path="--autosell.wait_for_finalization" type="boolean">
-  Require finality confirmation
-</ParamField>
-
-<ParamField path="--autosell.period" type="int">
-  Block period to wait for confirmations
-</ParamField>
-
-<ParamField path="--autosell.total_alpha_target" type="float" default="0">
-  Total α to liquidate (`0` = unlimited)
-</ParamField>
-
-## Example Configurations
-
-<CodeGroup>
-```bash Basic Multi-Subnet Bidding
+```bash
 python neurons/miner.py \
   --netuid 73 \
   --wallet.name mywallet \
   --wallet.hotkey miner1 \
-  --subtensor.network "ws://127.0.0.1:9944" \
+  --subtensor.network "ws://x.x.x.x:9944" \
   --miner.bids.netuids 71 72 73 \
   --miner.bids.amounts 1.0 0.5 0.25 \
   --miner.bids.discounts 500 700 900 \
   --axon.port 8091 \
-  --payment.validators 5GHot...KeyA 5GHot...KeyB
+  --axon.external_port 8091 \
+  --logging.debug \
+  --payment.validators $source-stake-hotkeyA $source-stake-hotkeyB $source-stake-hotkeyC
 ```
 
-```bash With Auto-Sell
-python neurons/miner.py \
-  --netuid 73 \
-  --wallet.name mywallet \
-  --wallet.hotkey miner1 \
-  --miner.bids.netuids 73 \
-  --miner.bids.amounts 2.0 \
-  --miner.bids.discounts 1000 \
-  --payment.validators 5GHot...KeyA \
-  --autosell.enabled \
-  --autosell.keep_alpha 0
-```
+<Warning>
+`--payment.validators` are **hotkeys where stake will be transferred from**.
+`--miner.bids.discounts` are **basis points (bps)** — not percent.
+- `500` = 5%
+- `700` = 7%
+- `900` = 9%
+</Warning>
 
-```bash Spend Limits + Explicit Routing
-python neurons/miner.py \
-  --netuid 73 \
-  --wallet.name mywallet \
-  --wallet.hotkey miner1 \
-  --miner.bids.netuids 30 30 12 \
-  --miner.bids.amounts 100 50 25 \
-  --miner.bids.discounts 500 500 800 \
-  --bidding.max_total_alpha 200 \
-  --bidding.min_stake_alpha 10 \
-  --bidding.stop_on_low_stake \
-  --payment.map "30:5GKey1,12:5GKey2"
-```
+## High-Level Overview (Miner ↔ Validator)
 
-```bash Raw Discount Mode
-python neurons/miner.py \
-  --netuid 73 \
-  --wallet.name mywallet \
-  --wallet.hotkey miner1 \
-  --miner.bids.netuids 73 \
-  --miner.bids.amounts 5.0 \
-  --miner.bids.discounts 500 \
-  --miner.bids.raw_discount \
-  --payment.validators 5GHot...KeyA
-```
-</CodeGroup>
+The miner participates in a multi-epoch cycle with validators:
 
-## Operational Notes
+<Tabs>
+  <Tab title="Epoch e: Bid">
+    **AuctionStart** – Validator broadcasts auction start.
 
-### Payment Validators
+    **Bids from miner** – You submit bid lines:
+    ```
+    (subnet_id, alpha_amount, discount_bps)
+    ```
 
-`--payment.validators` defines the hotkeys from which α will be sourced. Ensure each has sufficient stake to cover the bids they might fund.
+    Where:
+    - `subnet_id` – target subnet to support with α
+    - `alpha_amount` – how much α you offer
+    - `discount_bps` – **basis points (bps)** where 1 bp = 0.01%
+      - `500` = 5%
+      - `700` = 7%
+      - `900` = 9%
+  </Tab>
 
-### Port Configuration
+  <Tab title="Clearing & Win">
+    **Validator clearing** – Bids ranked by **TAO value** with slippage & optional reputation caps; partial fills allowed.
 
-Miner requires:
-- `--axon.port` and `--axon.external_port` (default `8091`)
-- Ensure port is accessible from validator nodes
+    **Win invoice (still epoch e)** – If accepted, you receive `Win` with **payment window** `[as, de]` (block numbers) occurring in **epoch e+1**.
+  </Tab>
 
-### Logging
+  <Tab title="Epoch e+1: Pay">
+    **Miner sends α** – Pay within `[as, de]` to a **known treasury** (see `metahash/treasuries.py`).
 
-Use `--logging.debug` for verbose output. Logs include:
-- Auction start signals
-- Bid submission confirmations
-- Win notifications with payment windows
-- Payment transfer details
-- Settlement outcomes
+    <Warning>
+    With `STRICT_PER_SUBNET=true`, each accepted bid line must be **paid on its own subnet**.
+    </Warning>
+  </Tab>
 
-### State Management
+  <Tab title="Epoch e+2: Settle">
+    **Settlement & weights** – Validator verifies payments, **burns underfill** to UID 0, and sets weights on-chain.
+  </Tab>
+</Tabs>
 
-The miner maintains ephemeral state for:
-- Active bid tracking
-- Payment window monitoring
-- Auto-sell thresholds
+## Understanding `discount_bps`
 
-No persistent state files are required (stateless design).
+Each bid includes a `discount_bps` field, which sets the **maximum discount you are willing to accept** on the value of your α, after adjusting for slippage and validator-specific subnet weights.
 
-## Troubleshooting
+### Basis Points Explained
+
+**Basis points (bps):** 1 bp = 0.01%
+- `0` bps = no discount (you expect full value)
+- `500` bps = 5% max discount
+- `2500` bps = 25% max discount
+
+### How It Works
+
+<Steps>
+  <Step title="Subnet weight applies baseline haircut">
+    Subnet weights apply an implicit haircut. For example, a subnet weight of `0.8` means you already face a 20% baseline discount.
+  </Step>
+
+  <Step title="Your discount_bps sets the maximum">
+    Your `discount_bps` sets the maximum haircut you are willing to accept, including this baseline.
+  </Step>
+
+  <Step title="Validator enforces your limit">
+    The validator ensures your **effective discount never exceeds your configured max**.
+  </Step>
+
+  <Step title="Protection against unfavorable conditions">
+    If the subnet's baseline discount is greater than your max, the bid is not sent.
+  </Step>
+</Steps>
+
+### Examples
 
 <AccordionGroup>
-  <Accordion title="Bids not accepted" icon="circle-xmark">
-    **Check:**
-    - `discount_bps` may be too low given subnet weight haircuts
-    - Insufficient α stake on payment validators
-    - Miner not receiving `AuctionStart` signals (check subtensor connectivity)
+  <Accordion title="Example 1: Accepted Bid" icon="check">
+    - **Subnet weight** = `0.8` (20% haircut)
+    - **Your discount** = 25% max (`2500` bps)
+    - **Effective discount applied** = 5% (difference between 25% and 20%)
+    - **Result:** You receive 75% of your α's value ✅
   </Accordion>
 
-  <Accordion title="Payment failures" icon="wallet">
-    **Common causes:**
-    - Payment sent outside `[as, de]` window
-    - Wrong treasury hotkey (verify `metahash/treasuries.py`)
-    - If `STRICT_PER_SUBNET=true`, α not sourced from correct subnet
+  <Accordion title="Example 2: Tight Fill" icon="arrows-to-circle">
+    - **Subnet weight** = `0.95` (5% haircut)
+    - **Your discount** = 25% max (`2500` bps)
+    - **Effective discount applied** = 25% – 5% = 20%
+    - **Result:** You receive 75% of your α's value ✅
   </Accordion>
 
-  <Accordion title="Auto-sell not triggering" icon="robot">
-    **Verify:**
-    - `--autosell.enabled` flag set
-    - Surplus α exceeds `--autosell.keep_alpha` threshold
-    - Check `--autosell.check_interval` timing
+  <Accordion title="Example 3: Rejected Bid" icon="xmark">
+    - **Subnet weight** = `0.7` (30% haircut)
+    - **Your discount** = 25% max (`2500` bps)
+    - **Result:** Since 30% > 25%, the bid is **not sent** ❌
   </Accordion>
 </AccordionGroup>
 
-## Quick Reference
+### Why This Matters
 
-<CodeGroup>
-```bash Check Miner Help
-python neurons/miner.py --help
-```
+<Warning>
+**Set and forget:** You can specify the maximum discount you're comfortable with and the code guarantees you will never be forced into a worse deal.
 
-```bash Verify Wallet Registration
-btcli subnet metagraph --netuid 73 | grep <your-hotkey>
-```
+**Certainty and safety:** This provides predictability, similar to OTC markets where miners typically offer ~10–20% discounts.
+</Warning>
 
-```bash Check Stake on Payment Validators
-btcli stake show --wallet.name mywallet --wallet.hotkey miner1
-```
+## Next Steps
 
-```bash Monitor Live Logs
-tail -f ~/.bittensor/miners/miner.log
-```
-
-```bash View Treasury Mappings
-cat metahash/treasuries.py
-```
-</CodeGroup>
-
-### Key Files
-
-| File | Purpose |
-|------|---------|
-| `.env` | Wallet password and network config |
-| `metahash/treasuries.py` | Validator hotkey → treasury mappings |
-| `neurons/miner.py` | Main miner entry point |
-
-## Resources
-
-<CardGroup cols={3}>
-  <Card title="GitHub Repository" icon="github" href="https://github.com/fx-integral/metahash">
-    Source code and issues
+<CardGroup cols={2}>
+  <Card title="Miner CLI Reference" icon="terminal" href="/miners-validators-guide/miners/miner-cli">
+    Complete command-line reference for managing your miner
   </Card>
-  <Card title="Epoch Mechanics" icon="clock" href="/understand-metahash/fundamentals/auction-mechanics">
-    Detailed auction timing
+
+  <Card title="Epoch & Auction Mechanics" icon="clock" href="/understand-metahash/fundamentals/auction-mechanics">
+    Learn about the epoch lifecycle and auction timing
   </Card>
-  <Card title="Alpha Economics" icon="coins" href="/understand-metahash/economics/alpha-exchange">
-    α token mechanics
+
+  <Card title="How MetaHash Moves Liquidity" icon="arrows-spin" href="/understand-metahash/fundamentals/epoch-auction-economics">
+    Understand the liquidity flow and reward distribution
+  </Card>
+
+  <Card title="Safety Warnings" icon="triangle-exclamation" href="/miners-validators-guide/getting-started/safety-warnings">
+    Important security considerations for miners
   </Card>
 </CardGroup>
+

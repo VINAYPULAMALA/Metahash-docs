@@ -1,6 +1,6 @@
 ---
-title: "MetaHash Liquidity Cycle"
-description: "Understand how MetaHash SN73 routes subnet α across Bittensor through predictable auctions, treasury coordination, and network interoperability."
+title: "How MetaHash Moves Liquidity"
+description: "Learn how MetaHash turns subnet α into network liquidity through validator auctions, synchronized treasuries, and predictable reward flows."
 ---
 
 <div style={{
@@ -16,32 +16,37 @@ description: "Understand how MetaHash SN73 routes subnet α across Bittensor thr
     margin: 0,
     color: 'inherit'
   }}>
-    MetaHash SN73 serves as Bittensor's liquidity coordination layer — transforming subnet output (α) into usable liquidity through validator-run predictable auctions and routing that liquidity across the network's ecosystem of subnets and treasuries.
+    MetaHash isn't a marketplace or an exchange — it's a **liquidity engine**. Every subnet in Bittensor produces value called **α** (alpha). MetaHash transforms that output into usable liquidity through validator-cleared auctions and synchronized treasuries, creating a closed, self-balancing economy where value constantly moves.
   </p>
 </div>
 
-Every **360 blocks** (≈72 minutes), MetaHash completes a synchronized cycle of α exchange, reward distribution, and liquidity rebalancing.
-This repeating process is what keeps subnet economies connected, efficient, and fair.
+## MetaHash in Motion
 
-## 1. The Purpose of the MetaHash Exchange
+MetaHash acts like the **heart of liquidity** in Bittensor — pumping META and TAO through the network in steady, predictable cycles.
 
-Each subnet in Bittensor creates **α**, a measure of its contribution or intelligence output.
-But α alone isn't liquid — it needs a bridge to convert into spendable assets like META or TAO.
+- **Miners and Subnets** generate α — proof of intelligence output.
+- **Validators** compete to buy α, setting fair on-chain prices.
+- **Treasuries** collect liquidity and reissue rewards.
+- **Holders** and **funds** receive yield through buybacks and airdrops.
 
-MetaHash provides that bridge.
+Each role contributes to the motion — together, they keep the network alive. Liquidity never stands still; it flows through MetaHash like oxygen through an organism.
 
-It does this through:
-- **Predictable auctions:** validator-cleared α sales that follow the same rules every epoch.
-- **Distributed treasuries:** many Master Validators (MVs), each managing their own liquidity budgets.
-- **Interoperable flow:** liquidity moving seamlessly between subnets through treasury settlements.
+## Why the Liquidity Loop Exists
+
+Each subnet emits **α** as proof of the intelligence or compute it contributes. On its own α is not liquid, so MetaHash provides the bridge from production to spendable value.
+
+```
+α_i = E_i × Q_i
+```
+
+`E_i` is the emission rate for subnet `i`, and `Q_i` reflects performance. MetaHash aims to keep rewards tied to that measurable output, not speculation.
 
 <div style={{
   padding: '0.75rem 1rem',
   background: 'rgba(255, 140, 0, 0.12)',
   border: '2px solid rgba(255, 140, 0, 0.5)',
   borderRadius: '8px',
-  margin: 0,
-  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
+  margin: '1.5rem 0 0'
 }}>
   <p style={{
     fontSize: '1.05rem',
@@ -50,51 +55,41 @@ It does this through:
     color: '#ff8c00',
     fontWeight: '600'
   }}>
-    This turns Bittensor's intelligence layer into an active economic layer — where subnet output constantly translates into network value.
+    The goal is simple: every unit of α should find a buyer, clear predictably, and return as liquidity that supports the entire metagraph.
   </p>
 </div>
 
-## The Role of Master Validators and Distributed Treasuries
+## Epoch Rhythm: 360-Block Cadence
 
-MetaHash replaces the notion of a single, centralized treasury with a **network of decentralized treasuries**,  
+MetaHash runs a full liquidity cycle every **360 blocks** (≈72 minutes). Miners, validators, and treasuries act in lockstep:
 
-Each Master Validator functions like an on-chain **fund manager**:
+1. **α submission** – Miners post subnet ID, α amount, and desired discount.
+2. **Validator auctions** – Validators bid in META/TAO and rank supply using the shared score `score = α × (1 - discount)`.
+3. **Deterministic clearing** – The clearing price is the ratio between total bids and α sold.
 
-- **Independent strategy:** decides how to acquire α or which subnets to support.  
-- **Budget allocation:** proportional to its staked TAO.  
-- **Autonomous auctions:** runs its own predictable auction each epoch.  
+```
+P_α = Σ bids / Σ α_sold
+```
 
-All treasuries operate on equal footing — there is no hierarchy, only synchronized independence.  
-Each MV governs its own budget, clears bids, and executes liquidity events using its local treasury.  
-
-Information about auctions, bids, and settlements isn’t stored in a database; it’s shared across the **Bittensor chain and IPFS**, allowing validators to coordinate securely without central infrastructure.  
-
-This structure makes MetaHash **decentralized at the liquidity layer**:  
-many auctions, many treasuries, one synchronized epoch.
-
-## 6. The MetaHash Liquidity Loop
-
-Every 360 blocks, the same cycle repeats — linking subnet production, validator auctions, and treasury recycling into one continuous flow.
+4. **Treasury conversion** – Winning validators transfer META/TAO for α and log results to IPFS + chain.
+5. **Reward execution** – Treasuries split inflow into buybacks and airdrops before the next epoch begins.
 
 ```mermaid
 flowchart TD
-    A["Alpha Producers (Miners & Subnets)"] -->|"Submit alpha via bid"| B["Validators Run Predictable Auctions"]
-    B -->|"Scored and Verified"| C["Treasuries Acquire Alpha"]
-    C -->|"Redistribute 75% Buybacks"| D["Market Liquidity Support"]
-    C -->|"Airdrop 25% Rewards"| E["Participants & Wallets"]
-    D -->|"Strengthens"| F["META/TAO Ecosystem"]
-    E -->|"Reinforces participation"| A
+    A["Miners & Subnets<br/>Generate α"]
+    B["Validator Auctions<br/>Bids in META / TAO"]
+    C["Treasury Conversion<br/>α → Liquidity"]
+    D["Reward Distribution<br/>Buybacks + Airdrops"]
+    E["Epoch Renewal<br/>Fresh α Emission"]
+
+    A -->|"Submit α bids"| B
+    B -->|"Clear winning bids"| C
+    C -->|"Split proceeds"| D
+    D -->|"Reinvest & restart"| E
+    E -->|"New cycle begins"| A
 ```
 
-This continuous loop creates a **self-sustaining liquidity engine** where:
-- α holders get instant exits.
-- Validators earn from clearing trades.
-- Treasuries support network growth.
-- The cycle repeats every 360 blocks, forever.
-
-## 2. The Predictable Auction Cycle (360 Blocks)
-
-Every 360 blocks, MetaHash executes its liquidity cycle through validator-managed auctions.
+### Phase-by-phase view
 
 <table style={{
   borderCollapse: 'collapse',
@@ -119,7 +114,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '2px solid rgba(255, 140, 0, 0.4)',
         textAlign: 'left'
-      }}>Block Range</th>
+      }}>Blocks</th>
       <th style={{
         background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
         color: '#ff8c00',
@@ -127,7 +122,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '2px solid rgba(255, 140, 0, 0.4)',
         textAlign: 'left'
-      }}>What Happens</th>
+      }}>What happens</th>
     </tr>
   </thead>
   <tbody>
@@ -137,7 +132,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)',
         fontWeight: '600'
-      }}><strong>Preparation</strong></td>
+      }}><strong>Prep</strong></td>
       <td style={{
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
@@ -147,7 +142,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Each Master Validator resets budgets and finalizes the previous epoch.</td>
+      }}>Master Validators (MVs) settle prior trades and refresh budgets.</td>
     </tr>
     <tr>
       <td style={{
@@ -165,7 +160,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Miners submit α offers (subnet ID, amount, discount). Validators record and rank them on IPFS.</td>
+      }}>Miners post α offers; validators collect and pin bids to IPFS.</td>
     </tr>
     <tr>
       <td style={{
@@ -183,7 +178,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Bids are scored using the shared formula: Score = α_amount × (1 - discount), so every validator reaches the same result.</td>
+      }}>Validators run the shared scoring formula and agree on winners.</td>
     </tr>
     <tr>
       <td style={{
@@ -201,7 +196,7 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Treasuries execute payouts, clear auctions, and record state to the chain.</td>
+      }}>Treasuries pay winners, perform buybacks, and store proofs.</td>
     </tr>
   </tbody>
 </table>
@@ -221,51 +216,40 @@ Every 360 blocks, MetaHash executes its liquidity cycle through validator-manage
     color: '#ff8c00',
     fontWeight: '600'
   }}>
-    All auctions across MetaHash run in parallel — synchronized by block height — creating a network-wide liquidity pulse every 360 blocks.
+    All auctions across SN73 fire in parallel. The block height is the metronome that keeps every validator on time.
   </p>
 </div>
 
-## 4. Network Interoperability: How MetaHash Connects Subnets
+## Treasury Feedback Loop
 
-MetaHash isn't isolated. It operates as a **router** between subnets — linking computational work and financial liquidity.
+Treasuries convert auction inflow into support for the network:
 
-### Inbound Flow (Subnet → MetaHash)
-- Subnets produce α as part of their reward cycles.
-- Miners can bring that α to MetaHash auctions to trade for META or TAO.
-- Validators verify the origin subnet (via chain records) before acceptance.
+- **75%** goes to buybacks and liquidity reinforcement.
+- **25%** goes to airdrops and subnet incentives.
 
-### Outbound Flow (MetaHash → Subnets)
-- After auctions, liquidity and buyback funds can flow *back* into subnet treasuries.
-- Treasuries use these funds for validator rewards, miner incentives, or collateral stabilization.
-- Airdrops ensure subnet contributors directly benefit from the broader liquidity network.
+```
+R_buyback = 0.75 × T_inflow
+R_airdrop = 0.25 × T_inflow
+```
 
-### Result: Network Coherence
-Because all auctions follow the same 360-block cadence, value moves across subnets in rhythm.
-SN73 acts as a **clearing hub**, ensuring α and liquidity stay in balance throughout the Bittensor economy.
+```mermaid
+flowchart TD
+    T["Treasury Inflow<br/>T_inflow from Auctions"]
 
-<div style={{
-  padding: '0.75rem 1rem',
-  background: 'rgba(255, 140, 0, 0.12)',
-  border: '2px solid rgba(255, 140, 0, 0.5)',
-  borderRadius: '8px',
-  margin: 0,
-  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
-}}>
-  <p style={{
-    fontSize: '1.05rem',
-    lineHeight: '1.6',
-    margin: 0,
-    color: '#ff8c00',
-    fontWeight: '600'
-  }}>
-    MetaHash synchronizes auctions and payouts across every subnet, ensuring the entire Bittensor economy moves to the same rhythm.
-  </p>
-</div>
+    T -->|"75%"| B["Buybacks<br/>R_buyback = 0.75 × T_inflow"]
+    T -->|"25%"| A["Airdrops<br/>R_airdrop = 0.25 × T_inflow"]
 
-## 5. Multi-Treasury Coordination
+    B --> R["Network Liquidity<br/>META/TAO Markets"]
+    A --> R
 
-Each treasury operates autonomously but remains synchronized through shared epoch timing.
-This coordination ensures liquidity and rewards are distributed evenly across all validator-led treasuries.
+    R --> T
+```
+
+This closed loop keeps META moving instead of letting capital sit idle.
+
+## Participant Incentives & Yield
+
+MetaHash's design ensures that everyone who participates in the liquidity cycle benefits — fairly and transparently.
 
 <table style={{
   borderCollapse: 'collapse',
@@ -282,7 +266,7 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         padding: '0.875rem 1rem',
         border: '2px solid rgba(255, 140, 0, 0.4)',
         textAlign: 'left'
-      }}>Layer</th>
+      }}>Participant</th>
       <th style={{
         background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
         color: '#ff8c00',
@@ -290,7 +274,15 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         padding: '0.875rem 1rem',
         border: '2px solid rgba(255, 140, 0, 0.4)',
         textAlign: 'left'
-      }}>Description</th>
+      }}>What They Do</th>
+      <th style={{
+        background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.2) 0%, rgba(255, 140, 0, 0.15) 100%)',
+        color: '#ff8c00',
+        fontWeight: '700',
+        padding: '0.875rem 1rem',
+        border: '2px solid rgba(255, 140, 0, 0.4)',
+        textAlign: 'left'
+      }}>What They Gain</th>
     </tr>
   </thead>
   <tbody>
@@ -300,12 +292,17 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)',
         fontWeight: '600'
-      }}><strong>Validator Treasury</strong></td>
+      }}><strong>Miners</strong></td>
       <td style={{
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Collects α from miners during auctions and distributes META/TAO post-settlement.</td>
+      }}>Produce α based on subnet output</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Earn META/TAO liquidity through auctions</td>
     </tr>
     <tr>
       <td style={{
@@ -313,12 +310,17 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)',
         fontWeight: '600'
-      }}><strong>Global Sync Layer</strong></td>
+      }}><strong>Validators</strong></td>
       <td style={{
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Ensures every treasury clears in the same 360-block rhythm, avoiding liquidity drift.</td>
+      }}>Bid on α, verify results, clear auctions</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Gain auction spread and validator rewards</td>
     </tr>
     <tr>
       <td style={{
@@ -326,12 +328,17 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)',
         fontWeight: '600'
-      }}><strong>Inter-Treasury Rebalancing</strong></td>
+      }}><strong>Master Validators</strong></td>
       <td style={{
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Enables optional balancing between validator pools if one exceeds or falls short of its target liquidity.</td>
+      }}>Recycle and redistribute META, manage treasuries</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Maintain liquidity and network stability</td>
     </tr>
     <tr>
       <td style={{
@@ -339,12 +346,17 @@ This coordination ensures liquidity and rewards are distributed evenly across al
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)',
         fontWeight: '600'
-      }}><strong>Audit Layer (IPFS + Chain)</strong></td>
+      }}><strong>Holders</strong></td>
       <td style={{
         padding: '0.875rem 1rem',
         border: '1px solid rgba(255, 140, 0, 0.3)',
         background: 'rgba(255, 140, 0, 0.05)'
-      }}>Keeps an immutable record of all treasury movements for transparency and verification.</td>
+      }}>Stake or hold META tokens</td>
+      <td style={{
+        padding: '0.875rem 1rem',
+        border: '1px solid rgba(255, 140, 0, 0.3)',
+        background: 'rgba(255, 140, 0, 0.05)'
+      }}>Receive airdrops and buyback yield</td>
     </tr>
   </tbody>
 </table>
@@ -364,48 +376,33 @@ This coordination ensures liquidity and rewards are distributed evenly across al
     color: '#ff8c00',
     fontWeight: '600'
   }}>
-    By linking many treasuries through predictable timing, MetaHash forms a coordinated liquidity web rather than a single centralized pool. The network becomes more stable as validator diversity increases.
+    Every movement in the system creates shared value. The network grows because all roles depend on each other's participation — not speculation. MetaHash rewards contribution, not noise.
   </p>
 </div>
 
+## Cross-Treasury Synchronization
 
-## 3. Treasury & Reward Flow
+MetaHash runs many Master Validators instead of a single treasury. Each MV:
 
-After settlement, each treasury automatically redistributes proceeds according to a transparent split:
+- Manages its own budget proportional to staked TAO.
+- Hosts a full auction every epoch.
+- Stores bids and results on chain + IPFS for auditability.
 
-- **75% → Buybacks & Liquidity Support**
-  Used to stabilize subnet liquidity, META pairs, and validator operations.
-- **25% → Airdrops & Wallet Rewards**
-  Sent to miners, α sellers, and long-term holders.
+At block 360 every MV reports settlements, aligns reward ledgers, and, when needed, rebalances liquidity across peers. This creates a decentralized liquidity mesh instead of a single point of failure.
 
-Validators are rewarded for running fair auctions, verifying bids, and maintaining chain/IPFS state integrity.
+## Continuous Equilibrium
 
-```mermaid
-flowchart TD
-    n6["Rebalance<br/>---------------------<br/>BuyBacks<br/>---------------------<br/>Airdrops"] -->|"SN73 Winning Bids"| n2["Validators"]
-    n2 -->|"SN73 payback from Emission"| n1["Miners"]
-    n1 -->|"Paying Auction Bids"| n6
+By the end of each epoch, inflows and outflows balance:
+
+```
+Σ α_sold ≈ Σ α_produced
+Σ META_outflow = Σ rewards_distributed
 ```
 
-<div style={{
-  padding: '0.75rem 1rem',
-  background: 'rgba(255, 140, 0, 0.12)',
-  border: '2px solid rgba(255, 140, 0, 0.5)',
-  borderRadius: '8px',
-  margin: 0,
-  boxShadow: '0 2px 8px rgba(255, 140, 0, 0.15)'
-}}>
-  <p style={{
-    fontSize: '1.05rem',
-    lineHeight: '1.6',
-    margin: 0,
-    color: '#ff8c00',
-    fontWeight: '600'
-  }}>
-    These actions keep liquidity balanced, circulating, and auditable across the network.
-  </p>
-</div>
+That equilibrium is what keeps subnet emissions productive. α that enters MetaHash exits as actionable liquidity, reinforcing the same network that produced it.
 
-## Continue Learning
-**Next:** [**Auction Mechanics →**](/understand-metahash/fundamentals/auction-mechanics)
-Explore the detailed block-by-block timing and phases of MetaHash auctions.
+## Renewal & Beyond SN73
+
+Once settlement closes, the process restarts automatically: α emissions reset, new bids arrive, and fresh META cycles through buybacks and rewards. Because the cadence is predictable, other subnets and even outside strategists can plan against it, bridging META to TAO markets or tapping shared liquidity when needed.
+
+MetaHash is more than a single subnet. It is the liquidity pulse of Bittensor — a calm, predictable beat that keeps intelligence work, capital, and incentives in sync.

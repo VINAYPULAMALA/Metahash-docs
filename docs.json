@@ -89,6 +89,7 @@
             "group": "Miner & Validator Playbooks",
             "pages": [
               "miners-validators-guide/miners/miner-advanced-guide",
+              "miners-validators-guide/miners/miner-cli",
               "miners-validators-guide/validators/validator-advanced-guide"
             ]
           }
