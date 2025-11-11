@@ -1,0 +1,330 @@
+---
+title: Keep Miner Running
+description: Set up your miner for continuous operation with screen or systemd
+---
+
+# Keep Miner Running
+
+Configure your miner to run continuously, even after closing your SSH session or system restarts.
+
+## Option 1: Quick Setup with Screen
+
+Perfect for testing and short-term operations.
+
+<Steps>
+  <Step title="Start Screen Session">
+    ```bash
+    screen -S miner
+    ```
+    Creates a named screen session called "miner"
+  </Step>
+
+  <Step title="Run Miner">
+    Execute your miner command inside the screen session:
+    ```bash
+    python neurons/miner.py --netuid 73 --wallet.name mywallet --wallet.hotkey miner1 ...
+    ```
+  </Step>
+
+  <Step title="Detach from Screen">
+    Press `Ctrl+A` then `D` to detach
+  </Step>
+
+  <Step title="Reattach to Screen">
+    ```bash
+    screen -r miner
+    ```
+    To view the miner again
+  </Step>
+</Steps>
+
+### Screen Commands Reference
+
+| Command | Description |
+|---------|-------------|
+| `screen -S name` | Create new named session |
+| `Ctrl+A` then `D` | Detach from session |
+| `screen -r name` | Reattach to session |
+| `screen -ls` | List all sessions |
+| `screen -X -S name quit` | Kill a session |
+
+<Info>
+Screen is great for testing, but for production use systemd (Option 2) for automatic restarts.
+</Info>
+
+---
+
+## Option 2: Production Setup with systemd
+
+Recommended for production deployments with automatic restarts and system boot integration.
+
+### Create Systemd Service
+
+<Steps>
+  <Step title="Create Service File">
+    ```bash
+    sudo nano /etc/systemd/system/metahash-miner.service
+    ```
+  </Step>
+
+  <Step title="Add Service Configuration">
+    Paste the following configuration (adjust paths and parameters for your setup):
+
+    ```ini /etc/systemd/system/metahash-miner.service
+    [Unit]
+    Description=MetaHash Miner (SN73)
+    After=network.target
+
+    [Service]
+    User=ubuntu
+    WorkingDirectory=/home/ubuntu/metahash
+    ExecStart=/bin/bash -c 'source /home/ubuntu/metahash/.venv/bin/activate && python neurons/miner.py --netuid 73 --wallet.name mywallet --wallet.hotkey miner1 --subtensor.network finney --miner.bids.netuids 62 --miner.bids.amounts 0.25 --miner.bids.discounts 500 --axon.port 8091 --axon.external_port 8091 --logging.debug --blacklist.force_validator_permit --payment.validators 5H9WDbXXtJVoMRAGM3EgqZPZBk5A4d57PthhxsNrb6hBXsz7'
+    Restart=always
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    <Warning>
+    Replace:
+    - `User=ubuntu` with your username
+    - `/home/ubuntu/metahash` with your actual path
+    - `--payment.validators` with your hotkey address
+    - All other parameters with your specific configuration
+    </Warning>
+  </Step>
+
+  <Step title="Save and Exit">
+    In nano: `Ctrl+O`, `Enter`, then `Ctrl+X`
+  </Step>
+
+  <Step title="Reload Systemd">
+    ```bash
+    sudo systemctl daemon-reload
+    ```
+  </Step>
+
+  <Step title="Enable Service">
+    ```bash
+    sudo systemctl enable metahash-miner
+    ```
+    Enables auto-start on system boot
+  </Step>
+
+  <Step title="Start Service">
+    ```bash
+    sudo systemctl start metahash-miner
+    ```
+  </Step>
+
+  <Step title="Check Status">
+    ```bash
+    sudo systemctl status metahash-miner
+    ```
+  </Step>
+</Steps>
+
+### Systemd Service Management
+
+<CodeGroup>
+```bash Start Service
+sudo systemctl start metahash-miner
+```
+
+```bash Stop Service
+sudo systemctl stop metahash-miner
+```
+
+```bash Restart Service
+sudo systemctl restart metahash-miner
+```
+
+```bash Check Status
+sudo systemctl status metahash-miner
+```
+
+```bash View Logs
+journalctl -u metahash-miner -f
+```
+
+```bash View Last 100 Lines
+journalctl -u metahash-miner -n 100
+```
+
+```bash Disable Auto-Start
+sudo systemctl disable metahash-miner
+```
+</CodeGroup>
+
+### Service Configuration Details
+
+| Setting | Description | Value |
+|---------|-------------|-------|
+| `User` | Linux user to run service | `ubuntu` (or your username) |
+| `WorkingDirectory` | Path to metahash repo | `/home/ubuntu/metahash` |
+| `ExecStart` | Command to run | Full miner command |
+| `Restart` | Restart policy | `always` |
+| `RestartSec` | Wait time before restart | `10` seconds |
+| `After` | Start after service | `network.target` |
+
+<Check>
+With `Restart=always`, your miner will automatically restart if it crashes or if the system reboots!
+</Check>
+
+---
+
+## Monitoring Your Miner
+
+### View Real-Time Logs
+
+<CodeGroup>
+```bash Systemd Logs
+journalctl -u metahash-miner -f
+```
+
+```bash Direct Log File
+tail -f ~/.bittensor/miners/mywallet/miner1/netuid73/miner.log
+```
+</CodeGroup>
+
+### Check System Resources
+
+```bash
+# Memory and CPU usage
+htop
+
+# Disk space
+df -h
+
+# Memory details
+free -h
+```
+
+### Health Check Script
+
+Create a simple monitoring script:
+
+```bash monitor.sh
+#!/bin/bash
+echo "=== MetaHash Miner Status ==="
+sudo systemctl status metahash-miner --no-pager
+echo ""
+echo "=== Port Status ==="
+ss -tulpn | grep 8091
+echo ""
+echo "=== Memory Usage ==="
+free -h
+echo ""
+echo "=== Recent Logs ==="
+journalctl -u metahash-miner -n 20 --no-pager
+```
+
+Make it executable:
+```bash
+chmod +x monitor.sh
+./monitor.sh
+```
+
+---
+
+## Automatic Restart Policies
+
+### Restart on Failure Only
+
+Change `Restart=always` to `Restart=on-failure` in your service file if you only want restarts on crashes (not manual stops).
+
+### Restart Limits
+
+Add restart limits to prevent rapid restart loops:
+
+```ini
+[Service]
+Restart=always
+RestartSec=10
+StartLimitInterval=200
+StartLimitBurst=5
+```
+
+This allows 5 restarts within 200 seconds before giving up.
+
+---
+
+## Scheduled Maintenance
+
+### Weekly Restart (Optional)
+
+Create a cron job for weekly restarts (helpful for memory management):
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add line (restart every Sunday at 3 AM)
+0 3 * * 0 sudo systemctl restart metahash-miner
+```
+
+---
+
+## Comparison: Screen vs Systemd
+
+| Feature | Screen | Systemd |
+|---------|--------|---------|
+| Setup complexity | Simple | Moderate |
+| Auto-restart on crash | ❌ No | ✅ Yes |
+| Auto-start on boot | ❌ No | ✅ Yes |
+| Log management | Manual | Integrated |
+| Best for | Testing | Production |
+| Process isolation | ✅ Yes | ✅ Yes |
+
+<Tip>
+Use screen for initial testing, then migrate to systemd once your configuration is stable.
+</Tip>
+
+---
+
+## Troubleshooting
+
+### Service Won't Start
+
+```bash
+# Check service status
+sudo systemctl status metahash-miner
+
+# View detailed logs
+journalctl -u metahash-miner -n 50
+
+# Check for syntax errors
+sudo systemd-analyze verify /etc/systemd/system/metahash-miner.service
+```
+
+### Service Keeps Restarting
+
+Check logs for error messages:
+```bash
+journalctl -u metahash-miner -f
+```
+
+Common causes:
+- Wrong paths in service file
+- Missing `.env` file
+- Virtual environment not activated
+- Port already in use
+
+### Screen Session Lost
+
+List all sessions:
+```bash
+screen -ls
+```
+
+Reattach to detached session:
+```bash
+screen -r SESSION_ID
+```
+
+---
+
+## Next Steps
+
+With your miner running continuously, review the [Helpful Commands](/support/operations/02-commands) page for useful management commands.

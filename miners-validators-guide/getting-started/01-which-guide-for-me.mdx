@@ -1,0 +1,98 @@
+---
+title: Which Guide For Me?
+description: Use this decision helper to match your goals, experience, and hardware so you can open the right setup guide on your first click.
+---
+
+<Info>
+The playbooks now bundle the quickstart flow with the production runbooks—use the tabs below to jump straight to the sections that match your experience.
+</Info>
+
+## TL;DR Decision Matrix
+
+| Role | Start with… | Core outcomes |
+| --- | --- | --- |
+| Miners bringing a first rig online or automating multiple bids | [Miner Guide](/miners-validators-guide/miners/01-miner-advanced-guide) | Copy-paste bootstrap, spend controls, payment routing, automation hooks |
+| Validators preparing to accept auctions or hardening existing infrastructure | [Validator Guide](/miners-validators-guide/validators/01-validator-advanced-guide) | Environment prep, process managers, strategy tuning, telemetry, redundancy |
+
+## Role-Specific Playbooks
+
+<Tabs>
+  <Tab title="Miners">
+    <CardGroup cols={1}>
+      <Card title="Advanced Miner Guide" icon="sliders" href="/miners-validators-guide/miners/01-miner-advanced-guide">
+        Quickstart commands, multi-bid orchestration, monitoring, and operations checklists in one place.
+      </Card>
+    </CardGroup>
+    <Steps>
+      <Step title="Before You Start">
+        - Single VPS or multi-node rollout?
+        - Wallets funded and registered?
+
+        The guide flows from the copy-paste bootstrap into automation toggles—work through sequentially on your first pass.
+      </Step>
+      <Step title="Readiness Checks">
+        - `btcli wallet list` shows your hotkey and coldkey.
+        - Ports 8091/30303 open and reachable.
+        - At least 0.15 TAO available for staking.
+      </Step>
+      <Step title="Next Actions">
+        - Bookmark [Running the Miner](/support/operations/01-keep-running) for ongoing ops.
+        - Layer in watchdogs, systemd, or Terraform once the base flow is stable.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Validators">
+    <CardGroup cols={1}>
+      <Card title="Validator Playbook" icon="shield-halved" href="/miners-validators-guide/validators/01-validator-advanced-guide">
+        Infrastructure hardening, pm2/systemd launch patterns, strategy tuning, telemetry, and operational handoffs.
+      </Card>
+    </CardGroup>
+    <Steps>
+      <Step title="Before You Start">
+        - Permits earned and collateral ready?
+        - Subtensor access planned (self-hosted or trusted peer)?
+
+        Follow the quickstart sections first; revisit automation and redundancy chapters as you scale.
+      </Step>
+      <Step title="Readiness Checks">
+        - `btcli subnet list --netuid 73` shows permits and status.
+        - Treasure keys backed up; `treasuries.py` ready for verification.
+        - Monitoring/alerting expectations defined with your team.
+      </Step>
+      <Step title="Next Actions">
+        - Schedule telemetry integration once uptime stabilizes.
+        - Document failover and handoff procedures before scaling.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Guided Flow
+
+<Steps>
+  <Step title="Identify Your Role">
+    <ul>
+      <li><strong>Miner</strong> — Converting α to META through auctions.</li>
+      <li><strong>Validator</strong> — Clearing auctions, publishing commitments, managing treasuries.</li>
+      <li><strong>Explorer</strong> — Still learning? Start with the <a href="/welcome/01-overview">Welcome overview</a>.</li>
+    </ul>
+  </Step>
+  <Step title="Match Experience Level">
+    <p>The playbooks open with copy-paste quickstarts and branch into automation, redundancy, and monitoring. Skim the headings and dive deepest where your operations need it.</p>
+  </Step>
+  <Step title="Verify Readiness">
+    <ul>
+      <li>Run <code>btcli wallet list</code> to confirm your hotkey exists.</li>
+      <li>Check validator permits with <code>btcli subnet list --netuid 73</code> if you plan to accept bids.</li>
+      <li>Ensure hardware meets the <a href="/miners-validators-guide/getting-started/03-introduction">environment prerequisites</a> and required ports are open.</li>
+    </ul>
+  </Step>
+</Steps>
+
+## Final Checklist
+
+- [ ] Hardware, OS, and networking match the specs in the environment guide.
+- [ ] Wallets and treasuries are backed up, and you know how to validate them with `treasuries.py`.
+- [ ] You have Discord access for real-time support if something looks off.
+
+Still unsure? Share your plan in the MetaHash Discord. The community will flag gaps and point you to the safest starting point before you ship.

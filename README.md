@@ -46,58 +46,59 @@ mintlify deploy
 
 ```
 .
-├── docs.json              # Mintlify configuration
+├── docs.json              # Mintlify configuration & navigation
 ├── index.mdx              # Landing page wrapper
 ├── welcome/
-│   └── overview.mdx       # Welcome tab overview
+│   └── 01-overview.mdx
 ├── otc-desk/
-│   └── overview.mdx       # OTC onboarding flow
+│   └── 01-overview.mdx
 ├── understand-metahash/
 │   ├── fundamentals/
-│   │   ├── auction-mechanics.mdx
-│   │   └── introduction.mdx
+│   │   ├── 01-introduction.mdx
+│   │   ├── 02-epoch-auction-economics.mdx
+│   │   ├── 03-auction-mechanics.mdx
+│   │   └── 04-faq.mdx
 │   ├── economics/
-│   │   ├── alpha-exchange.mdx
-│   │   ├── miner-lifecycle.mdx
-│   │   ├── treasury-structure.mdx
-│   │   └── validator-role.mdx
+│   │   ├── 01-miner-lifecycle.mdx
+│   │   ├── 02-validator-role.mdx
+│   │   ├── 03-master-validator-role.mdx
+│   │   ├── 04-staker-role.mdx
+│   │   └── 05-treasury-structure.mdx
 │   ├── network/
-│   │   ├── glossary.mdx
-│   │   └── interoperability.mdx
+│   │   └── 01-glossary.mdx
 │   └── community/
-│       └── team.mdx
+│       └── 01-team.mdx
 ├── miners-validators-guide/
 │   ├── getting-started/
-│   │   ├── introduction.mdx
-│   │   ├── safety-warnings.mdx
-│   │   └── which-guide-for-me.mdx
+│   │   ├── 01-which-guide-for-me.mdx
+│   │   ├── 02-safety-warnings.mdx
+│   │   └── 03-introduction.mdx
 │   ├── miners/
-│   │   └── miner-advanced-guide.mdx
+│   │   ├── 01-miner-advanced-guide.mdx
+│   │   └── 02-miner-cli.mdx
 │   └── validators/
-│       └── validator-advanced-guide.mdx
+│       └── 01-validator-advanced-guide.mdx
 ├── support/
-│   ├── troubleshooting/
-│   │   └── troubleshooting.mdx
 │   ├── operations/
-│   │   ├── commands.mdx
-│   │   └── keep-running.mdx
+│   │   ├── 01-keep-running.mdx
+│   │   └── 02-commands.mdx
+│   ├── troubleshooting/
+│   │   └── 01-troubleshooting.mdx
 │   └── checklists/
-│       └── checklist.mdx
+│       └── 01-checklist.mdx
 ├── roadmap/
-│   └── index.mdx
+│   └── 01-roadmap.mdx
 ├── internal/
-│   ├── reviews/
-│   │   └── uid111-review.mdx
-│   └── setup/
-│       └── safety-warnings.mdx
+│   └── reviews/
+│       └── uid111-review.mdx
 └── assets/
     ├── icons/
     │   └── favicon.png
     ├── images/
-    │   ├── cycle.png
-    │   └── metahash-working.png
-    └── screenshots/
-        └── *.png
+    │   └── Auction.png
+    └── main diagram/
+        ├── Untitled-2025-11-08-1700.excalidraw.png
+        └── Untitled-2025-11-08-1718.png
 ```
 
 ## Configuration
@@ -151,18 +152,9 @@ This is a helpful tip!
 </Steps>
 ```
 
-## Old Files
+## Legacy Files
 
-The following old HTML files are kept for reference but are no longer used:
-
-- `index.html` - Old documentation homepage
-- `review.html` - Old review page (superseded by `internal/reviews/uid111-review.mdx`)
-- `styles.css` - Old CSS styles
-- `script.js` - Old JavaScript
-- `gpt.md` - Source markdown (migrated to tabbed pages above)
-- `review.md` - Source markdown (migrated to `internal/reviews/uid111-review.mdx`)
-
-These can be safely deleted once you've verified the Mintlify version works correctly.
+The legacy HTML prototype (old `index.html`, `review.html`, `script.js`, `gpt.md`, `review.md`, and associated CSS) has been removed from the working tree. Refer to git history if you need those artifacts for reference.
 
 ## Contributing
 

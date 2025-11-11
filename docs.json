@@ -24,7 +24,7 @@
           {
             "group": "Overview",
             "pages": [
-              "welcome/overview"
+              "welcome/01-overview"
             ]
           }
         ]
@@ -35,7 +35,7 @@
           {
             "group": "Overview",
             "pages": [
-              "otc-desk/overview"
+              "otc-desk/01-overview"
             ]
           }
         ]
@@ -43,33 +43,34 @@
       {
         "tab": "Understand MetaHash",
         "label": "Understand MetaHash",
-        "href": "/understand-metahash/fundamentals/introduction",
+        "href": "/understand-metahash/fundamentals/01-introduction",
         "groups": [
           {
             "group": "MetaHash Fundamentals",
             "pages": [
-              "understand-metahash/fundamentals/introduction",
-              "understand-metahash/fundamentals/epoch-auction-economics",
-              "understand-metahash/fundamentals/auction-mechanics",
-              "understand-metahash/fundamentals/faq"
+              "understand-metahash/fundamentals/01-introduction",
+              "understand-metahash/fundamentals/02-epoch-auction-economics",
+              "understand-metahash/fundamentals/03-auction-mechanics",
+              "understand-metahash/fundamentals/04-faq"
 
             ]
           },
           {
             "group": "Network Roles",
             "pages": [
-              "understand-metahash/economics/miner-lifecycle",
-              "understand-metahash/economics/validator-role",
-              "understand-metahash/economics/master-validator-role",
-              "understand-metahash/economics/staker-role",
-              "understand-metahash/network/glossary"
+              "understand-metahash/economics/01-miner-lifecycle",
+              "understand-metahash/economics/02-validator-role",
+              "understand-metahash/economics/03-master-validator-role",
+              "understand-metahash/economics/04-staker-role",
+              "understand-metahash/economics/05-treasury-structure",
+              "understand-metahash/network/01-glossary"
 
             ]
           },
           {
             "group": "About Us",
             "pages": [
-              "understand-metahash/community/team"
+              "understand-metahash/community/01-team"
             ]
           }
         ]
@@ -80,17 +81,36 @@
           {
             "group": "Start Here",
             "pages": [
-              "miners-validators-guide/getting-started/which-guide-for-me",
-              "miners-validators-guide/getting-started/safety-warnings",
-              "miners-validators-guide/getting-started/introduction"
+              "miners-validators-guide/getting-started/01-which-guide-for-me",
+              "miners-validators-guide/getting-started/02-safety-warnings",
+              "miners-validators-guide/getting-started/03-introduction"
             ]
           },
           {
             "group": "Miner & Validator Playbooks",
             "pages": [
-              "miners-validators-guide/miners/miner-advanced-guide",
-              "miners-validators-guide/miners/miner-cli",
-              "miners-validators-guide/validators/validator-advanced-guide"
+              "miners-validators-guide/miners/01-miner-advanced-guide",
+              "miners-validators-guide/miners/02-miner-cli",
+              "miners-validators-guide/validators/01-validator-advanced-guide"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Support",
+        "groups": [
+          {
+            "group": "Operations",
+            "pages": [
+              "support/operations/01-keep-running",
+              "support/operations/02-commands"
+            ]
+          },
+          {
+            "group": "Support Center",
+            "pages": [
+              "support/troubleshooting/01-troubleshooting",
+              "support/checklists/01-checklist"
             ]
           }
         ]
@@ -101,7 +121,7 @@
           {
             "group": "Roadmap",
             "pages": [
-              "roadmap/index"
+              "roadmap/01-roadmap"
             ]
           }
         ]
